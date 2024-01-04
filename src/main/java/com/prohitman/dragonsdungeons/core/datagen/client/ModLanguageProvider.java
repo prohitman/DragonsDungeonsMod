@@ -19,6 +19,8 @@ public class ModLanguageProvider extends LanguageProvider {
     protected void addTranslations() {
         addItem(ModItems.DRAGON_BONE);
         addBlock(ModBlocks.AGING_ADOBE);
+
+        add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }
 
     public void addBlock(RegistryObject<Block> key) {
