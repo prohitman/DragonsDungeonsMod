@@ -41,5 +41,15 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.MOSSY_SHALE_BRICKS.get());
         simpleBlock(ModBlocks.POLISHED_SHALE.get());
 
+        //Ironstone
+        simpleBlock(ModBlocks.RAW_IRONSTONE.get());
+        logBlock((RotatedPillarBlock) ModBlocks.IRONSTONE_PILLAR.get());
+        logBlock((RotatedPillarBlock) ModBlocks.IRONSTONE_BATTLEMENT.get());
+        simpleBlock(ModBlocks.IRONSTONE_BRICKS.get());
+        simpleBlock(ModBlocks.IRONSTONE_TILES.get());
+        simpleBlock(ModBlocks.POLISHED_IRONSTONE.get());
+        simpleBlock(ModBlocks.CHISELED_IRONSTONE.get());
+        simpleBlock(ModBlocks.CRACKED_IRONSTONE_BRICKS.get());
+        simpleBlock(ModBlocks.MOSSY_IRONSTONE_BRICKS.get());
     }
 }

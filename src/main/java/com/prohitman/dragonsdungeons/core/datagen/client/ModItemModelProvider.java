@@ -47,6 +47,16 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.MOSSY_SHALE_BRICKS);
         createParent(ModBlocks.POLISHED_SHALE);
 
+        //Ironstone
+        createParent(ModBlocks.RAW_IRONSTONE);
+        createParent(ModBlocks.IRONSTONE_PILLAR);
+        createParent(ModBlocks.IRONSTONE_BRICKS);
+        createParent(ModBlocks.IRONSTONE_BATTLEMENT);
+        createParent(ModBlocks.IRONSTONE_TILES);
+        createParent(ModBlocks.POLISHED_IRONSTONE);
+        createParent(ModBlocks.CRACKED_IRONSTONE_BRICKS);
+        createParent(ModBlocks.CHISELED_IRONSTONE);
+        createParent(ModBlocks.MOSSY_IRONSTONE_BRICKS);
     }
 
     private void createParent(RegistryObject<Block> handler) {

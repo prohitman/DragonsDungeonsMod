@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "dragonsdungeons:block/ironstone_battlement_top",
+    "side": "dragonsdungeons:block/ironstone_battlement"
+  }
+}
