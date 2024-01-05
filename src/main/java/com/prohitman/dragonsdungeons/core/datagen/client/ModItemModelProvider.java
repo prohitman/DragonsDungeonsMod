@@ -26,6 +26,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.RUBBLE);
         createParent(ModBlocks.CHUNKY_RUBBLE);
 
+        createParent(ModBlocks.THATCH);
+
         //Adobe
         createParent(ModBlocks.AGING_ADOBE);
         createParent(ModBlocks.AGING_ADOBE_PILLAR);

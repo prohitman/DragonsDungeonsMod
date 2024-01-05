@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-05T22:07:23.7606943	Item Models: dragonsdungeons
+// 1.20.1	2024-01-05T22:29:42.2067251	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
 2fab58ea858f3edfc45756dff140aff049d92db2 assets/dragonsdungeons/models/item/algal_greenschist_bricks.json
@@ -46,3 +46,4 @@ e260b138022f80f6f7b022290fcb30857f12ff58 assets/dragonsdungeons/models/item/rubb
 11b58254a9d3d5cd7ae4abb7fdfb79b09a032bf9 assets/dragonsdungeons/models/item/shale_shingles.json
 bd8bc72a83a12771e17954ab9a5c97fdf712c0ec assets/dragonsdungeons/models/item/shale_tiles.json
 39166c3596e02ff668a42f47d383a07d2afe4187 assets/dragonsdungeons/models/item/shingles.json
+930db5bf8a07237f64dd2652e66291925f39d5c7 assets/dragonsdungeons/models/item/thatch.json

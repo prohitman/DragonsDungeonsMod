@@ -21,7 +21,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> RUBBLE = createRegistry("rubble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT)), new Item.Properties());
     public static final RegistryObject<Block> RUINED_SHINGLES = createRegistry("ruined_shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
     public static final RegistryObject<Block> SHINGLES = createRegistry("shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
-
+    public static final RegistryObject<Block> THATCH = createRegistry("thatch", () -> new Block(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).noOcclusion()), new Item.Properties());
     public static final RegistryObject<Block> AGING_ADOBE = createRegistry("aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> AGING_ADOBE_PILLAR = createRegistry("aging_adobe_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> CHISELED_AGING_ADOBE = createRegistry("chiseled_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());

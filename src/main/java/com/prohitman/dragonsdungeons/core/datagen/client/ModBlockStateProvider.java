@@ -7,6 +7,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -23,6 +24,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.RUINED_SHINGLES.get());
         simpleBlock(ModBlocks.RUBBLE.get());
         simpleBlock(ModBlocks.CHUNKY_RUBBLE.get());
+
+        createBlockWithModel(ModBlocks.THATCH);
 
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
@@ -94,6 +97,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                 .texture("side", modLoc("block/" + name(block)))
                                         .texture("top", modLoc("block/" + name(block) + "_top"))
                                                 .texture("end", modLoc("block/" + name(bottomBlock))));
+    }
+
+    public void createBlockWithModel(RegistryObject<Block> block){
+        simpleBlock(block.get(),
+                models().withExistingParent(name(block) + "_dd", modLoc("block/" + name(block)))
+                        .renderType("cutout")
+                        .ao(false));
     }
 
     private String name(RegistryObject<Block> block) {

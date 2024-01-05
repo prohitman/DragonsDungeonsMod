@@ -72,6 +72,8 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.CHUNKY_RUBBLE);
         addBlock(ModBlocks.RUBBLE);
 
+        addBlock(ModBlocks.THATCH);
+
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }
 
