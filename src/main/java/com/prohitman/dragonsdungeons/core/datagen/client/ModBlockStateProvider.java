@@ -19,7 +19,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         logBlock((RotatedPillarBlock) ModBlocks.AGING_ADOBE_PILLAR.get());
         simpleBlock(ModBlocks.CHISELED_AGING_ADOBE.get());
         simpleBlock(ModBlocks.MOSSY_AGING_ADOBE.get());
-        simpleBlock(ModBlocks.PAINTED_AGING_ADOBE.get());
+        logBlock((RotatedPillarBlock) ModBlocks.PAINTED_AGING_ADOBE.get());
         simpleBlock(ModBlocks.CRACKED_AGING_ADOBE.get());
 
         //Greenschist
@@ -59,6 +59,13 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CRACKED_FORGED_BRICKS.get());
         simpleBlock(ModBlocks.LINED_FORGED_BRICKS.get());
 
-
+        //Lavarock
+        simpleBlock(ModBlocks.LAVAROCK.get());
+        logBlock((RotatedPillarBlock) ModBlocks.LAVAROCK_PILLAR.get());
+        simpleBlock(ModBlocks.LAVAROCK_BRICKS.get());
+        simpleBlock(ModBlocks.CHISELED_LAVAROCK.get());
+        simpleBlock(ModBlocks.CRACKED_LAVAROCK_BRICKS.get());
+        simpleBlock(ModBlocks.POLISHED_LAVAROCK.get());
+        simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
     }
 }

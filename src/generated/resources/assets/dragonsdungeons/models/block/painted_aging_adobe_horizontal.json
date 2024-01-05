@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_horizontal",
+  "textures": {
+    "end": "dragonsdungeons:block/painted_aging_adobe_top",
+    "side": "dragonsdungeons:block/painted_aging_adobe"
+  }
+}

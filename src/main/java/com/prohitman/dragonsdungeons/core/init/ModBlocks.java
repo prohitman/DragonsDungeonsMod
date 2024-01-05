@@ -20,7 +20,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> AGING_ADOBE_PILLAR = createRegistry("aging_adobe_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> CHISELED_AGING_ADOBE = createRegistry("chiseled_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> CRACKED_AGING_ADOBE = createRegistry("cracked_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
-    public static final RegistryObject<Block> PAINTED_AGING_ADOBE = createRegistry("painted_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> PAINTED_AGING_ADOBE = createRegistry("painted_aging_adobe", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> MOSSY_AGING_ADOBE = createRegistry("mossy_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
 
     public static final RegistryObject<Block> GREENSCHIST = createRegistry("greenschist", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
@@ -55,6 +55,14 @@ public class ModBlocks {
     public static final RegistryObject<Block> FORGED_TILES = createRegistry("forged_tiles", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> CRACKED_FORGED_BRICKS = createRegistry("cracked_forged_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> LINED_FORGED_BRICKS = createRegistry("lined_forged_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+
+    public static final RegistryObject<Block> LAVAROCK = createRegistry("lavarock", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> LAVAROCK_PILLAR = createRegistry("lavarock_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> LAVAROCK_BRICKS = createRegistry("lavarock_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> POLISHED_LAVAROCK = createRegistry("polished_lavarock", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> CHARRED_LAVAROCK_BRICKS = createRegistry("charred_lavarock_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> CHISELED_LAVAROCK = createRegistry("chiseled_lavarock", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> CRACKED_LAVAROCK_BRICKS = createRegistry("cracked_lavarock_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
 
     public static <T extends Block> RegistryObject<Block> createRegistry(String name, Supplier<T> block, Item.Properties properties) {
         RegistryObject<Block> object = BLOCKS.register(name, block);
