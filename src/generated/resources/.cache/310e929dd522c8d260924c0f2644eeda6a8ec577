@@ -1,8 +1,14 @@
-// 1.20.1	2024-01-05T18:44:50.0444429	Item Models: dragonsdungeons
+// 1.20.1	2024-01-05T18:55:05.0199282	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
+2fab58ea858f3edfc45756dff140aff049d92db2 assets/dragonsdungeons/models/item/algal_greenschist_bricks.json
 70dc7eaefde28e849cafbf22f7e1969b66415ca9 assets/dragonsdungeons/models/item/chiseled_aging_adobe.json
+30c35c3228b90a987cf7715fd5b66348b152990e assets/dragonsdungeons/models/item/chiseled_greenschist.json
 08d9bf1647ab1153b83d49e5ae7a9a048423091f assets/dragonsdungeons/models/item/cracked_aging_adobe.json
 702da081c38554fff080608050906359342a081e assets/dragonsdungeons/models/item/dragon_bone.json
+c460bc37ff250b1dcf05160de10d90240ca2bb3c assets/dragonsdungeons/models/item/greenschist.json
+e006c202f9d3ea0dc4af7c1373cb4e9919b8a567 assets/dragonsdungeons/models/item/greenschist_bricks.json
+132ffc429c518938270c282d97e8f9d4f41dde85 assets/dragonsdungeons/models/item/greenschist_pillar.json
 0f971b0d3b7478d9241935400a17087eb0c2630d assets/dragonsdungeons/models/item/mossy_aging_adobe.json
 064400b720f927a1a1f7de59c4bcf9c5f6dc1f65 assets/dragonsdungeons/models/item/painted_aging_adobe.json
+d65d4bc4404615f4d80ba98433c783245b216832 assets/dragonsdungeons/models/item/polished_greenschist.json

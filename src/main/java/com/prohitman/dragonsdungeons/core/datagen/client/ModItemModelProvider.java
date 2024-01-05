@@ -28,6 +28,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.PAINTED_AGING_ADOBE);
         createParent(ModBlocks.MOSSY_AGING_ADOBE);
 
+        //Greenschist
+        createParent(ModBlocks.GREENSCHIST);
+        createParent(ModBlocks.GREENSCHIST_BRICKS);
+        createParent(ModBlocks.GREENSCHIST_PILLAR);
+        createParent(ModBlocks.CHISELED_GREENSCHIST);
+        createParent(ModBlocks.POLISHED_GREENSCHIST);
+        createParent(ModBlocks.ALGAL_GREENSCHIST_BRICKS);
     }
 
     private void createParent(RegistryObject<Block> handler) {

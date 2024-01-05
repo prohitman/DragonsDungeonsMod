@@ -22,5 +22,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.PAINTED_AGING_ADOBE.get());
         simpleBlock(ModBlocks.CRACKED_AGING_ADOBE.get());
 
+        //Greenschist
+        simpleBlock(ModBlocks.GREENSCHIST.get());
+        logBlock((RotatedPillarBlock) ModBlocks.GREENSCHIST_PILLAR.get());
+        simpleBlock(ModBlocks.GREENSCHIST_BRICKS.get());
+        simpleBlock(ModBlocks.CHISELED_GREENSCHIST.get());
+        simpleBlock(ModBlocks.POLISHED_GREENSCHIST.get());
+        simpleBlock(ModBlocks.ALGAL_GREENSCHIST_BRICKS.get());
     }
 }

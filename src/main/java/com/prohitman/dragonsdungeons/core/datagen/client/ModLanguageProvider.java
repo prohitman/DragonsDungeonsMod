@@ -26,6 +26,13 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.PAINTED_AGING_ADOBE);
         addBlock(ModBlocks.CRACKED_AGING_ADOBE);
 
+        addBlock(ModBlocks.GREENSCHIST);
+        addBlock(ModBlocks.GREENSCHIST_BRICKS);
+        addBlock(ModBlocks.GREENSCHIST_PILLAR);
+        addBlock(ModBlocks.POLISHED_GREENSCHIST);
+        addBlock(ModBlocks.ALGAL_GREENSCHIST_BRICKS);
+        addBlock(ModBlocks.CHISELED_GREENSCHIST);
+
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }
 

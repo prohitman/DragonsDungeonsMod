@@ -1,10 +1,16 @@
 {
   "block.dragonsdungeons.aging_adobe": "Aging Adobe",
   "block.dragonsdungeons.aging_adobe_pillar": "Aging Adobe Pillar",
+  "block.dragonsdungeons.algal_greenschist_bricks": "Algal Greenschist Bricks",
   "block.dragonsdungeons.chiseled_aging_adobe": "Chiseled Aging Adobe",
+  "block.dragonsdungeons.chiseled_greenschist": "Chiseled Greenschist",
   "block.dragonsdungeons.cracked_aging_adobe": "Cracked Aging Adobe",
+  "block.dragonsdungeons.greenschist": "Greenschist",
+  "block.dragonsdungeons.greenschist_bricks": "Greenschist Bricks",
+  "block.dragonsdungeons.greenschist_pillar": "Greenschist Pillar",
   "block.dragonsdungeons.mossy_aging_adobe": "Mossy Aging Adobe",
   "block.dragonsdungeons.painted_aging_adobe": "Painted Aging Adobe",
+  "block.dragonsdungeons.polished_greenschist": "Polished Greenschist",
   "item.dragonsdungeons.dragon_bone": "Dragon Bone",
   "itemGroup.dragonsdungeons": "Dragons & Dungeons Mod"
 }
