@@ -20,7 +20,14 @@ public class ModItemModelProvider extends ItemModelProvider {
     protected void registerModels() {
         createSingle(ModItems.DRAGON_BONE);
 
+        //Adobe
         createParent(ModBlocks.AGING_ADOBE);
+        createParent(ModBlocks.AGING_ADOBE_PILLAR);
+        createParent(ModBlocks.CHISELED_AGING_ADOBE);
+        createParent(ModBlocks.CRACKED_AGING_ADOBE);
+        createParent(ModBlocks.PAINTED_AGING_ADOBE);
+        createParent(ModBlocks.MOSSY_AGING_ADOBE);
+
     }
 
     private void createParent(RegistryObject<Block> handler) {

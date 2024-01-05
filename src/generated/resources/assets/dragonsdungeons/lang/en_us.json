@@ -1,5 +1,10 @@
 {
   "block.dragonsdungeons.aging_adobe": "Aging Adobe",
+  "block.dragonsdungeons.aging_adobe_pillar": "Aging Adobe Pillar",
+  "block.dragonsdungeons.chiseled_aging_adobe": "Chiseled Aging Adobe",
+  "block.dragonsdungeons.cracked_aging_adobe": "Cracked Aging Adobe",
+  "block.dragonsdungeons.mossy_aging_adobe": "Mossy Aging Adobe",
+  "block.dragonsdungeons.painted_aging_adobe": "Painted Aging Adobe",
   "item.dragonsdungeons.dragon_bone": "Dragon Bone",
   "itemGroup.dragonsdungeons": "Dragons & Dungeons Mod"
 }
