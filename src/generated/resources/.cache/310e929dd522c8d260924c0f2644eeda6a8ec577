@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-05T19:14:15.5989341	Item Models: dragonsdungeons
+// 1.20.1	2024-01-05T19:21:51.6237706	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
 2fab58ea858f3edfc45756dff140aff049d92db2 assets/dragonsdungeons/models/item/algal_greenschist_bricks.json
@@ -7,9 +7,13 @@ f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/agin
 64aa794d210c63e69b01c2d902ab17126802e463 assets/dragonsdungeons/models/item/chiseled_ironstone.json
 bfb3e57dcb90f13146d1f8c02a8c20e548d13bc6 assets/dragonsdungeons/models/item/chiseled_shale.json
 08d9bf1647ab1153b83d49e5ae7a9a048423091f assets/dragonsdungeons/models/item/cracked_aging_adobe.json
+08c6ffcc7903a65f8659b34b8af4c36607303bd3 assets/dragonsdungeons/models/item/cracked_forged_bricks.json
 61241fc23662fd78ed0a880e5f0f77e0d9324906 assets/dragonsdungeons/models/item/cracked_ironstone_bricks.json
 134a452ea5c459966a73388faed0de6712811717 assets/dragonsdungeons/models/item/cracked_shale_bricks.json
 702da081c38554fff080608050906359342a081e assets/dragonsdungeons/models/item/dragon_bone.json
+c5c1e93794dcd316a855703b2c363418a3dab03c assets/dragonsdungeons/models/item/forged_bricks.json
+72ca118ff49697c2b341cf7c273ad907076110a6 assets/dragonsdungeons/models/item/forged_pillar.json
+74d035a10ff2f91c002d3db76a2710587909f3b6 assets/dragonsdungeons/models/item/forged_tiles.json
 c460bc37ff250b1dcf05160de10d90240ca2bb3c assets/dragonsdungeons/models/item/greenschist.json
 e006c202f9d3ea0dc4af7c1373cb4e9919b8a567 assets/dragonsdungeons/models/item/greenschist_bricks.json
 132ffc429c518938270c282d97e8f9d4f41dde85 assets/dragonsdungeons/models/item/greenschist_pillar.json
@@ -17,6 +21,7 @@ e006c202f9d3ea0dc4af7c1373cb4e9919b8a567 assets/dragonsdungeons/models/item/gree
 f4c8350929e7c449c2ab05f31924b2cadfa0046e assets/dragonsdungeons/models/item/ironstone_bricks.json
 c01ecf425606b34e50c0cb667968e748ee1b3576 assets/dragonsdungeons/models/item/ironstone_pillar.json
 81a9596768b7bc2d881cc46be42b5f12a24cbc07 assets/dragonsdungeons/models/item/ironstone_tiles.json
+778b25ccebcffa75d1ee0f3708289c8688d0cbe4 assets/dragonsdungeons/models/item/lined_forged_bricks.json
 0f971b0d3b7478d9241935400a17087eb0c2630d assets/dragonsdungeons/models/item/mossy_aging_adobe.json
 f3bbaaedf265f4621084ff849b9102171a54e0e6 assets/dragonsdungeons/models/item/mossy_ironstone_bricks.json
 70e25bf56a472ab2a5a7990466968b62f9d36ca2 assets/dragonsdungeons/models/item/mossy_shale_bricks.json

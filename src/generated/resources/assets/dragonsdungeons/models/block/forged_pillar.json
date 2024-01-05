@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "dragonsdungeons:block/forged_pillar_top",
+    "side": "dragonsdungeons:block/forged_pillar"
+  }
+}

@@ -53,6 +53,12 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.POLISHED_IRONSTONE);
         addBlock(ModBlocks.IRONSTONE_TILES);
 
+        addBlock(ModBlocks.FORGED_BRICKS);
+        addBlock(ModBlocks.FORGED_PILLAR);
+        addBlock(ModBlocks.FORGED_TILES);
+        addBlock(ModBlocks.LINED_FORGED_BRICKS);
+        addBlock(ModBlocks.CRACKED_FORGED_BRICKS);
+
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }
 

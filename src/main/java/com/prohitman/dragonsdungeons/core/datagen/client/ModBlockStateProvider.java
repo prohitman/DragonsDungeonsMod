@@ -51,5 +51,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CHISELED_IRONSTONE.get());
         simpleBlock(ModBlocks.CRACKED_IRONSTONE_BRICKS.get());
         simpleBlock(ModBlocks.MOSSY_IRONSTONE_BRICKS.get());
+
+        //Forged Bricks
+        simpleBlock(ModBlocks.FORGED_BRICKS.get());
+        logBlock((RotatedPillarBlock) ModBlocks.FORGED_PILLAR.get());
+        simpleBlock(ModBlocks.FORGED_TILES.get());
+        simpleBlock(ModBlocks.CRACKED_FORGED_BRICKS.get());
+        simpleBlock(ModBlocks.LINED_FORGED_BRICKS.get());
+
+
     }
 }

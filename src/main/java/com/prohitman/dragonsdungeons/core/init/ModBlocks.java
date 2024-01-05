@@ -50,6 +50,12 @@ public class ModBlocks {
     public static final RegistryObject<Block> MOSSY_IRONSTONE_BRICKS = createRegistry("mossy_ironstone_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> POLISHED_IRONSTONE = createRegistry("polished_ironstone", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
 
+    public static final RegistryObject<Block> FORGED_BRICKS = createRegistry("forged_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> FORGED_PILLAR = createRegistry("forged_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> FORGED_TILES = createRegistry("forged_tiles", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> CRACKED_FORGED_BRICKS = createRegistry("cracked_forged_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> LINED_FORGED_BRICKS = createRegistry("lined_forged_bricks", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+
     public static <T extends Block> RegistryObject<Block> createRegistry(String name, Supplier<T> block, Item.Properties properties) {
         RegistryObject<Block> object = BLOCKS.register(name, block);
         ModItems.ITEMS.register(name, () -> new BlockItem(object.get(), properties));

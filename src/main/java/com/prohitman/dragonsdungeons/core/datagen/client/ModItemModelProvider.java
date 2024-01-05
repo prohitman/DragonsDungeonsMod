@@ -57,6 +57,13 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.CRACKED_IRONSTONE_BRICKS);
         createParent(ModBlocks.CHISELED_IRONSTONE);
         createParent(ModBlocks.MOSSY_IRONSTONE_BRICKS);
+
+        //Forged Bricks
+        createParent(ModBlocks.FORGED_BRICKS);
+        createParent(ModBlocks.FORGED_PILLAR);
+        createParent(ModBlocks.FORGED_TILES);
+        createParent(ModBlocks.CRACKED_FORGED_BRICKS);
+        createParent(ModBlocks.LINED_FORGED_BRICKS);
     }
 
     private void createParent(RegistryObject<Block> handler) {
