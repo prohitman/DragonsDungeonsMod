@@ -4,6 +4,7 @@ import com.prohitman.dragonsdungeons.DragonsDungeons;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
@@ -15,6 +16,11 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, DragonsDungeons.MODID);
+
+    public static final RegistryObject<Block> CHUNKY_RUBBLE = createRegistry("chunky_rubble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT)), new Item.Properties());
+    public static final RegistryObject<Block> RUBBLE = createRegistry("rubble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT)), new Item.Properties());
+    public static final RegistryObject<Block> RUINED_SHINGLES = createRegistry("ruined_shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
+    public static final RegistryObject<Block> SHINGLES = createRegistry("shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
 
     public static final RegistryObject<Block> AGING_ADOBE = createRegistry("aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> AGING_ADOBE_PILLAR = createRegistry("aging_adobe_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());

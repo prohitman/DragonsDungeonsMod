@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-05T19:37:22.4678473	Item Models: dragonsdungeons
+// 1.20.1	2024-01-05T22:07:23.7606943	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
 2fab58ea858f3edfc45756dff140aff049d92db2 assets/dragonsdungeons/models/item/algal_greenschist_bricks.json
@@ -8,6 +8,7 @@ f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/agin
 64aa794d210c63e69b01c2d902ab17126802e463 assets/dragonsdungeons/models/item/chiseled_ironstone.json
 3a0c994164d3d00c909e42a02d69b78c9d36c128 assets/dragonsdungeons/models/item/chiseled_lavarock.json
 bfb3e57dcb90f13146d1f8c02a8c20e548d13bc6 assets/dragonsdungeons/models/item/chiseled_shale.json
+d801c7f45d0f0d4d989ba67f32c300280737a648 assets/dragonsdungeons/models/item/chunky_rubble.json
 08d9bf1647ab1153b83d49e5ae7a9a048423091f assets/dragonsdungeons/models/item/cracked_aging_adobe.json
 08c6ffcc7903a65f8659b34b8af4c36607303bd3 assets/dragonsdungeons/models/item/cracked_forged_bricks.json
 61241fc23662fd78ed0a880e5f0f77e0d9324906 assets/dragonsdungeons/models/item/cracked_ironstone_bricks.json
@@ -37,8 +38,11 @@ d65d4bc4404615f4d80ba98433c783245b216832 assets/dragonsdungeons/models/item/poli
 3999045f69006c3ceae1289ba5587b50622244a7 assets/dragonsdungeons/models/item/polished_lavarock.json
 f76fd001c77a925175d4701f2623609c384be140 assets/dragonsdungeons/models/item/polished_shale.json
 a3131906b4e637ee1a6e471e10e129124feb6fd5 assets/dragonsdungeons/models/item/raw_ironstone.json
+e260b138022f80f6f7b022290fcb30857f12ff58 assets/dragonsdungeons/models/item/rubble.json
+3b3733fefa3a7ee7deee4a364386ad9cad326e2e assets/dragonsdungeons/models/item/ruined_shingles.json
 169057f9b6c8598f25ac6be6ab0fd1b8e457cc72 assets/dragonsdungeons/models/item/shale.json
 6b46bfaeaf6e0d3abc202cdbb8411d895dbfceb3 assets/dragonsdungeons/models/item/shale_bricks.json
 798a8214be0d566b074f537968bc647ffde2d599 assets/dragonsdungeons/models/item/shale_pillar.json
 11b58254a9d3d5cd7ae4abb7fdfb79b09a032bf9 assets/dragonsdungeons/models/item/shale_shingles.json
 bd8bc72a83a12771e17954ab9a5c97fdf712c0ec assets/dragonsdungeons/models/item/shale_tiles.json
+39166c3596e02ff668a42f47d383a07d2afe4187 assets/dragonsdungeons/models/item/shingles.json

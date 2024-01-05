@@ -8,6 +8,7 @@
   "block.dragonsdungeons.chiseled_ironstone": "Chiseled Ironstone",
   "block.dragonsdungeons.chiseled_lavarock": "Chiseled Lavarock",
   "block.dragonsdungeons.chiseled_shale": "Chiseled Shale",
+  "block.dragonsdungeons.chunky_rubble": "Chunky Rubble",
   "block.dragonsdungeons.cracked_aging_adobe": "Cracked Aging Adobe",
   "block.dragonsdungeons.cracked_forged_bricks": "Cracked Forged Bricks",
   "block.dragonsdungeons.cracked_ironstone_bricks": "Cracked Ironstone Bricks",
@@ -36,11 +37,14 @@
   "block.dragonsdungeons.polished_lavarock": "Polished Lavarock",
   "block.dragonsdungeons.polished_shale": "Polished Shale",
   "block.dragonsdungeons.raw_ironstone": "Raw Ironstone",
+  "block.dragonsdungeons.rubble": "Rubble",
+  "block.dragonsdungeons.ruined_shingles": "Ruined Shingles",
   "block.dragonsdungeons.shale": "Shale",
   "block.dragonsdungeons.shale_bricks": "Shale Bricks",
   "block.dragonsdungeons.shale_pillar": "Shale Pillar",
   "block.dragonsdungeons.shale_shingles": "Shale Shingles",
   "block.dragonsdungeons.shale_tiles": "Shale Tiles",
+  "block.dragonsdungeons.shingles": "Shingles",
   "item.dragonsdungeons.dragon_bone": "Dragon Bone",
   "itemGroup.dragonsdungeons": "Dragons & Dungeons Mod"
 }

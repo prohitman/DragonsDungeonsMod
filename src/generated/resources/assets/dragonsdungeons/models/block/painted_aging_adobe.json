@@ -1,7 +1,9 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "dragonsdungeons:block/cube_bottomtop_horizontal",
   "textures": {
-    "end": "dragonsdungeons:block/painted_aging_adobe_top",
-    "side": "dragonsdungeons:block/painted_aging_adobe"
+    "bottom": "dragonsdungeons:block/aging_adobe",
+    "end": "dragonsdungeons:block/aging_adobe",
+    "side": "dragonsdungeons:block/painted_aging_adobe",
+    "top": "dragonsdungeons:block/painted_aging_adobe_top"
   }
 }

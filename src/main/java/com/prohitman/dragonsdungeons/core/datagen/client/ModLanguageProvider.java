@@ -67,6 +67,11 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS);
         addBlock(ModBlocks.CRACKED_LAVAROCK_BRICKS);
 
+        addBlock(ModBlocks.SHINGLES);
+        addBlock(ModBlocks.RUINED_SHINGLES);
+        addBlock(ModBlocks.CHUNKY_RUBBLE);
+        addBlock(ModBlocks.RUBBLE);
+
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }
 

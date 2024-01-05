@@ -1,7 +1,7 @@
 {
   "variants": {
     "axis=x": {
-      "model": "dragonsdungeons:block/painted_aging_adobe_horizontal",
+      "model": "dragonsdungeons:block/painted_aging_adobe",
       "x": 90,
       "y": 90
     },
@@ -9,7 +9,7 @@
       "model": "dragonsdungeons:block/painted_aging_adobe"
     },
     "axis=z": {
-      "model": "dragonsdungeons:block/painted_aging_adobe_horizontal",
+      "model": "dragonsdungeons:block/painted_aging_adobe",
       "x": 90
     }
   }

@@ -3,9 +3,13 @@ package com.prohitman.dragonsdungeons.core.datagen.client;
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -14,12 +18,18 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     @Override
     protected void registerStatesAndModels() {
+        //Other Blocks
+        simpleBlock(ModBlocks.SHINGLES.get());
+        simpleBlock(ModBlocks.RUINED_SHINGLES.get());
+        simpleBlock(ModBlocks.RUBBLE.get());
+        simpleBlock(ModBlocks.CHUNKY_RUBBLE.get());
+
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
         logBlock((RotatedPillarBlock) ModBlocks.AGING_ADOBE_PILLAR.get());
         simpleBlock(ModBlocks.CHISELED_AGING_ADOBE.get());
         simpleBlock(ModBlocks.MOSSY_AGING_ADOBE.get());
-        logBlock((RotatedPillarBlock) ModBlocks.PAINTED_AGING_ADOBE.get());
+        createAxisBlock((RotatedPillarBlock) ModBlocks.PAINTED_AGING_ADOBE.get(), ModBlocks.AGING_ADOBE);
         simpleBlock(ModBlocks.CRACKED_AGING_ADOBE.get());
 
         //Greenschist
@@ -67,5 +77,34 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CRACKED_LAVAROCK_BRICKS.get());
         simpleBlock(ModBlocks.POLISHED_LAVAROCK.get());
         simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
+    }
+
+    public void createHorizontalBlock(RegistryObject<Block> block, RegistryObject<Block> frontBlock){
+        horizontalBlock(block.get(),
+                modLoc("block/" + block.getId().getPath()),
+                modLoc("block/" + frontBlock.getId().getPath()),
+                modLoc("block/" + block.getId().getPath() + "_top"));
+    }
+
+    public void createAxisBlock(RotatedPillarBlock block, RegistryObject<Block> bottomBlock) {
+        axisBlock(block,
+                models().cubeBottomTop(name(block), modLoc("block/" + name(block)),
+                        modLoc("block/" + name(bottomBlock)), modLoc("block/" + name(block) + "_top")),
+                models().withExistingParent(name(block), modLoc("block/" + "cube_bottomtop_horizontal"))
+                                .texture("side", modLoc("block/" + name(block)))
+                                        .texture("top", modLoc("block/" + name(block) + "_top"))
+                                                .texture("end", modLoc("block/" + name(bottomBlock))));
+    }
+
+    private String name(RegistryObject<Block> block) {
+        return block.getId().getPath();
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
     }
 }
