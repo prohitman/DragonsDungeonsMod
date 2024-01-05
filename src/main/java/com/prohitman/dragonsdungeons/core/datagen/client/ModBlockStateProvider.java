@@ -29,5 +29,17 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CHISELED_GREENSCHIST.get());
         simpleBlock(ModBlocks.POLISHED_GREENSCHIST.get());
         simpleBlock(ModBlocks.ALGAL_GREENSCHIST_BRICKS.get());
+
+        //Shale
+        simpleBlock(ModBlocks.SHALE.get());
+        logBlock((RotatedPillarBlock) ModBlocks.SHALE_PILLAR.get());
+        simpleBlock(ModBlocks.SHALE_BRICKS.get());
+        simpleBlock(ModBlocks.SHALE_SHINGLES.get());
+        simpleBlock(ModBlocks.SHALE_TILES.get());
+        simpleBlock(ModBlocks.CHISELED_SHALE.get());
+        simpleBlock(ModBlocks.CRACKED_SHALE_BRICKS.get());
+        simpleBlock(ModBlocks.MOSSY_SHALE_BRICKS.get());
+        simpleBlock(ModBlocks.POLISHED_SHALE.get());
+
     }
 }

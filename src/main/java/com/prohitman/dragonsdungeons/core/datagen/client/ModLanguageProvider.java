@@ -33,6 +33,16 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.ALGAL_GREENSCHIST_BRICKS);
         addBlock(ModBlocks.CHISELED_GREENSCHIST);
 
+        addBlock(ModBlocks.SHALE_BRICKS);
+        addBlock(ModBlocks.SHALE);
+        addBlock(ModBlocks.SHALE_PILLAR);
+        addBlock(ModBlocks.SHALE_SHINGLES);
+        addBlock(ModBlocks.SHALE_TILES);
+        addBlock(ModBlocks.CHISELED_SHALE);
+        addBlock(ModBlocks.MOSSY_SHALE_BRICKS);
+        addBlock(ModBlocks.CRACKED_SHALE_BRICKS);
+        addBlock(ModBlocks.POLISHED_SHALE);
+
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }
 

@@ -35,6 +35,18 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.CHISELED_GREENSCHIST);
         createParent(ModBlocks.POLISHED_GREENSCHIST);
         createParent(ModBlocks.ALGAL_GREENSCHIST_BRICKS);
+
+        //Shale
+        createParent(ModBlocks.SHALE);
+        createParent(ModBlocks.SHALE_BRICKS);
+        createParent(ModBlocks.SHALE_PILLAR);
+        createParent(ModBlocks.SHALE_SHINGLES);
+        createParent(ModBlocks.SHALE_TILES);
+        createParent(ModBlocks.CHISELED_SHALE);
+        createParent(ModBlocks.CRACKED_SHALE_BRICKS);
+        createParent(ModBlocks.MOSSY_SHALE_BRICKS);
+        createParent(ModBlocks.POLISHED_SHALE);
+
     }
 
     private void createParent(RegistryObject<Block> handler) {
