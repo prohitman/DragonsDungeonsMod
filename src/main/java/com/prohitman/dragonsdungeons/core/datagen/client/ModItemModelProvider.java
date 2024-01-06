@@ -44,6 +44,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.BARROW_STONES);
         createParent(ModBlocks.THATCH_ROOF);
         createParent(ModBlocks.HANGING_BARROW_MOSS);
+        createParent(ModBlocks.STONE_WINDOW);
 
         createStairWallSlabParents();
 

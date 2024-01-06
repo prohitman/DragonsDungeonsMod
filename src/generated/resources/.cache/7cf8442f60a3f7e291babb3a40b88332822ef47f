@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-06T18:21:39.9705199	Block States: dragonsdungeons
+// 1.20.1	2024-01-06T20:55:22.5584606	Block States: dragonsdungeons
 f01a670d8f2cb81d21a5004e2b4bd2aeaefa3901 assets/dragonsdungeons/blockstates/aging_adobe.json
 5986a5d3c75af8ef5583d7c03041503851e1bc5f assets/dragonsdungeons/blockstates/aging_adobe_pillar.json
 b2bfd9eff6a07d8c9828549031803e542fbd4704 assets/dragonsdungeons/blockstates/aging_adobe_slab.json
@@ -132,6 +132,7 @@ c9dc4899e43d9eb9c701ba910c97c924a1657aa1 assets/dragonsdungeons/blockstates/shal
 43e08e32044a8ec876c41bb9eeeff91a13db5532 assets/dragonsdungeons/blockstates/shale_tiles_wall.json
 2ca910416470bf06ca901fd3587513394296dc5e assets/dragonsdungeons/blockstates/shale_wall.json
 592f8cfc21b952357232c1b5777f9050b72001f5 assets/dragonsdungeons/blockstates/shingles.json
+8e0ccf73d43425afa59fec7142fa2d87a995fe28 assets/dragonsdungeons/blockstates/stone_window.json
 7d8e6b481083c8063028b1c20f5e2267c18a44cb assets/dragonsdungeons/blockstates/thatch.json
 57736f67428ebb6db1843b6a2e26cf20b83649be assets/dragonsdungeons/blockstates/thatch_roof.json
 da3251997bf4a5a53508a8973cb092d170ce8c71 assets/dragonsdungeons/models/block/aging_adobe.json
@@ -414,5 +415,9 @@ edc85e8ff4a97cb703a4e8d46963a6704844b6be assets/dragonsdungeons/models/block/sha
 b91aec7b3d593f9f56b91eeaf63813b80ad88ad9 assets/dragonsdungeons/models/block/shale_wall_side.json
 dd43a09a0d9798c736c8646be2d01a9ebfce266a assets/dragonsdungeons/models/block/shale_wall_side_tall.json
 bfa7ea20845e06eb138e7121d4be7ce07069bc59 assets/dragonsdungeons/models/block/shingles.json
+303e921a82c07678e251fe56c329591e5236b2c9 assets/dragonsdungeons/models/block/stone_window.json
+1e3089c4f53f94f94c5fc4240c44df7577d031c7 assets/dragonsdungeons/models/block/stone_window_bottom.json
+1c79a1cec6f56005b30701908b3ad30994c57206 assets/dragonsdungeons/models/block/stone_window_middle.json
+f88eac88a9ee92cedf082b146d2652499f6b53c9 assets/dragonsdungeons/models/block/stone_window_top.json
 cf1349fb0fcee0042d8efc9b1b78283fe85048d4 assets/dragonsdungeons/models/block/thatch_dd.json
 70df0a5decb7d8a9dd6395aca621f42dd62b83b3 assets/dragonsdungeons/models/block/thatch_roof_dd.json

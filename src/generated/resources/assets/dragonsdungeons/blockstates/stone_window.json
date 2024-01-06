@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "connected_state=both": {
+      "model": "dragonsdungeons:block/stone_window_middle"
+    },
+    "connected_state=bottom": {
+      "model": "dragonsdungeons:block/stone_window_bottom"
+    },
+    "connected_state=none": {
+      "model": "dragonsdungeons:block/stone_window"
+    },
+    "connected_state=top": {
+      "model": "dragonsdungeons:block/stone_window_top"
+    }
+  }
+}

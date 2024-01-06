@@ -1,6 +1,8 @@
 package com.prohitman.dragonsdungeons.core.datagen.client;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
+import com.prohitman.dragonsdungeons.common.blocks.enums.ConnectedState;
+import com.prohitman.dragonsdungeons.common.blocks.obj.StoneWindow;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import net.minecraft.core.Direction;
@@ -42,6 +44,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .renderType("cutout_mipped")
                         .ao(false));
         createBlockWithModel(ModBlocks.HANGING_BARROW_MOSS);
+        createStoneWindow(ModBlocks.STONE_WINDOW);
+
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
         createStairSlabWall(ModBlocks.AGING_ADOBE);
@@ -165,6 +169,31 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .rotationX(face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? 90 : 180))
                     .rotationY((int) (face == AttachFace.CEILING ? facing : facing.getOpposite()).toYRot() + (face == AttachFace.FLOOR ? 90 : 0))
                     //.uvLock(face == AttachFace.WALL)
+                    .build();
+        });
+    }
+
+    public void createStoneWindow(RegistryObject<Block> block){
+        stoneWindow(block.get(),
+                models().cubeAll(name(block), modLoc("block/" + name(block))).renderType("cutout_mipped"),
+                models().cubeAll(name(block) + "_top", modLoc("block/" + name(block) + "_top")).renderType("cutout_mipped"),
+                models().cubeAll(name(block) + "_bottom", modLoc("block/" + name(block) + "_bottom")).renderType("cutout_mipped"),
+                models().cubeAll(name(block) + "_middle", modLoc("block/" + name(block) + "_middle")).renderType("cutout_mipped"));
+    }
+
+    public void stoneWindow(Block window, ModelFile none, ModelFile top, ModelFile bottom, ModelFile both){
+        getVariantBuilder(window).forAllStates(blockState -> {
+            ModelFile model = none;
+            if(blockState.getValue(StoneWindow.CONNECTED_STATE) == ConnectedState.TOP){
+                model = top;
+            } else if(blockState.getValue(StoneWindow.CONNECTED_STATE) == ConnectedState.BOTTOM){
+                model = bottom;
+            } else if(blockState.getValue(StoneWindow.CONNECTED_STATE) == ConnectedState.BOTH){
+                model = both;
+            }
+
+            return ConfiguredModel.builder()
+                    .modelFile(model)
                     .build();
         });
     }
