@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dragonsdungeons:block/polished_greenschist_slab"
+    },
+    "type=double": {
+      "model": "dragonsdungeons:block/polished_greenschist"
+    },
+    "type=top": {
+      "model": "dragonsdungeons:block/polished_greenschist_slab_top"
+    }
+  }
+}

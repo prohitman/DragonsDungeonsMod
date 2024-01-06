@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "dragonsdungeons:block/charred_lavarock_bricks",
+    "side": "dragonsdungeons:block/charred_lavarock_bricks",
+    "top": "dragonsdungeons:block/charred_lavarock_bricks"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "dragonsdungeons:block/mossy_ironstone_bricks",
+    "side": "dragonsdungeons:block/mossy_ironstone_bricks",
+    "top": "dragonsdungeons:block/mossy_ironstone_bricks"
+  }
+}

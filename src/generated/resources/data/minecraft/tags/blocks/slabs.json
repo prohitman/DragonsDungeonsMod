@@ -1,0 +1,32 @@
+{
+  "values": [
+    "dragonsdungeons:aging_adobe_slab",
+    "dragonsdungeons:cracked_aging_adobe_slab",
+    "dragonsdungeons:mossy_aging_adobe_slab",
+    "dragonsdungeons:greenschist_slab",
+    "dragonsdungeons:algal_greenschist_bricks_slab",
+    "dragonsdungeons:greenschist_bricks_slab",
+    "dragonsdungeons:polished_greenschist_slab",
+    "dragonsdungeons:shale_slab",
+    "dragonsdungeons:cracked_shale_bricks_slab",
+    "dragonsdungeons:mossy_shale_bricks_slab",
+    "dragonsdungeons:polished_shale_slab",
+    "dragonsdungeons:shale_bricks_slab",
+    "dragonsdungeons:shale_tiles_slab",
+    "dragonsdungeons:raw_ironstone_slab",
+    "dragonsdungeons:cracked_ironstone_bricks_slab",
+    "dragonsdungeons:ironstone_bricks_slab",
+    "dragonsdungeons:ironstone_tiles_slab",
+    "dragonsdungeons:mossy_ironstone_bricks_slab",
+    "dragonsdungeons:polished_ironstone_slab",
+    "dragonsdungeons:forged_bricks_slab",
+    "dragonsdungeons:forged_tiles_slab",
+    "dragonsdungeons:cracked_forged_bricks_slab",
+    "dragonsdungeons:lined_forged_bricks_slab",
+    "dragonsdungeons:lavarock_slab",
+    "dragonsdungeons:lavarock_bricks_slab",
+    "dragonsdungeons:polished_lavarock_slab",
+    "dragonsdungeons:charred_lavarock_bricks_slab",
+    "dragonsdungeons:cracked_lavarock_bricks_slab"
+  ]
+}

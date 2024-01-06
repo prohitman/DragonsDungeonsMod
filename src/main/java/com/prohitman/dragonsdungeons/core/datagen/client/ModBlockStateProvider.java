@@ -6,9 +6,7 @@ import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.ButtonBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -45,57 +43,116 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .ao(false));
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
+        createStairSlabWall(ModBlocks.AGING_ADOBE);
         logBlock((RotatedPillarBlock) ModBlocks.AGING_ADOBE_PILLAR.get());
         simpleBlock(ModBlocks.CHISELED_AGING_ADOBE.get());
         simpleBlock(ModBlocks.MOSSY_AGING_ADOBE.get());
+        createStairSlabWall(ModBlocks.MOSSY_AGING_ADOBE);
         createAxisBlock((RotatedPillarBlock) ModBlocks.PAINTED_AGING_ADOBE.get(), ModBlocks.AGING_ADOBE);
         simpleBlock(ModBlocks.CRACKED_AGING_ADOBE.get());
+        createStairSlabWall(ModBlocks.CRACKED_AGING_ADOBE);
 
         //Greenschist
         simpleBlock(ModBlocks.GREENSCHIST.get());
+        createStairSlabWall(ModBlocks.GREENSCHIST);
+
         logBlock((RotatedPillarBlock) ModBlocks.GREENSCHIST_PILLAR.get());
         simpleBlock(ModBlocks.GREENSCHIST_BRICKS.get());
+        createStairSlabWall(ModBlocks.GREENSCHIST_BRICKS);
+
         simpleBlock(ModBlocks.CHISELED_GREENSCHIST.get());
         simpleBlock(ModBlocks.POLISHED_GREENSCHIST.get());
+        createStairSlabWall(ModBlocks.POLISHED_GREENSCHIST);
+
         simpleBlock(ModBlocks.ALGAL_GREENSCHIST_BRICKS.get());
+        createStairSlabWall(ModBlocks.ALGAL_GREENSCHIST_BRICKS);
 
         //Shale
         simpleBlock(ModBlocks.SHALE.get());
+        createStairSlabWall(ModBlocks.SHALE);
+
         logBlock((RotatedPillarBlock) ModBlocks.SHALE_PILLAR.get());
         simpleBlock(ModBlocks.SHALE_BRICKS.get());
+        createStairSlabWall(ModBlocks.SHALE_BRICKS);
+
         simpleBlock(ModBlocks.SHALE_SHINGLES.get());
         simpleBlock(ModBlocks.SHALE_TILES.get());
+        createStairSlabWall(ModBlocks.SHALE_TILES);
+
         simpleBlock(ModBlocks.CHISELED_SHALE.get());
         simpleBlock(ModBlocks.CRACKED_SHALE_BRICKS.get());
+        createStairSlabWall(ModBlocks.CRACKED_SHALE_BRICKS);
+
         simpleBlock(ModBlocks.MOSSY_SHALE_BRICKS.get());
+        createStairSlabWall(ModBlocks.MOSSY_SHALE_BRICKS);
+
         simpleBlock(ModBlocks.POLISHED_SHALE.get());
+        createStairSlabWall(ModBlocks.POLISHED_SHALE);
 
         //Ironstone
         simpleBlock(ModBlocks.RAW_IRONSTONE.get());
+        createStairSlabWall(ModBlocks.RAW_IRONSTONE);
+
         logBlock((RotatedPillarBlock) ModBlocks.IRONSTONE_PILLAR.get());
         logBlock((RotatedPillarBlock) ModBlocks.IRONSTONE_BATTLEMENT.get());
         simpleBlock(ModBlocks.IRONSTONE_BRICKS.get());
+        createStairSlabWall(ModBlocks.IRONSTONE_BRICKS);
+
         simpleBlock(ModBlocks.IRONSTONE_TILES.get());
+        createStairSlabWall(ModBlocks.IRONSTONE_TILES);
+
         simpleBlock(ModBlocks.POLISHED_IRONSTONE.get());
+        createStairSlabWall(ModBlocks.POLISHED_IRONSTONE);
+
         simpleBlock(ModBlocks.CHISELED_IRONSTONE.get());
         simpleBlock(ModBlocks.CRACKED_IRONSTONE_BRICKS.get());
+        createStairSlabWall(ModBlocks.CRACKED_IRONSTONE_BRICKS);
+
         simpleBlock(ModBlocks.MOSSY_IRONSTONE_BRICKS.get());
+        createStairSlabWall(ModBlocks.MOSSY_IRONSTONE_BRICKS);
 
         //Forged Bricks
         simpleBlock(ModBlocks.FORGED_BRICKS.get());
+        createStairSlabWall(ModBlocks.FORGED_BRICKS);
+
         logBlock((RotatedPillarBlock) ModBlocks.FORGED_PILLAR.get());
         simpleBlock(ModBlocks.FORGED_TILES.get());
+        createStairSlabWall(ModBlocks.FORGED_TILES);
+
         simpleBlock(ModBlocks.CRACKED_FORGED_BRICKS.get());
+        createStairSlabWall(ModBlocks.CRACKED_FORGED_BRICKS);
+
         simpleBlock(ModBlocks.LINED_FORGED_BRICKS.get());
+        createStairSlabWall(ModBlocks.LINED_FORGED_BRICKS);
 
         //Lavarock
         simpleBlock(ModBlocks.LAVAROCK.get());
+        createStairSlabWall(ModBlocks.LAVAROCK);
+
         logBlock((RotatedPillarBlock) ModBlocks.LAVAROCK_PILLAR.get());
         simpleBlock(ModBlocks.LAVAROCK_BRICKS.get());
+        createStairSlabWall(ModBlocks.LAVAROCK_BRICKS);
+
         simpleBlock(ModBlocks.CHISELED_LAVAROCK.get());
         simpleBlock(ModBlocks.CRACKED_LAVAROCK_BRICKS.get());
+        createStairSlabWall(ModBlocks.CRACKED_LAVAROCK_BRICKS);
+
         simpleBlock(ModBlocks.POLISHED_LAVAROCK.get());
+        createStairSlabWall(ModBlocks.POLISHED_LAVAROCK);
+
         simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
+        createStairSlabWall(ModBlocks.CHARRED_LAVAROCK_BRICKS);
+
+    }
+
+    public void createStairSlabWall(RegistryObject<Block> block){
+        stairsBlock((StairBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DragonsDungeons.MODID, name(block) + "_stairs")),
+                modLoc("block/" + name(block)));
+        slabBlock((SlabBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DragonsDungeons.MODID, name(block) + "_slab")),
+                modLoc("block/" + name(block)),
+                modLoc("block/" + name(block)));
+        wallBlock((WallBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DragonsDungeons.MODID, name(block) + "_wall")),
+                modLoc("block/" + name(block)));
     }
 
     public void mithrilBlock(MithrilCrystal block, ModelFile crystal) {

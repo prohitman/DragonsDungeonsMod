@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dragonsdungeons:block/raw_ironstone_slab"
+    },
+    "type=double": {
+      "model": "dragonsdungeons:block/raw_ironstone"
+    },
+    "type=top": {
+      "model": "dragonsdungeons:block/raw_ironstone_slab_top"
+    }
+  }
+}

@@ -6,9 +6,15 @@ import com.prohitman.dragonsdungeons.core.init.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SlabBlock;
+import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.WallBlock;
 import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 import org.codehaus.plexus.util.StringUtils;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ModLanguageProvider extends LanguageProvider {
     public ModLanguageProvider(PackOutput output, String locale) {
@@ -19,6 +25,8 @@ public class ModLanguageProvider extends LanguageProvider {
     protected void addTranslations() {
         addItem(ModItems.DRAGON_BONE);
         addItem(ModItems.GOLD_COINS);
+
+        addAllSlabsStairsWalls();
 
         addBlock(ModBlocks.AGING_ADOBE);
         addBlock(ModBlocks.AGING_ADOBE_PILLAR);
@@ -79,6 +87,17 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.MITHRIL_CRYSTAL);
 
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
+    }
+
+    public void addAllSlabsStairsWalls(){
+        List<RegistryObject<Block>> list = new LinkedList<>();
+
+        list.addAll(ModBlocks.BLOCKS.getEntries().stream()
+                .filter((registryObject) -> registryObject.get() instanceof SlabBlock
+                        || registryObject.get() instanceof WallBlock
+                        || registryObject.get() instanceof StairBlock).toList());
+
+        list.forEach((this::addBlock));
     }
 
     public void addBlock(RegistryObject<Block> key) {

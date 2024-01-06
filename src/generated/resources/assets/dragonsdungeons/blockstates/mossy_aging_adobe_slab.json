@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dragonsdungeons:block/mossy_aging_adobe_slab"
+    },
+    "type=double": {
+      "model": "dragonsdungeons:block/mossy_aging_adobe"
+    },
+    "type=top": {
+      "model": "dragonsdungeons:block/mossy_aging_adobe_slab_top"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "values": [
+    "dragonsdungeons:aging_adobe_wall",
+    "dragonsdungeons:cracked_aging_adobe_wall",
+    "dragonsdungeons:mossy_aging_adobe_wall",
+    "dragonsdungeons:greenschist_wall",
+    "dragonsdungeons:algal_greenschist_bricks_wall",
+    "dragonsdungeons:greenschist_bricks_wall",
+    "dragonsdungeons:polished_greenschist_wall",
+    "dragonsdungeons:shale_wall",
+    "dragonsdungeons:cracked_shale_bricks_wall",
+    "dragonsdungeons:mossy_shale_bricks_wall",
+    "dragonsdungeons:polished_shale_wall",
+    "dragonsdungeons:shale_bricks_wall",
+    "dragonsdungeons:shale_tiles_wall",
+    "dragonsdungeons:raw_ironstone_wall",
+    "dragonsdungeons:cracked_ironstone_bricks_wall",
+    "dragonsdungeons:ironstone_bricks_wall",
+    "dragonsdungeons:ironstone_tiles_wall",
+    "dragonsdungeons:mossy_ironstone_bricks_wall",
+    "dragonsdungeons:polished_ironstone_wall",
+    "dragonsdungeons:forged_bricks_wall",
+    "dragonsdungeons:forged_tiles_wall",
+    "dragonsdungeons:cracked_forged_bricks_wall",
+    "dragonsdungeons:lined_forged_bricks_wall",
+    "dragonsdungeons:lavarock_wall",
+    "dragonsdungeons:lavarock_bricks_wall",
+    "dragonsdungeons:polished_lavarock_wall",
+    "dragonsdungeons:charred_lavarock_bricks_wall",
+    "dragonsdungeons:cracked_lavarock_bricks_wall"
+  ]
+}

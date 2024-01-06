@@ -1,0 +1,32 @@
+{
+  "values": [
+    "dragonsdungeons:aging_adobe_stairs",
+    "dragonsdungeons:cracked_aging_adobe_stairs",
+    "dragonsdungeons:mossy_aging_adobe_stairs",
+    "dragonsdungeons:greenschist_stairs",
+    "dragonsdungeons:algal_greenschist_bricks_stairs",
+    "dragonsdungeons:greenschist_bricks_stairs",
+    "dragonsdungeons:polished_greenschist_stairs",
+    "dragonsdungeons:shale_stairs",
+    "dragonsdungeons:cracked_shale_bricks_stairs",
+    "dragonsdungeons:mossy_shale_bricks_stairs",
+    "dragonsdungeons:polished_shale_stairs",
+    "dragonsdungeons:shale_bricks_stairs",
+    "dragonsdungeons:shale_tiles_stairs",
+    "dragonsdungeons:raw_ironstone_stairs",
+    "dragonsdungeons:cracked_ironstone_bricks_stairs",
+    "dragonsdungeons:ironstone_bricks_stairs",
+    "dragonsdungeons:ironstone_tiles_stairs",
+    "dragonsdungeons:mossy_ironstone_bricks_stairs",
+    "dragonsdungeons:polished_ironstone_stairs",
+    "dragonsdungeons:forged_bricks_stairs",
+    "dragonsdungeons:forged_tiles_stairs",
+    "dragonsdungeons:cracked_forged_bricks_stairs",
+    "dragonsdungeons:lined_forged_bricks_stairs",
+    "dragonsdungeons:lavarock_stairs",
+    "dragonsdungeons:lavarock_bricks_stairs",
+    "dragonsdungeons:polished_lavarock_stairs",
+    "dragonsdungeons:charred_lavarock_bricks_stairs",
+    "dragonsdungeons:cracked_lavarock_bricks_stairs"
+  ]
+}

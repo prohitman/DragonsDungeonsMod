@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dragonsdungeons:block/charred_lavarock_bricks_slab"
+    },
+    "type=double": {
+      "model": "dragonsdungeons:block/charred_lavarock_bricks"
+    },
+    "type=top": {
+      "model": "dragonsdungeons:block/charred_lavarock_bricks_slab_top"
+    }
+  }
+}

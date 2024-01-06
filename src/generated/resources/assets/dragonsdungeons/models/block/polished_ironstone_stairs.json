@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "dragonsdungeons:block/polished_ironstone",
+    "side": "dragonsdungeons:block/polished_ironstone",
+    "top": "dragonsdungeons:block/polished_ironstone"
+  }
+}

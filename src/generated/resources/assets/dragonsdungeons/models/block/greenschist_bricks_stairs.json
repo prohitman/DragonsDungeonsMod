@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "dragonsdungeons:block/greenschist_bricks",
+    "side": "dragonsdungeons:block/greenschist_bricks",
+    "top": "dragonsdungeons:block/greenschist_bricks"
+  }
+}

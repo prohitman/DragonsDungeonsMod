@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "dragonsdungeons:block/lined_forged_bricks",
+    "side": "dragonsdungeons:block/lined_forged_bricks",
+    "top": "dragonsdungeons:block/lined_forged_bricks"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/wall_inventory",
+  "textures": {
+    "wall": "dragonsdungeons:block/charred_lavarock_bricks"
+  }
+}

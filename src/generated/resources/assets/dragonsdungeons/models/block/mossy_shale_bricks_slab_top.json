@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "dragonsdungeons:block/mossy_shale_bricks",
+    "side": "dragonsdungeons:block/mossy_shale_bricks",
+    "top": "dragonsdungeons:block/mossy_shale_bricks"
+  }
+}

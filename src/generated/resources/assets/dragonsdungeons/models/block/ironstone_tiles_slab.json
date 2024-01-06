@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "dragonsdungeons:block/ironstone_tiles",
+    "side": "dragonsdungeons:block/ironstone_tiles",
+    "top": "dragonsdungeons:block/ironstone_tiles"
+  }
+}

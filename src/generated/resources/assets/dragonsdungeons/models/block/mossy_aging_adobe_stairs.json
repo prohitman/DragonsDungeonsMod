@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "dragonsdungeons:block/mossy_aging_adobe",
+    "side": "dragonsdungeons:block/mossy_aging_adobe",
+    "top": "dragonsdungeons:block/mossy_aging_adobe"
+  }
+}

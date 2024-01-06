@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dragonsdungeons:block/mossy_shale_bricks_slab"
+    },
+    "type=double": {
+      "model": "dragonsdungeons:block/mossy_shale_bricks"
+    },
+    "type=top": {
+      "model": "dragonsdungeons:block/mossy_shale_bricks_slab_top"
+    }
+  }
+}

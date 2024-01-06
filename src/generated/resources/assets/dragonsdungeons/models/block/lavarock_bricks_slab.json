@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab",
+  "textures": {
+    "bottom": "dragonsdungeons:block/lavarock_bricks",
+    "side": "dragonsdungeons:block/lavarock_bricks",
+    "top": "dragonsdungeons:block/lavarock_bricks"
+  }
+}

@@ -4,12 +4,21 @@ import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import com.prohitman.dragonsdungeons.core.init.ModItems;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.SignItem;
+import net.minecraft.world.level.block.*;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.stringtemplate.v4.ST;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class ModItemModelProvider extends ItemModelProvider {
     public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -34,6 +43,8 @@ public class ModItemModelProvider extends ItemModelProvider {
                 "layer0", modLoc("item/mithril_crystal"));
         createParent(ModBlocks.BARROW_STONES);
         createParent(ModBlocks.THATCH_ROOF);
+
+        createStairWallSlabParents();
 
         //Adobe
         createParent(ModBlocks.AGING_ADOBE);
@@ -93,6 +104,44 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private void createParent(RegistryObject<Block> handler) {
         withExistingParent(handler.getId().getPath(), modLoc( "block/" + handler.getId().getPath()));
+    }
+
+    private void createParentBlock(RegistryObject<Block> handler) {
+        withExistingParent(handler.getId().getPath(), modLoc( "block/" + handler.getId().getPath()));
+    }
+
+    private void createStairWallSlabParents(){
+        List<RegistryObject<Block>> list = new LinkedList<>();
+
+        list.addAll(ModBlocks.BLOCKS.getEntries().stream()
+                .filter((registryObject) -> registryObject.get() instanceof SlabBlock
+                        || registryObject.get() instanceof WallBlock
+                        || registryObject.get() instanceof StairBlock).toList());
+
+        list.forEach((registryObject -> {
+            if(registryObject.get() instanceof WallBlock){
+                withExistingParent(name(registryObject.get()), mcLoc("block/wall_inventory"))
+                        .texture("wall", modLoc("block/" + name(registryObject).replaceAll("_wall", "")));
+            }else {
+                createParent(registryObject);
+            }
+        }));
+    }
+/*
+    private Block getBlock(RegistryObject<Block> block){
+        return ForgeRegistries.BLOCKS.(new ResourceLocation(DragonsDungeons.MODID, name(block)));
+    }*/
+
+    private String name(RegistryObject<Block> block) {
+        return block.getId().getPath();
+    }
+
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
     }
 
     private void createSingle(RegistryObject<Item> item) {

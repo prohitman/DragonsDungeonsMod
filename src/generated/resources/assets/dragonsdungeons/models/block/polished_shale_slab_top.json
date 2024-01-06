@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "dragonsdungeons:block/polished_shale",
+    "side": "dragonsdungeons:block/polished_shale",
+    "top": "dragonsdungeons:block/polished_shale"
+  }
+}
