@@ -33,12 +33,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         createBlockWithModel(ModBlocks.THATCH);
         //createBlockWithModel(ModBlocks.MITHRIL_CRYSTAL);
         mithrilBlock((MithrilCrystal) ModBlocks.MITHRIL_CRYSTAL.get(), models().withExistingParent(name(ModBlocks.MITHRIL_CRYSTAL.get()) + "_dd", modLoc("block/" + name(ModBlocks.MITHRIL_CRYSTAL.get())))
-                .renderType("cutout")
+                .renderType("cutout_mipped")
                 .ao(false));
-        /*horizontalBlock(ModBlocks.MITHRIL_CRYSTAL.get(),
-                models().withExistingParent(name(ModBlocks.MITHRIL_CRYSTAL.get()) + "_dd", modLoc("block/" + name(ModBlocks.MITHRIL_CRYSTAL.get())))
-                .renderType("cutout")
-                .ao(false));*/
+        horizontalBlock(ModBlocks.BARROW_STONES.get(),
+                models().withExistingParent(name(ModBlocks.BARROW_STONES.get()) + "_dd", modLoc("block/" + name(ModBlocks.BARROW_STONES.get())))
+                .renderType("cutout_mipped")
+                .ao(false));
 
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());

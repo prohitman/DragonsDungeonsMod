@@ -32,6 +32,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         singleTexture((ModBlocks.MITHRIL_CRYSTAL.getId().getPath()),
                 mcLoc("item/generated"),
                 "layer0", modLoc("item/mithril_crystal"));
+        createParent(ModBlocks.BARROW_STONES);
 
         //Adobe
         createParent(ModBlocks.AGING_ADOBE);

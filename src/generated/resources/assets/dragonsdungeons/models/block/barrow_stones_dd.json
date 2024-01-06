@@ -1,5 +1,5 @@
 {
-  "parent": "dragonsdungeons:block/mithril_crystal",
+  "parent": "dragonsdungeons:block/barrow_stones",
   "ambientocclusion": false,
   "render_type": "minecraft:cutout_mipped"
 }
