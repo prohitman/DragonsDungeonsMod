@@ -1,0 +1,5 @@
+{
+  "parent": "dragonsdungeons:block/hanging_barrow_moss",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout"
+}

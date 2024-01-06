@@ -41,6 +41,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 models().withExistingParent(name(ModBlocks.THATCH_ROOF.get()) + "_dd", modLoc("block/" + name(ModBlocks.THATCH_ROOF.get())))
                         .renderType("cutout_mipped")
                         .ao(false));
+        createBlockWithModel(ModBlocks.HANGING_BARROW_MOSS);
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
         createStairSlabWall(ModBlocks.AGING_ADOBE);
@@ -142,7 +143,6 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
         createStairSlabWall(ModBlocks.CHARRED_LAVAROCK_BRICKS);
-
     }
 
     public void createStairSlabWall(RegistryObject<Block> block){

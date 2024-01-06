@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-06T17:55:31.3769346	Item Models: dragonsdungeons
+// 1.20.1	2024-01-06T18:21:39.976501	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
 d3b944a49b6cb844f0f4918415c3ef117349f138 assets/dragonsdungeons/models/item/aging_adobe_slab.json
@@ -59,6 +59,7 @@ c9a2e351f3d5f3f373781debe754abae15df6a6c assets/dragonsdungeons/models/item/gree
 da674f08ab586da4313f0b5ba92933985e47f707 assets/dragonsdungeons/models/item/greenschist_slab.json
 34545e1e7a7b0918c778bbf32dd73926b9c0136f assets/dragonsdungeons/models/item/greenschist_stairs.json
 4bfd5f5f4dba8b9e1fe4d5937a20a931a297e15e assets/dragonsdungeons/models/item/greenschist_wall.json
+5979812141d7f0dc6d30fcbf222b3f322ed3f68a assets/dragonsdungeons/models/item/hanging_barrow_moss.json
 4398caa28a421014c57151515bc672758bd8293b assets/dragonsdungeons/models/item/ironstone_battlement.json
 f4c8350929e7c449c2ab05f31924b2cadfa0046e assets/dragonsdungeons/models/item/ironstone_bricks.json
 383b608958732b39dc6044abbc18b5ca13e1393e assets/dragonsdungeons/models/item/ironstone_bricks_slab.json

@@ -36,6 +36,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.CRACKED_AGING_ADOBE);
         addBlock(ModBlocks.BARROW_STONES);
         addBlock(ModBlocks.THATCH_ROOF);
+        addBlock(ModBlocks.HANGING_BARROW_MOSS);
 
         addBlock(ModBlocks.GREENSCHIST);
         addBlock(ModBlocks.GREENSCHIST_BRICKS);

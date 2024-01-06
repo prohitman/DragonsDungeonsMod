@@ -43,6 +43,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 "layer0", modLoc("item/mithril_crystal"));
         createParent(ModBlocks.BARROW_STONES);
         createParent(ModBlocks.THATCH_ROOF);
+        createParent(ModBlocks.HANGING_BARROW_MOSS);
 
         createStairWallSlabParents();
 
