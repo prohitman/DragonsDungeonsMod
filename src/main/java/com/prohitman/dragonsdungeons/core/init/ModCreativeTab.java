@@ -15,7 +15,7 @@ public class ModCreativeTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, DragonsDungeons.MODID);
 
     public static RegistryObject<CreativeModeTab> DD_TAB = CREATIVE_MODE_TABS.register("dd_tab", () ->
-            CreativeModeTab.builder().icon(() -> ModItems.DRAGON_BONE.get().getDefaultInstance())
+            CreativeModeTab.builder().icon(() -> ModBlocks.MITHRIL_CRYSTAL.get().asItem().getDefaultInstance())
                     .title(Component.translatable("itemGroup.dragonsdungeons"))
                     .displayItems((featureFlags, output) -> {
                         output.acceptAll(getTabItems());

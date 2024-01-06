@@ -28,6 +28,7 @@
   "block.dragonsdungeons.lavarock_bricks": "Lavarock Bricks",
   "block.dragonsdungeons.lavarock_pillar": "Lavarock Pillar",
   "block.dragonsdungeons.lined_forged_bricks": "Lined Forged Bricks",
+  "block.dragonsdungeons.mithril_crystal": "Mithril Crystal",
   "block.dragonsdungeons.mossy_aging_adobe": "Mossy Aging Adobe",
   "block.dragonsdungeons.mossy_ironstone_bricks": "Mossy Ironstone Bricks",
   "block.dragonsdungeons.mossy_shale_bricks": "Mossy Shale Bricks",
@@ -47,5 +48,6 @@
   "block.dragonsdungeons.shingles": "Shingles",
   "block.dragonsdungeons.thatch": "Thatch",
   "item.dragonsdungeons.dragon_bone": "Dragon Bone",
+  "item.dragonsdungeons.gold_coins": "Gold Coins",
   "itemGroup.dragonsdungeons": "Dragons & Dungeons Mod"
 }

@@ -18,6 +18,7 @@ public class ModLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         addItem(ModItems.DRAGON_BONE);
+        addItem(ModItems.GOLD_COINS);
 
         addBlock(ModBlocks.AGING_ADOBE);
         addBlock(ModBlocks.AGING_ADOBE_PILLAR);
@@ -73,6 +74,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.RUBBLE);
 
         addBlock(ModBlocks.THATCH);
+        addBlock(ModBlocks.MITHRIL_CRYSTAL);
 
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }

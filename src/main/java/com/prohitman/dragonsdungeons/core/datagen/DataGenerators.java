@@ -33,7 +33,7 @@ public class DataGenerators {
                 output -> new ModItemModelProvider(output, event.getExistingFileHelper()));
 
         dataGenerator.addProvider(event.includeClient(), (DataProvider.Factory<ModLanguageProvider>)
-                output -> new ModLanguageProvider(output, "en_us"));
+                output -> new ModLanguageProvider(dataGenerator.getPackOutput(), "en_us"));
 
 
 /*

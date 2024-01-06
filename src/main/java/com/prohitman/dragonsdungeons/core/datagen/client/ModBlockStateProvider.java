@@ -1,13 +1,18 @@
 package com.prohitman.dragonsdungeons.core.datagen.client;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
+import com.prohitman.dragonsdungeons.common.blocks.MithrilCrystal;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ButtonBlock;
 import net.minecraft.world.level.block.RotatedPillarBlock;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -26,6 +31,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CHUNKY_RUBBLE.get());
 
         createBlockWithModel(ModBlocks.THATCH);
+        //createBlockWithModel(ModBlocks.MITHRIL_CRYSTAL);
+        mithrilBlock((MithrilCrystal) ModBlocks.MITHRIL_CRYSTAL.get(), models().withExistingParent(name(ModBlocks.MITHRIL_CRYSTAL.get()) + "_dd", modLoc("block/" + name(ModBlocks.MITHRIL_CRYSTAL.get())))
+                .renderType("cutout")
+                .ao(false));
+        /*horizontalBlock(ModBlocks.MITHRIL_CRYSTAL.get(),
+                models().withExistingParent(name(ModBlocks.MITHRIL_CRYSTAL.get()) + "_dd", modLoc("block/" + name(ModBlocks.MITHRIL_CRYSTAL.get())))
+                .renderType("cutout")
+                .ao(false));*/
 
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
@@ -80,6 +93,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CRACKED_LAVAROCK_BRICKS.get());
         simpleBlock(ModBlocks.POLISHED_LAVAROCK.get());
         simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
+    }
+
+    public void mithrilBlock(MithrilCrystal block, ModelFile crystal) {
+        getVariantBuilder(block).forAllStates(state -> {
+            Direction facing = state.getValue(ButtonBlock.FACING);
+            AttachFace face = state.getValue(ButtonBlock.FACE);
+
+            return ConfiguredModel.builder()
+                    .modelFile(crystal)
+                    .rotationX(face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? 90 : 180))
+                    .rotationY((int) (face == AttachFace.CEILING ? facing : facing.getOpposite()).toYRot() + (face == AttachFace.FLOOR ? 90 : 0))
+                    //.uvLock(face == AttachFace.WALL)
+                    .build();
+        });
     }
 
     public void createHorizontalBlock(RegistryObject<Block> block, RegistryObject<Block> frontBlock){

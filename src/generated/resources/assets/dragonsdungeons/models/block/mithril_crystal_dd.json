@@ -1,0 +1,5 @@
+{
+  "parent": "dragonsdungeons:block/mithril_crystal",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout"
+}

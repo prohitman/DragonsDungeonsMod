@@ -18,7 +18,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
+        //Items
         createSingle(ModItems.DRAGON_BONE);
+        createSingle(ModItems.GOLD_COINS);
 
         //Other Blocks
         createParent(ModBlocks.SHINGLES);
@@ -27,6 +29,9 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.CHUNKY_RUBBLE);
 
         createParent(ModBlocks.THATCH);
+        singleTexture((ModBlocks.MITHRIL_CRYSTAL.getId().getPath()),
+                mcLoc("item/generated"),
+                "layer0", modLoc("item/mithril_crystal"));
 
         //Adobe
         createParent(ModBlocks.AGING_ADOBE);

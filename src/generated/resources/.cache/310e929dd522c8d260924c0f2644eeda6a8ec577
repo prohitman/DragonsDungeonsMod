@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-05T22:29:42.2067251	Item Models: dragonsdungeons
+// 1.20.1	2024-01-06T06:05:49.2324834	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
 2fab58ea858f3edfc45756dff140aff049d92db2 assets/dragonsdungeons/models/item/algal_greenschist_bricks.json
@@ -18,6 +18,7 @@ d801c7f45d0f0d4d989ba67f32c300280737a648 assets/dragonsdungeons/models/item/chun
 c5c1e93794dcd316a855703b2c363418a3dab03c assets/dragonsdungeons/models/item/forged_bricks.json
 72ca118ff49697c2b341cf7c273ad907076110a6 assets/dragonsdungeons/models/item/forged_pillar.json
 74d035a10ff2f91c002d3db76a2710587909f3b6 assets/dragonsdungeons/models/item/forged_tiles.json
+a5fdc0a7f2dbf968da3e67bdc2541887836a220e assets/dragonsdungeons/models/item/gold_coins.json
 c460bc37ff250b1dcf05160de10d90240ca2bb3c assets/dragonsdungeons/models/item/greenschist.json
 e006c202f9d3ea0dc4af7c1373cb4e9919b8a567 assets/dragonsdungeons/models/item/greenschist_bricks.json
 132ffc429c518938270c282d97e8f9d4f41dde85 assets/dragonsdungeons/models/item/greenschist_pillar.json
@@ -29,6 +30,7 @@ dca53c11b4789c228546d977baa50e66a194b358 assets/dragonsdungeons/models/item/lava
 3de3ab7038dc5cdd639d56e6966a61ab7ca11482 assets/dragonsdungeons/models/item/lavarock_bricks.json
 26e0cb14415f0f99f174498128b7d82adb91edfe assets/dragonsdungeons/models/item/lavarock_pillar.json
 778b25ccebcffa75d1ee0f3708289c8688d0cbe4 assets/dragonsdungeons/models/item/lined_forged_bricks.json
+0435ab9450b688ac95bcc6818a7edb33074eb9a9 assets/dragonsdungeons/models/item/mithril_crystal.json
 0f971b0d3b7478d9241935400a17087eb0c2630d assets/dragonsdungeons/models/item/mossy_aging_adobe.json
 f3bbaaedf265f4621084ff849b9102171a54e0e6 assets/dragonsdungeons/models/item/mossy_ironstone_bricks.json
 70e25bf56a472ab2a5a7990466968b62f9d36ca2 assets/dragonsdungeons/models/item/mossy_shale_bricks.json
