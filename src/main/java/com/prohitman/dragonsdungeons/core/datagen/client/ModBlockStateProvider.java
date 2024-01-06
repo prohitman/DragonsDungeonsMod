@@ -10,6 +10,8 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -45,6 +47,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .ao(false));
         createBlockWithModel(ModBlocks.HANGING_BARROW_MOSS);
         createStoneWindow(ModBlocks.STONE_WINDOW);
+        createDoubleBlockModel(ModBlocks.STANDING_TORCH);
 
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
@@ -169,6 +172,25 @@ public class ModBlockStateProvider extends BlockStateProvider {
                     .rotationX(face == AttachFace.FLOOR ? 0 : (face == AttachFace.WALL ? 90 : 180))
                     .rotationY((int) (face == AttachFace.CEILING ? facing : facing.getOpposite()).toYRot() + (face == AttachFace.FLOOR ? 90 : 0))
                     //.uvLock(face == AttachFace.WALL)
+                    .build();
+        });
+    }
+
+    public void createDoubleBlockModel(RegistryObject<Block> block){
+        createDoubleBlockModel(block.get(),
+                models().getExistingFile(modLoc("block/" + name(block) + "_upper")),
+                models().getExistingFile(modLoc("block/" + name(block) + "_lower")));
+    }
+
+    public void createDoubleBlockModel(Block block, ModelFile upper, ModelFile lower){
+        getVariantBuilder(block).forAllStates(state -> {
+            ModelFile model = lower;
+            if(state.getValue(BlockStateProperties.DOUBLE_BLOCK_HALF) == DoubleBlockHalf.UPPER){
+                model = upper;
+            }
+
+            return ConfiguredModel.builder()
+                    .modelFile(model)
                     .build();
         });
     }

@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-06T20:55:22.5584606	Block States: dragonsdungeons
+// 1.20.1	2024-01-06T21:59:54.7558471	Block States: dragonsdungeons
 f01a670d8f2cb81d21a5004e2b4bd2aeaefa3901 assets/dragonsdungeons/blockstates/aging_adobe.json
 5986a5d3c75af8ef5583d7c03041503851e1bc5f assets/dragonsdungeons/blockstates/aging_adobe_pillar.json
 b2bfd9eff6a07d8c9828549031803e542fbd4704 assets/dragonsdungeons/blockstates/aging_adobe_slab.json
@@ -132,6 +132,7 @@ c9dc4899e43d9eb9c701ba910c97c924a1657aa1 assets/dragonsdungeons/blockstates/shal
 43e08e32044a8ec876c41bb9eeeff91a13db5532 assets/dragonsdungeons/blockstates/shale_tiles_wall.json
 2ca910416470bf06ca901fd3587513394296dc5e assets/dragonsdungeons/blockstates/shale_wall.json
 592f8cfc21b952357232c1b5777f9050b72001f5 assets/dragonsdungeons/blockstates/shingles.json
+bca125375c2e0cd255c8a9f39ff6b54f64396373 assets/dragonsdungeons/blockstates/standing_torch.json
 8e0ccf73d43425afa59fec7142fa2d87a995fe28 assets/dragonsdungeons/blockstates/stone_window.json
 7d8e6b481083c8063028b1c20f5e2267c18a44cb assets/dragonsdungeons/blockstates/thatch.json
 57736f67428ebb6db1843b6a2e26cf20b83649be assets/dragonsdungeons/blockstates/thatch_roof.json

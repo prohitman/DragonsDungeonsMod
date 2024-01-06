@@ -45,6 +45,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.THATCH_ROOF);
         createParent(ModBlocks.HANGING_BARROW_MOSS);
         createParent(ModBlocks.STONE_WINDOW);
+        createBlockSingle(ModBlocks.STANDING_TORCH, "item/standing_torch");
 
         createStairWallSlabParents();
 
@@ -102,6 +103,12 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.CRACKED_LAVAROCK_BRICKS);
         createParent(ModBlocks.POLISHED_LAVAROCK);
 
+    }
+
+    private void createBlockSingle(RegistryObject<Block> block, String location){
+        singleTexture((block.getId().getPath()),
+                mcLoc("item/generated"),
+                "layer0", modLoc(location));
     }
 
     private void createParent(RegistryObject<Block> handler) {

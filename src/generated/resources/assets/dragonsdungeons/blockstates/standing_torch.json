@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "half=lower": {
+      "model": "dragonsdungeons:block/standing_torch_lower"
+    },
+    "half=upper": {
+      "model": "dragonsdungeons:block/standing_torch_upper"
+    }
+  }
+}

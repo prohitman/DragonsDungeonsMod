@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-06T20:30:23.8021075	Item Models: dragonsdungeons
+// 1.20.1	2024-01-06T21:59:54.7643558	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
 d3b944a49b6cb844f0f4918415c3ef117349f138 assets/dragonsdungeons/models/item/aging_adobe_slab.json
@@ -134,6 +134,7 @@ bd8bc72a83a12771e17954ab9a5c97fdf712c0ec assets/dragonsdungeons/models/item/shal
 3a190b6c6cf9d67920ba20dd025d6d319570e64c assets/dragonsdungeons/models/item/shale_tiles_wall.json
 dc258c9a4b3f7498cfef51ee6e7fed5d41b59ef8 assets/dragonsdungeons/models/item/shale_wall.json
 39166c3596e02ff668a42f47d383a07d2afe4187 assets/dragonsdungeons/models/item/shingles.json
+6e70d8978caa6abead12a3ffd902b64b61778ae7 assets/dragonsdungeons/models/item/standing_torch.json
 ad2dfcf20e154c0a83966898250539cc64c4d0e4 assets/dragonsdungeons/models/item/stone_window.json
 930db5bf8a07237f64dd2652e66291925f39d5c7 assets/dragonsdungeons/models/item/thatch.json
 12cb7f1cd98f9aab2d2d5d19f0d8f123afede8b2 assets/dragonsdungeons/models/item/thatch_roof.json

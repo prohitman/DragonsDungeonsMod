@@ -2,6 +2,7 @@ package com.prohitman.dragonsdungeons.core.init;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.common.blocks.obj.HangingBarrowMoss;
+import com.prohitman.dragonsdungeons.common.blocks.obj.StandingTorch;
 import com.prohitman.dragonsdungeons.common.blocks.obj.StoneWindow;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.BarrowStones;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
@@ -29,6 +30,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> HANGING_BARROW_MOSS = createRegistry("hanging_barrow_moss", () -> new HangingBarrowMoss(BlockBehaviour.Properties.copy(Blocks.MOSS_BLOCK).noOcclusion()), new Item.Properties());
     public static final RegistryObject<Block> THATCH_ROOF = createRegistry("thatch_roof", () -> new ThatchRoof(BlockBehaviour.Properties.copy(ModBlocks.THATCH.get()).noOcclusion()), new Item.Properties());
     public static final RegistryObject<Block> STONE_WINDOW = createRegistry("stone_window", () -> new StoneWindow(BlockBehaviour.Properties.copy(Blocks.GLASS)), new Item.Properties());
+    public static final RegistryObject<Block> STANDING_TORCH = createRegistry("standing_torch", () -> new StandingTorch(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
 
     public static final RegistryObject<Block> MITHRIL_CRYSTAL = createRegistry("mithril_crystal", () -> new MithrilCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).lightLevel((blockState) -> 6).noOcclusion()), new Item.Properties());
 
