@@ -1,4 +1,4 @@
-package com.prohitman.dragonsdungeons.common.blocks;
+package com.prohitman.dragonsdungeons.common.blocks.shaped;
 
 import com.prohitman.dragonsdungeons.common.Utils;
 import net.minecraft.Util;

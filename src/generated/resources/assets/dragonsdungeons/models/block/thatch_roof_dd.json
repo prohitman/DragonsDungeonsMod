@@ -1,0 +1,5 @@
+{
+  "parent": "dragonsdungeons:block/thatch_roof",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout_mipped"
+}

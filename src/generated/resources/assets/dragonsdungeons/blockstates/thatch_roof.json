@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "dragonsdungeons:block/thatch_roof_dd",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "dragonsdungeons:block/thatch_roof_dd"
+    },
+    "facing=south": {
+      "model": "dragonsdungeons:block/thatch_roof_dd",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "dragonsdungeons:block/thatch_roof_dd",
+      "y": 270
+    }
+  }
+}

@@ -1,8 +1,9 @@
 package com.prohitman.dragonsdungeons.core.init;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
-import com.prohitman.dragonsdungeons.common.blocks.BarrowStones;
-import com.prohitman.dragonsdungeons.common.blocks.MithrilCrystal;
+import com.prohitman.dragonsdungeons.common.blocks.shaped.BarrowStones;
+import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
+import com.prohitman.dragonsdungeons.common.blocks.shaped.ThatchRoof;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -25,6 +26,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> SHINGLES = createRegistry("shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
     public static final RegistryObject<Block> THATCH = createRegistry("thatch", () -> new Block(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).noOcclusion()), new Item.Properties());
     public static final RegistryObject<Block> BARROW_STONES = createRegistry("barrow_stones", () -> new BarrowStones(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()), new Item.Properties());
+    public static final RegistryObject<Block> THATCH_ROOF = createRegistry("thatch_roof", () -> new ThatchRoof(BlockBehaviour.Properties.copy(ModBlocks.THATCH.get()).noOcclusion()), new Item.Properties());
+
     public static final RegistryObject<Block> MITHRIL_CRYSTAL = createRegistry("mithril_crystal", () -> new MithrilCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).lightLevel((blockState) -> 6).noOcclusion()), new Item.Properties());
 
     public static final RegistryObject<Block> AGING_ADOBE = createRegistry("aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());

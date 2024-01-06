@@ -1,7 +1,7 @@
 package com.prohitman.dragonsdungeons.core.datagen.client;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
-import com.prohitman.dragonsdungeons.common.blocks.MithrilCrystal;
+import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
@@ -39,7 +39,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 models().withExistingParent(name(ModBlocks.BARROW_STONES.get()) + "_dd", modLoc("block/" + name(ModBlocks.BARROW_STONES.get())))
                 .renderType("cutout_mipped")
                 .ao(false));
-
+        horizontalBlock(ModBlocks.THATCH_ROOF.get(),
+                models().withExistingParent(name(ModBlocks.THATCH_ROOF.get()) + "_dd", modLoc("block/" + name(ModBlocks.THATCH_ROOF.get())))
+                        .renderType("cutout_mipped")
+                        .ao(false));
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
         logBlock((RotatedPillarBlock) ModBlocks.AGING_ADOBE_PILLAR.get());

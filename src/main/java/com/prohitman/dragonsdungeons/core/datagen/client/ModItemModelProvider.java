@@ -33,6 +33,7 @@ public class ModItemModelProvider extends ItemModelProvider {
                 mcLoc("item/generated"),
                 "layer0", modLoc("item/mithril_crystal"));
         createParent(ModBlocks.BARROW_STONES);
+        createParent(ModBlocks.THATCH_ROOF);
 
         //Adobe
         createParent(ModBlocks.AGING_ADOBE);
