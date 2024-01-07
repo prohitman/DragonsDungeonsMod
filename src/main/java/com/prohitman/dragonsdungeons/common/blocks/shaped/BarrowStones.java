@@ -1,5 +1,6 @@
 package com.prohitman.dragonsdungeons.common.blocks.shaped;
 
+import com.prohitman.dragonsdungeons.common.Utils;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -24,7 +25,8 @@ public class BarrowStones extends HorizontalDirectionalBlock {
 
     @Override
     public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-        return makeShape();
+        Direction direction = pState.getValue(FACING);
+        return direction.getAxis() == Direction.Axis.X ? Utils.rotateXtoZ(makeShape()) : makeShape();
     }
 
     public VoxelShape makeShape(){

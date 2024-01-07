@@ -40,7 +40,7 @@ public class ThatchRoof extends HorizontalDirectionalBlock {
     }*/
 
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
+        return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getClockWise());
     }
 
     @Override

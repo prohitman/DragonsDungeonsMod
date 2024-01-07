@@ -1,0 +1,5 @@
+{
+  "parent": "dragonsdungeons:block/treasure_chest",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout_mipped"
+}

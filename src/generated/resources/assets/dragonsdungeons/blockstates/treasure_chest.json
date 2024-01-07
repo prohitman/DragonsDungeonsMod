@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "facing=east,open=false": {
+      "model": "dragonsdungeons:block/treasure_chest_dd",
+      "y": 90
+    },
+    "facing=east,open=true": {
+      "model": "dragonsdungeons:block/treasure_chest_dd",
+      "y": 90
+    },
+    "facing=north,open=false": {
+      "model": "dragonsdungeons:block/treasure_chest_dd"
+    },
+    "facing=north,open=true": {
+      "model": "dragonsdungeons:block/treasure_chest_dd"
+    },
+    "facing=south,open=false": {
+      "model": "dragonsdungeons:block/treasure_chest_dd",
+      "y": 180
+    },
+    "facing=south,open=true": {
+      "model": "dragonsdungeons:block/treasure_chest_dd",
+      "y": 180
+    },
+    "facing=west,open=false": {
+      "model": "dragonsdungeons:block/treasure_chest_dd",
+      "y": 270
+    },
+    "facing=west,open=true": {
+      "model": "dragonsdungeons:block/treasure_chest_dd",
+      "y": 270
+    }
+  }
+}

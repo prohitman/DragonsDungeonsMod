@@ -1,9 +1,7 @@
 package com.prohitman.dragonsdungeons.core.init;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
-import com.prohitman.dragonsdungeons.common.blocks.obj.HangingBarrowMoss;
-import com.prohitman.dragonsdungeons.common.blocks.obj.StandingTorch;
-import com.prohitman.dragonsdungeons.common.blocks.obj.StoneWindow;
+import com.prohitman.dragonsdungeons.common.blocks.obj.*;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.BarrowStones;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.ThatchRoof;
@@ -11,6 +9,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,6 +30,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> THATCH_ROOF = createRegistry("thatch_roof", () -> new ThatchRoof(BlockBehaviour.Properties.copy(ModBlocks.THATCH.get()).noOcclusion()), new Item.Properties());
     public static final RegistryObject<Block> STONE_WINDOW = createRegistry("stone_window", () -> new StoneWindow(BlockBehaviour.Properties.copy(Blocks.GLASS)), new Item.Properties());
     public static final RegistryObject<Block> STANDING_TORCH = createRegistry("standing_torch", () -> new StandingTorch(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
+    public static final RegistryObject<Block> TREASURE_CHEST = createRegistry("treasure_chest", () -> new TreasureChestBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()), new Item.Properties());
+    public static final RegistryObject<Block> URN = createRegistry("urn", () -> new UrnBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()), new Item.Properties());
 
     public static final RegistryObject<Block> MITHRIL_CRYSTAL = createRegistry("mithril_crystal", () -> new MithrilCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).lightLevel((blockState) -> 6).noOcclusion()), new Item.Properties());
 

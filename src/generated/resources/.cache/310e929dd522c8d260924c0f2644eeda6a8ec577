@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-06T21:59:54.7643558	Item Models: dragonsdungeons
+// 1.20.1	2024-01-07T16:40:40.2949431	Item Models: dragonsdungeons
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
 d3b944a49b6cb844f0f4918415c3ef117349f138 assets/dragonsdungeons/models/item/aging_adobe_slab.json
@@ -138,3 +138,5 @@ dc258c9a4b3f7498cfef51ee6e7fed5d41b59ef8 assets/dragonsdungeons/models/item/shal
 ad2dfcf20e154c0a83966898250539cc64c4d0e4 assets/dragonsdungeons/models/item/stone_window.json
 930db5bf8a07237f64dd2652e66291925f39d5c7 assets/dragonsdungeons/models/item/thatch.json
 12cb7f1cd98f9aab2d2d5d19f0d8f123afede8b2 assets/dragonsdungeons/models/item/thatch_roof.json
+3b1afac6199b1463a1abd5fc51028066496fbe68 assets/dragonsdungeons/models/item/treasure_chest.json
+e4b57c8b1def2c0f14d1219cd6a5f78893723c22 assets/dragonsdungeons/models/item/urn.json

@@ -1,7 +1,9 @@
 package com.prohitman.dragonsdungeons;
 
 import com.mojang.logging.LogUtils;
+import com.prohitman.dragonsdungeons.client.screen.ModMenuTypes;
 import com.prohitman.dragonsdungeons.core.events.CommonForgeEvents;
+import com.prohitman.dragonsdungeons.core.init.ModBlockEntities;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import com.prohitman.dragonsdungeons.core.init.ModCreativeTab;
 import com.prohitman.dragonsdungeons.core.init.ModItems;
@@ -48,6 +50,8 @@ public class DragonsDungeons
         ModBlocks.BLOCKS.register(modEventBus);
         ModItems.ITEMS.register(modEventBus);
         ModCreativeTab.CREATIVE_MODE_TABS.register(modEventBus);
+        ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ModMenuTypes.MENUS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);

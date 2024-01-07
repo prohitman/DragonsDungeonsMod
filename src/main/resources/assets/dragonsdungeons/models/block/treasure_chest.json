@@ -1,0 +1,112 @@
+{
+	"parent": "block/block",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "dragonsdungeons:block/treasure_chest",
+		"particle": "dragonsdungeons:block/treasure_chest"
+	},
+	"elements": [
+		{
+			"from": [1, 0, 2],
+			"to": [15, 8, 14],
+			"faces": {
+				"north": {"uv": [4, 6, 7.5, 8], "texture": "#0"},
+				"east": {"uv": [8, 9.75, 11, 11.75], "texture": "#0"},
+				"south": {"uv": [0, 7, 3.5, 9], "texture": "#0"},
+				"west": {"uv": [11, 0, 14, 2], "texture": "#0"},
+				"up": {"uv": [7.5, 3, 4, 0], "texture": "#0"},
+				"down": {"uv": [7.5, 3, 4, 6], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 0, 1],
+			"to": [4, 8, 15],
+			"faces": {
+				"north": {"uv": [3.5, 11.5, 4, 13.5], "texture": "#0"},
+				"east": {"uv": [7.5, 0, 11, 2], "texture": "#0"},
+				"south": {"uv": [4, 11.5, 4.5, 13.5], "texture": "#0"},
+				"west": {"uv": [7.5, 2, 11, 4], "texture": "#0"},
+				"up": {"uv": [2, 15, 1.5, 11.5], "texture": "#0"},
+				"down": {"uv": [2.5, 11.5, 2, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [12, 0, 1],
+			"to": [14, 8, 15],
+			"faces": {
+				"north": {"uv": [4.5, 11.5, 5, 13.5], "texture": "#0"},
+				"east": {"uv": [7.5, 4, 11, 6], "texture": "#0"},
+				"south": {"uv": [5, 11.5, 5.5, 13.5], "texture": "#0"},
+				"west": {"uv": [7.5, 6, 11, 8], "texture": "#0"},
+				"up": {"uv": [3, 15, 2.5, 11.5], "texture": "#0"},
+				"down": {"uv": [3.5, 11.5, 3, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 8, 1],
+			"to": [16, 14, 15],
+			"faces": {
+				"north": {"uv": [11, 2, 15, 3.5], "texture": "#0"},
+				"east": {"uv": [11, 5, 14.5, 6.5], "texture": "#0"},
+				"south": {"uv": [11, 3.5, 15, 5], "texture": "#0"},
+				"west": {"uv": [11, 6.5, 14.5, 8], "texture": "#0"},
+				"up": {"uv": [4, 3.5, 0, 0], "texture": "#0"},
+				"down": {"uv": [4, 3.5, 0, 7], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 8, 0],
+			"to": [4, 15, 16],
+			"faces": {
+				"north": {"uv": [5.5, 11.5, 6, 13.25], "texture": "#0"},
+				"east": {"uv": [3.5, 8, 7.5, 9.75], "texture": "#0"},
+				"south": {"uv": [6, 11.5, 6.5, 13.25], "texture": "#0"},
+				"west": {"uv": [7.5, 8, 11.5, 9.75], "texture": "#0"},
+				"up": {"uv": [11.5, 13.75, 11, 9.75], "texture": "#0"},
+				"down": {"uv": [0.5, 11.5, 0, 15.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [12, 8, 0],
+			"to": [14, 15, 16],
+			"faces": {
+				"north": {"uv": [6.5, 11.5, 7, 13.25], "texture": "#0"},
+				"east": {"uv": [0, 9.75, 4, 11.5], "texture": "#0"},
+				"south": {"uv": [7, 11.5, 7.5, 13.25], "texture": "#0"},
+				"west": {"uv": [4, 9.75, 8, 11.5], "texture": "#0"},
+				"up": {"uv": [1, 15.5, 0.5, 11.5], "texture": "#0"},
+				"down": {"uv": [1.5, 11.5, 1, 15.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 6, 1],
+			"to": [9, 8, 1],
+			"faces": {
+				"north": {"uv": [3.5, 7, 4, 7.5], "texture": "#0"},
+				"east": {"uv": [0, 0, 0, 0.5], "texture": "#0"},
+				"south": {"uv": [3.5, 7.5, 4, 8], "texture": "#0"},
+				"west": {"uv": [0, 0, 0, 0.5], "texture": "#0"},
+				"up": {"uv": [0.5, 0, 0, 0], "texture": "#0"},
+				"down": {"uv": [0.5, 0, 0, 0], "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "group",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				0,
+				1,
+				2,
+				{
+					"name": "group",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [3, 4, 5, 6]
+				}
+			]
+		}
+	]
+}

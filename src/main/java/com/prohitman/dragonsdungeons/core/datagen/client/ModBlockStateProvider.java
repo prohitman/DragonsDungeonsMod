@@ -45,9 +45,16 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 models().withExistingParent(name(ModBlocks.THATCH_ROOF.get()) + "_dd", modLoc("block/" + name(ModBlocks.THATCH_ROOF.get())))
                         .renderType("cutout_mipped")
                         .ao(false));
+        horizontalBlock(ModBlocks.TREASURE_CHEST.get(),
+                models().withExistingParent(name(ModBlocks.TREASURE_CHEST.get()) + "_dd", modLoc("block/" + name(ModBlocks.TREASURE_CHEST.get())))
+                        .renderType("cutout_mipped")
+                        .ao(false));
+
+        //createBlockWithModel(ModBlocks.TREASURE_CHEST);
         createBlockWithModel(ModBlocks.HANGING_BARROW_MOSS);
         createStoneWindow(ModBlocks.STONE_WINDOW);
         createDoubleBlockModel(ModBlocks.STANDING_TORCH);
+        createBlockWithModel(ModBlocks.URN);
 
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
@@ -240,7 +247,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
     public void createBlockWithModel(RegistryObject<Block> block){
         simpleBlock(block.get(),
                 models().withExistingParent(name(block) + "_dd", modLoc("block/" + name(block)))
-                        .renderType("cutout")
+                        .renderType("cutout_mipped")
                         .ao(false));
     }
 
