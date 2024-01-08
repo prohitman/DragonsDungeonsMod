@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dragonsdungeons:block/ruined_shingles_slab"
+    },
+    "type=double": {
+      "model": "dragonsdungeons:block/ruined_shingles"
+    },
+    "type=top": {
+      "model": "dragonsdungeons:block/ruined_shingles_slab_top"
+    }
+  }
+}

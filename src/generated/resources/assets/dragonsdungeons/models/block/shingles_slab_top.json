@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/slab_top",
+  "textures": {
+    "bottom": "dragonsdungeons:block/shingles",
+    "side": "dragonsdungeons:block/shingles",
+    "top": "dragonsdungeons:block/shingles"
+  }
+}

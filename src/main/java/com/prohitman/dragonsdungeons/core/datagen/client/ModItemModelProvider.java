@@ -28,8 +28,17 @@ public class ModItemModelProvider extends ItemModelProvider {
     @Override
     protected void registerModels() {
         //Items
-        createSingle(ModItems.DRAGON_BONE);
+        createSingleWithToolset(ModItems.DWARVEN_STEEL_INGOT);
+        createSingleWithToolset(ModItems.DRAGON_BONE);
+        createSingleWithToolset(ModItems.MITHRIL_INGOT);
+        createSingleWithToolset(ModItems.STEEL_INGOT);
+        createSingleWithToolset(ModItems.ELVEN_BRASS_INGOT);
+        createSingle(ModItems.OLDFORGED_INGOT);
+
         createSingle(ModItems.GOLD_COINS);
+        createSingle(ModItems.RAW_ADAMANTITE);
+        createSingle(ModItems.BLANK_OBELISK);
+        createSingle(ModItems.WYVERN_STINGER);
 
         //Other Blocks
         createParent(ModBlocks.SHINGLES);
@@ -48,8 +57,15 @@ public class ModItemModelProvider extends ItemModelProvider {
         createBlockSingle(ModBlocks.STANDING_TORCH, "item/standing_torch");
         createParent(ModBlocks.TREASURE_CHEST);
         createParent(ModBlocks.URN);
+        createParent(ModBlocks.FOUNDRY);
+
 
         createStairWallSlabParents();
+
+        //Adamantite
+        createParent(ModBlocks.ADAMANTITE_ORE);
+        createParent(ModBlocks.DEEPSLATE_ADAMANTITE_ORE);
+        createParent(ModBlocks.RAW_ADAMANTITE_BLOCK);
 
         //Adobe
         createParent(ModBlocks.AGING_ADOBE);
@@ -138,6 +154,7 @@ public class ModItemModelProvider extends ItemModelProvider {
             }
         }));
     }
+
 /*
     private Block getBlock(RegistryObject<Block> block){
         return ForgeRegistries.BLOCKS.(new ResourceLocation(DragonsDungeons.MODID, name(block)));
@@ -158,5 +175,19 @@ public class ModItemModelProvider extends ItemModelProvider {
     private void createSingle(RegistryObject<Item> item) {
         ModelFile generated = getExistingFile(mcLoc("item/generated"));
         getBuilder(item.getId().getPath()).parent(generated).texture("layer0", modLoc( "item/" + item.getId().getPath()));
+    }
+
+    private void createSingleWithToolset(RegistryObject<Item> item) {
+        ModelFile generated = getExistingFile(mcLoc("item/generated"));
+        ModelFile handheld = getExistingFile(mcLoc("item/handheld"));
+        String material = item.getId().getPath().replace("_ingot", "");
+
+        getBuilder(item.getId().getPath()).parent(generated).texture("layer0", modLoc( "item/" + item.getId().getPath()));
+
+        getBuilder(material + "_sword").parent(handheld).texture("layer0", modLoc( "item/" + material + "_sword") );
+        getBuilder(material + "_pickaxe").parent(handheld).texture("layer0", modLoc( "item/" + material + "_pickaxe"));
+        getBuilder(material + "_axe").parent(handheld).texture("layer0", modLoc( "item/" + material + "_axe"));
+        getBuilder(material + "_shovel").parent(handheld).texture("layer0", modLoc( "item/" + material + "_shovel"));
+        getBuilder(material + "_hoe").parent(handheld).texture("layer0", modLoc( "item/" + material + "_hoe"));
     }
 }

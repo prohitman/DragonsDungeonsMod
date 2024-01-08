@@ -4,7 +4,7 @@ import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import com.prohitman.dragonsdungeons.core.init.ModItems;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
@@ -25,7 +25,17 @@ public class ModLanguageProvider extends LanguageProvider {
     protected void addTranslations() {
         addItem(ModItems.DRAGON_BONE);
         addItem(ModItems.GOLD_COINS);
+        addItem(ModItems.RAW_ADAMANTITE);
 
+        addItem(ModItems.ELVEN_BRASS_INGOT);
+        addItem(ModItems.DWARVEN_STEEL_INGOT);
+        addItem(ModItems.STEEL_INGOT);
+        addItem(ModItems.OLDFORGED_INGOT);
+        addItem(ModItems.MITHRIL_INGOT);
+        addItem(ModItems.BLANK_OBELISK);
+        addItem(ModItems.WYVERN_STINGER);
+
+        addAllTools();
         addAllSlabsStairsWalls();
 
         addBlock(ModBlocks.AGING_ADOBE);
@@ -41,6 +51,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.STANDING_TORCH);
         addBlock(ModBlocks.TREASURE_CHEST);
         addBlock(ModBlocks.URN);
+        addBlock(ModBlocks.FOUNDRY);
 
         addBlock(ModBlocks.GREENSCHIST);
         addBlock(ModBlocks.GREENSCHIST_BRICKS);
@@ -91,6 +102,10 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.THATCH);
         addBlock(ModBlocks.MITHRIL_CRYSTAL);
 
+        addBlock(ModBlocks.ADAMANTITE_ORE);
+        addBlock(ModBlocks.RAW_ADAMANTITE_BLOCK);
+        addBlock(ModBlocks.DEEPSLATE_ADAMANTITE_ORE);
+
         add("itemGroup.dragonsdungeons", "Dragons & Dungeons Mod");
     }
 
@@ -103,6 +118,19 @@ public class ModLanguageProvider extends LanguageProvider {
                         || registryObject.get() instanceof StairBlock).toList());
 
         list.forEach((this::addBlock));
+    }
+
+    public void addAllTools(){
+        List<RegistryObject<Item>> list = new LinkedList<>();
+
+        list.addAll(ModItems.ITEMS.getEntries().stream()
+                .filter((registryObject) -> registryObject.get() instanceof SwordItem
+                        || registryObject.get() instanceof AxeItem
+                        || registryObject.get() instanceof ShovelItem
+                        || registryObject.get() instanceof HoeItem
+                        || registryObject.get() instanceof PickaxeItem).toList());
+
+        list.forEach((this::addItem));
     }
 
     public void addBlock(RegistryObject<Block> key) {

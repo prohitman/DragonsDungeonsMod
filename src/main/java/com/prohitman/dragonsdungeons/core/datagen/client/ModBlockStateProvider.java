@@ -29,6 +29,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         //Other Blocks
         simpleBlock(ModBlocks.SHINGLES.get());
         simpleBlock(ModBlocks.RUINED_SHINGLES.get());
+        createStairSlabWall(ModBlocks.SHINGLES, false);
+        createStairSlabWall(ModBlocks.RUINED_SHINGLES, false);
+
         simpleBlock(ModBlocks.RUBBLE.get());
         simpleBlock(ModBlocks.CHUNKY_RUBBLE.get());
 
@@ -49,6 +52,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 models().withExistingParent(name(ModBlocks.TREASURE_CHEST.get()) + "_dd", modLoc("block/" + name(ModBlocks.TREASURE_CHEST.get())))
                         .renderType("cutout_mipped")
                         .ao(false));
+        horizontalBlock(ModBlocks.FOUNDRY.get(),
+                models().withExistingParent(name(ModBlocks.FOUNDRY.get()) + "_dd", modLoc("block/" + name(ModBlocks.FOUNDRY.get())))
+                        .renderType("cutout_mipped")
+                        .ao(false));
 
         //createBlockWithModel(ModBlocks.TREASURE_CHEST);
         createBlockWithModel(ModBlocks.HANGING_BARROW_MOSS);
@@ -56,117 +63,124 @@ public class ModBlockStateProvider extends BlockStateProvider {
         createDoubleBlockModel(ModBlocks.STANDING_TORCH);
         createBlockWithModel(ModBlocks.URN);
 
+        //Adamantite
+        simpleBlock(ModBlocks.ADAMANTITE_ORE.get());
+        simpleBlock(ModBlocks.DEEPSLATE_ADAMANTITE_ORE.get());
+        simpleBlock(ModBlocks.RAW_ADAMANTITE_BLOCK.get());
+
         //Adobe
         simpleBlock(ModBlocks.AGING_ADOBE.get());
-        createStairSlabWall(ModBlocks.AGING_ADOBE);
+        createStairSlabWall(ModBlocks.AGING_ADOBE, true);
         logBlock((RotatedPillarBlock) ModBlocks.AGING_ADOBE_PILLAR.get());
         simpleBlock(ModBlocks.CHISELED_AGING_ADOBE.get());
         simpleBlock(ModBlocks.MOSSY_AGING_ADOBE.get());
-        createStairSlabWall(ModBlocks.MOSSY_AGING_ADOBE);
+        createStairSlabWall(ModBlocks.MOSSY_AGING_ADOBE, true);
         createAxisBlock((RotatedPillarBlock) ModBlocks.PAINTED_AGING_ADOBE.get(), ModBlocks.AGING_ADOBE);
         simpleBlock(ModBlocks.CRACKED_AGING_ADOBE.get());
-        createStairSlabWall(ModBlocks.CRACKED_AGING_ADOBE);
+        createStairSlabWall(ModBlocks.CRACKED_AGING_ADOBE, true);
 
         //Greenschist
         simpleBlock(ModBlocks.GREENSCHIST.get());
-        createStairSlabWall(ModBlocks.GREENSCHIST);
+        createStairSlabWall(ModBlocks.GREENSCHIST, true);
 
         logBlock((RotatedPillarBlock) ModBlocks.GREENSCHIST_PILLAR.get());
         simpleBlock(ModBlocks.GREENSCHIST_BRICKS.get());
-        createStairSlabWall(ModBlocks.GREENSCHIST_BRICKS);
+        createStairSlabWall(ModBlocks.GREENSCHIST_BRICKS, true);
 
         simpleBlock(ModBlocks.CHISELED_GREENSCHIST.get());
         simpleBlock(ModBlocks.POLISHED_GREENSCHIST.get());
-        createStairSlabWall(ModBlocks.POLISHED_GREENSCHIST);
+        createStairSlabWall(ModBlocks.POLISHED_GREENSCHIST, true);
 
         simpleBlock(ModBlocks.ALGAL_GREENSCHIST_BRICKS.get());
-        createStairSlabWall(ModBlocks.ALGAL_GREENSCHIST_BRICKS);
+        createStairSlabWall(ModBlocks.ALGAL_GREENSCHIST_BRICKS, true);
 
         //Shale
         simpleBlock(ModBlocks.SHALE.get());
-        createStairSlabWall(ModBlocks.SHALE);
+        createStairSlabWall(ModBlocks.SHALE, true);
 
         logBlock((RotatedPillarBlock) ModBlocks.SHALE_PILLAR.get());
         simpleBlock(ModBlocks.SHALE_BRICKS.get());
-        createStairSlabWall(ModBlocks.SHALE_BRICKS);
+        createStairSlabWall(ModBlocks.SHALE_BRICKS, true);
 
         simpleBlock(ModBlocks.SHALE_SHINGLES.get());
         simpleBlock(ModBlocks.SHALE_TILES.get());
-        createStairSlabWall(ModBlocks.SHALE_TILES);
+        createStairSlabWall(ModBlocks.SHALE_TILES, true);
 
         simpleBlock(ModBlocks.CHISELED_SHALE.get());
         simpleBlock(ModBlocks.CRACKED_SHALE_BRICKS.get());
-        createStairSlabWall(ModBlocks.CRACKED_SHALE_BRICKS);
+        createStairSlabWall(ModBlocks.CRACKED_SHALE_BRICKS, true);
 
         simpleBlock(ModBlocks.MOSSY_SHALE_BRICKS.get());
-        createStairSlabWall(ModBlocks.MOSSY_SHALE_BRICKS);
+        createStairSlabWall(ModBlocks.MOSSY_SHALE_BRICKS, true);
 
         simpleBlock(ModBlocks.POLISHED_SHALE.get());
-        createStairSlabWall(ModBlocks.POLISHED_SHALE);
+        createStairSlabWall(ModBlocks.POLISHED_SHALE, true);
 
         //Ironstone
         simpleBlock(ModBlocks.RAW_IRONSTONE.get());
-        createStairSlabWall(ModBlocks.RAW_IRONSTONE);
+        createStairSlabWall(ModBlocks.RAW_IRONSTONE, true);
 
         logBlock((RotatedPillarBlock) ModBlocks.IRONSTONE_PILLAR.get());
         logBlock((RotatedPillarBlock) ModBlocks.IRONSTONE_BATTLEMENT.get());
         simpleBlock(ModBlocks.IRONSTONE_BRICKS.get());
-        createStairSlabWall(ModBlocks.IRONSTONE_BRICKS);
+        createStairSlabWall(ModBlocks.IRONSTONE_BRICKS, true);
 
         simpleBlock(ModBlocks.IRONSTONE_TILES.get());
-        createStairSlabWall(ModBlocks.IRONSTONE_TILES);
+        createStairSlabWall(ModBlocks.IRONSTONE_TILES, true);
 
         simpleBlock(ModBlocks.POLISHED_IRONSTONE.get());
-        createStairSlabWall(ModBlocks.POLISHED_IRONSTONE);
+        createStairSlabWall(ModBlocks.POLISHED_IRONSTONE, true);
 
         simpleBlock(ModBlocks.CHISELED_IRONSTONE.get());
         simpleBlock(ModBlocks.CRACKED_IRONSTONE_BRICKS.get());
-        createStairSlabWall(ModBlocks.CRACKED_IRONSTONE_BRICKS);
+        createStairSlabWall(ModBlocks.CRACKED_IRONSTONE_BRICKS, true);
 
         simpleBlock(ModBlocks.MOSSY_IRONSTONE_BRICKS.get());
-        createStairSlabWall(ModBlocks.MOSSY_IRONSTONE_BRICKS);
+        createStairSlabWall(ModBlocks.MOSSY_IRONSTONE_BRICKS, true);
 
         //Forged Bricks
         simpleBlock(ModBlocks.FORGED_BRICKS.get());
-        createStairSlabWall(ModBlocks.FORGED_BRICKS);
+        createStairSlabWall(ModBlocks.FORGED_BRICKS, true);
 
         logBlock((RotatedPillarBlock) ModBlocks.FORGED_PILLAR.get());
         simpleBlock(ModBlocks.FORGED_TILES.get());
-        createStairSlabWall(ModBlocks.FORGED_TILES);
+        createStairSlabWall(ModBlocks.FORGED_TILES, true);
 
         simpleBlock(ModBlocks.CRACKED_FORGED_BRICKS.get());
-        createStairSlabWall(ModBlocks.CRACKED_FORGED_BRICKS);
+        createStairSlabWall(ModBlocks.CRACKED_FORGED_BRICKS, true);
 
         simpleBlock(ModBlocks.LINED_FORGED_BRICKS.get());
-        createStairSlabWall(ModBlocks.LINED_FORGED_BRICKS);
+        createStairSlabWall(ModBlocks.LINED_FORGED_BRICKS, true);
 
         //Lavarock
         simpleBlock(ModBlocks.LAVAROCK.get());
-        createStairSlabWall(ModBlocks.LAVAROCK);
+        createStairSlabWall(ModBlocks.LAVAROCK, true);
 
         logBlock((RotatedPillarBlock) ModBlocks.LAVAROCK_PILLAR.get());
         simpleBlock(ModBlocks.LAVAROCK_BRICKS.get());
-        createStairSlabWall(ModBlocks.LAVAROCK_BRICKS);
+        createStairSlabWall(ModBlocks.LAVAROCK_BRICKS, true);
 
         simpleBlock(ModBlocks.CHISELED_LAVAROCK.get());
         simpleBlock(ModBlocks.CRACKED_LAVAROCK_BRICKS.get());
-        createStairSlabWall(ModBlocks.CRACKED_LAVAROCK_BRICKS);
+        createStairSlabWall(ModBlocks.CRACKED_LAVAROCK_BRICKS, true);
 
         simpleBlock(ModBlocks.POLISHED_LAVAROCK.get());
-        createStairSlabWall(ModBlocks.POLISHED_LAVAROCK);
+        createStairSlabWall(ModBlocks.POLISHED_LAVAROCK, true);
 
         simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
-        createStairSlabWall(ModBlocks.CHARRED_LAVAROCK_BRICKS);
+        createStairSlabWall(ModBlocks.CHARRED_LAVAROCK_BRICKS, true);
     }
 
-    public void createStairSlabWall(RegistryObject<Block> block){
+    public void createStairSlabWall(RegistryObject<Block> block, boolean withWalls){
         stairsBlock((StairBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DragonsDungeons.MODID, name(block) + "_stairs")),
                 modLoc("block/" + name(block)));
         slabBlock((SlabBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DragonsDungeons.MODID, name(block) + "_slab")),
                 modLoc("block/" + name(block)),
                 modLoc("block/" + name(block)));
-        wallBlock((WallBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DragonsDungeons.MODID, name(block) + "_wall")),
-                modLoc("block/" + name(block)));
+        if(withWalls){
+            wallBlock((WallBlock) ForgeRegistries.BLOCKS.getValue(new ResourceLocation(DragonsDungeons.MODID, name(block) + "_wall")),
+                    modLoc("block/" + name(block)));
+        }
     }
 
     public void mithrilBlock(MithrilCrystal block, ModelFile crystal) {

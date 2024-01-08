@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "dragonsdungeons:block/shingles_slab"
+    },
+    "type=double": {
+      "model": "dragonsdungeons:block/shingles"
+    },
+    "type=top": {
+      "model": "dragonsdungeons:block/shingles_slab_top"
+    }
+  }
+}
