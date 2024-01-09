@@ -10,6 +10,7 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
@@ -40,12 +41,17 @@ public class ModBlocks {
     public static final RegistryObject<Block> ADAMANTITE_ORE = createRegistry("adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE).mapColor(MapColor.COLOR_CYAN)), new Item.Properties());
     public static final RegistryObject<Block> DEEPSLATE_ADAMANTITE_ORE = createRegistry("deepslate_adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE).mapColor(MapColor.COLOR_CYAN)), new Item.Properties());
     public static final RegistryObject<Block> RAW_ADAMANTITE_BLOCK = createRegistry("raw_adamantite_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.RAW_IRON_BLOCK).mapColor(MapColor.COLOR_CYAN)), new Item.Properties());
+    public static final RegistryObject<Block> DWARVEN_STEEL_BLOCK = createRegistry("dwarven_steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), new Item.Properties());
+    public static final RegistryObject<Block> ELVEN_BRASS_BLOCK = createRegistry("elven_brass_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).mapColor(MapColor.GOLD)), new Item.Properties());
+    public static final RegistryObject<Block> MITHRIL_BLOCK = createRegistry("mithril_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.DIAMOND)), new Item.Properties());
+    public static final RegistryObject<Block> STEEL_BLOCK = createRegistry("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), new Item.Properties());
+    public static final RegistryObject<Block> FORGED_DOOR = createRegistry("forged_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_BLACK), BlockSetType.IRON), new Item.Properties());
 
     public static final RegistryObject<Block> AGING_ADOBE = createRegistryWithStairSlabWall("aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties(), true);
     public static final RegistryObject<Block> AGING_ADOBE_PILLAR = createRegistry("aging_adobe_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> CHISELED_AGING_ADOBE = createRegistry("chiseled_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> CRACKED_AGING_ADOBE = createRegistryWithStairSlabWall("cracked_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties(), true);
-    public static final RegistryObject<Block> PAINTED_AGING_ADOBE = createRegistry("painted_aging_adobe", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
+    public static final RegistryObject<Block> PAINTED_AGING_ADOBE = createRegistry("painted_aging_adobe", () -> new ModDirectionalBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
     public static final RegistryObject<Block> MOSSY_AGING_ADOBE = createRegistryWithStairSlabWall("mossy_aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties(), true);
 
     public static final RegistryObject<Block> GREENSCHIST = createRegistryWithStairSlabWall("greenschist", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties(), true);

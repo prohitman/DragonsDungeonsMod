@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_bottom_right_open",
+  "textures": {
+    "bottom": "dragonsdungeons:block/forged_door_bottom",
+    "top": "dragonsdungeons:block/forged_door_top"
+  }
+}

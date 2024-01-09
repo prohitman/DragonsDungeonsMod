@@ -1,16 +1,30 @@
 {
   "variants": {
-    "axis=x": {
+    "facing=down": {
+      "model": "dragonsdungeons:block/painted_aging_adobe",
+      "x": 180
+    },
+    "facing=east": {
       "model": "dragonsdungeons:block/painted_aging_adobe",
       "x": 90,
       "y": 90
     },
-    "axis=y": {
-      "model": "dragonsdungeons:block/painted_aging_adobe"
-    },
-    "axis=z": {
+    "facing=north": {
       "model": "dragonsdungeons:block/painted_aging_adobe",
       "x": 90
+    },
+    "facing=south": {
+      "model": "dragonsdungeons:block/painted_aging_adobe",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "dragonsdungeons:block/painted_aging_adobe"
+    },
+    "facing=west": {
+      "model": "dragonsdungeons:block/painted_aging_adobe",
+      "x": 90,
+      "y": 270
     }
   }
 }

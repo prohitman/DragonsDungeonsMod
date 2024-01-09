@@ -59,6 +59,11 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.URN);
         createParent(ModBlocks.FOUNDRY);
 
+        createParent(ModBlocks.MITHRIL_BLOCK);
+        createParent(ModBlocks.ELVEN_BRASS_BLOCK);
+        createParent(ModBlocks.DWARVEN_STEEL_BLOCK);
+        createParent(ModBlocks.STEEL_BLOCK);
+        createBlockSingle(ModBlocks.FORGED_DOOR, "item/forged_door");
 
         createStairWallSlabParents();
 

@@ -25,6 +25,13 @@ public class ModBlockTags extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
+
+        tag(BlockTags.BEACON_BASE_BLOCKS)
+                .add(ModBlocks.DWARVEN_STEEL_BLOCK.get())
+                .add(ModBlocks.STEEL_BLOCK.get())
+                .add(ModBlocks.MITHRIL_BLOCK.get())
+                .add(ModBlocks.ELVEN_BRASS_BLOCK.get());
+
         createStairSlabWallTags();
     }
 

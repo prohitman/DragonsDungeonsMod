@@ -9,6 +9,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
@@ -18,6 +19,8 @@ import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Function;
 
 public class ModBlockStateProvider extends BlockStateProvider {
     public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -47,7 +50,7 @@ public class ModBlockStateProvider extends BlockStateProvider {
         horizontalBlock(ModBlocks.THATCH_ROOF.get(),
                 models().withExistingParent(name(ModBlocks.THATCH_ROOF.get()) + "_dd", modLoc("block/" + name(ModBlocks.THATCH_ROOF.get())))
                         .renderType("cutout_mipped")
-                        .ao(false));
+                        .ao(false), 0);
         horizontalBlock(ModBlocks.TREASURE_CHEST.get(),
                 models().withExistingParent(name(ModBlocks.TREASURE_CHEST.get()) + "_dd", modLoc("block/" + name(ModBlocks.TREASURE_CHEST.get())))
                         .renderType("cutout_mipped")
@@ -63,6 +66,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         createDoubleBlockModel(ModBlocks.STANDING_TORCH);
         createBlockWithModel(ModBlocks.URN);
 
+        simpleBlock(ModBlocks.MITHRIL_BLOCK.get());
+        simpleBlock(ModBlocks.DWARVEN_STEEL_BLOCK.get());
+        simpleBlock(ModBlocks.ELVEN_BRASS_BLOCK.get());
+        simpleBlock(ModBlocks.STEEL_BLOCK.get());
+        doorBlock((DoorBlock) ModBlocks.FORGED_DOOR.get(), modLoc("block/forged_door_bottom"), modLoc("block/forged_door_top"));
+
         //Adamantite
         simpleBlock(ModBlocks.ADAMANTITE_ORE.get());
         simpleBlock(ModBlocks.DEEPSLATE_ADAMANTITE_ORE.get());
@@ -75,9 +84,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
         simpleBlock(ModBlocks.CHISELED_AGING_ADOBE.get());
         simpleBlock(ModBlocks.MOSSY_AGING_ADOBE.get());
         createStairSlabWall(ModBlocks.MOSSY_AGING_ADOBE, true);
-        createAxisBlock((RotatedPillarBlock) ModBlocks.PAINTED_AGING_ADOBE.get(), ModBlocks.AGING_ADOBE);
+        //createAxisBlock((RotatedPillarBlock) ModBlocks.PAINTED_AGING_ADOBE.get(), ModBlocks.AGING_ADOBE);
         simpleBlock(ModBlocks.CRACKED_AGING_ADOBE.get());
         createStairSlabWall(ModBlocks.CRACKED_AGING_ADOBE, true);
+        directionalBlock(ModBlocks.PAINTED_AGING_ADOBE.get(),
+                models().cubeBottomTop(name(ModBlocks.PAINTED_AGING_ADOBE), modLoc("block/" + name(ModBlocks.PAINTED_AGING_ADOBE)),
+                        modLoc("block/" + name(ModBlocks.AGING_ADOBE)), modLoc("block/" + name(ModBlocks.PAINTED_AGING_ADOBE) + "_top")));
 
         //Greenschist
         simpleBlock(ModBlocks.GREENSCHIST.get());
@@ -218,10 +230,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     public void createStoneWindow(RegistryObject<Block> block){
         stoneWindow(block.get(),
-                models().cubeAll(name(block), modLoc("block/" + name(block))).renderType("cutout_mipped"),
-                models().cubeAll(name(block) + "_top", modLoc("block/" + name(block) + "_top")).renderType("cutout_mipped"),
-                models().cubeAll(name(block) + "_bottom", modLoc("block/" + name(block) + "_bottom")).renderType("cutout_mipped"),
-                models().cubeAll(name(block) + "_middle", modLoc("block/" + name(block) + "_middle")).renderType("cutout_mipped"));
+                models().cubeAll(name(block), modLoc("block/" + name(block))).renderType("translucent"),
+                models().cubeAll(name(block) + "_top", modLoc("block/" + name(block) + "_top")).renderType("translucent"),
+                models().cubeAll(name(block) + "_bottom", modLoc("block/" + name(block) + "_bottom")).renderType("translucent"),
+                models().cubeAll(name(block) + "_middle", modLoc("block/" + name(block) + "_middle")).renderType("translucent"));
     }
 
     public void stoneWindow(Block window, ModelFile none, ModelFile top, ModelFile bottom, ModelFile both){
@@ -258,11 +270,35 @@ public class ModBlockStateProvider extends BlockStateProvider {
                                                 .texture("end", modLoc("block/" + name(bottomBlock))));
     }
 
+    public void createAxisBlockDD(RotatedPillarBlock block, RegistryObject<Block> bottomBlock) {
+        axisBlock(block,
+                models().cubeBottomTop(name(block), modLoc("block/" + name(block)),
+                        modLoc("block/" + name(bottomBlock)), modLoc("block/" + name(block) + "_top")),
+                models().withExistingParent(name(block), modLoc("block/" + "cube_bottom_top"))
+                        .texture("side", modLoc("block/" + name(block)))
+                        .texture("top", modLoc("block/" + name(block) + "_top"))
+                        .texture("end", modLoc("block/" + name(bottomBlock))));
+
+    }
+
     public void createBlockWithModel(RegistryObject<Block> block){
         simpleBlock(block.get(),
                 models().withExistingParent(name(block) + "_dd", modLoc("block/" + name(block)))
                         .renderType("cutout_mipped")
                         .ao(false));
+    }
+
+    public void createHorizontalDirectionalBlock(Block block, ModelFile model) {
+
+    }
+
+    public void createHorizontalDirectionalBlock(Block block, Function<BlockState, ModelFile> modelFunc, int angleOffset) {
+        getVariantBuilder(block)
+                .forAllStates(state -> ConfiguredModel.builder()
+                        .modelFile(modelFunc.apply(state))
+                        .rotationY(((int) state.getValue(BlockStateProperties.FACING).toYRot() + angleOffset) % 360)
+                        .build()
+                );
     }
 
     private String name(RegistryObject<Block> block) {

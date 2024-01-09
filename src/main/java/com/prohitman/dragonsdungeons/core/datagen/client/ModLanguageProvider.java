@@ -52,6 +52,11 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.TREASURE_CHEST);
         addBlock(ModBlocks.URN);
         addBlock(ModBlocks.FOUNDRY);
+        addBlock(ModBlocks.DWARVEN_STEEL_BLOCK);
+        addBlock(ModBlocks.ELVEN_BRASS_BLOCK);
+        addBlock(ModBlocks.STEEL_BLOCK);
+        addBlock(ModBlocks.MITHRIL_BLOCK);
+        addBlock(ModBlocks.FORGED_DOOR);
 
         addBlock(ModBlocks.GREENSCHIST);
         addBlock(ModBlocks.GREENSCHIST_BRICKS);
