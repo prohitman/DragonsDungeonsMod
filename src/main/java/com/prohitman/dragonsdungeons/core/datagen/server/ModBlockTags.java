@@ -50,7 +50,7 @@ public class ModBlockTags extends BlockTagsProvider {
             }else if(registryObject.get() instanceof StairBlock) {
                 tag(BlockTags.STAIRS)
                         .add(registryObject.get());
-            } else{
+            }else{
                 tag(BlockTags.SLABS)
                         .add(registryObject.get());
             }

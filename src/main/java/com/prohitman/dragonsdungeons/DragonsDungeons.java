@@ -3,10 +3,7 @@ package com.prohitman.dragonsdungeons;
 import com.mojang.logging.LogUtils;
 import com.prohitman.dragonsdungeons.client.screen.ModMenuTypes;
 import com.prohitman.dragonsdungeons.core.events.CommonForgeEvents;
-import com.prohitman.dragonsdungeons.core.init.ModBlockEntities;
-import com.prohitman.dragonsdungeons.core.init.ModBlocks;
-import com.prohitman.dragonsdungeons.core.init.ModCreativeTab;
-import com.prohitman.dragonsdungeons.core.init.ModItems;
+import com.prohitman.dragonsdungeons.core.init.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.food.FoodProperties;
@@ -52,6 +49,7 @@ public class DragonsDungeons
         ModCreativeTab.CREATIVE_MODE_TABS.register(modEventBus);
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModMenuTypes.MENUS.register(modEventBus);
+        ModParticleTypes.PARTICLES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
