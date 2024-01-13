@@ -1,6 +1,7 @@
 package com.prohitman.dragonsdungeons.client.screen;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
+import com.prohitman.dragonsdungeons.client.screen.menu.FoundryMenu;
 import com.prohitman.dragonsdungeons.client.screen.menu.TreasureChestMenu;
 import com.prohitman.dragonsdungeons.client.screen.menu.UrnMenu;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -19,6 +20,9 @@ public class ModMenuTypes {
             registerMenuType("treasure_chest_menu", TreasureChestMenu::new);
     public static final RegistryObject<MenuType<UrnMenu>> URN_MENU =
             registerMenuType("urn_menu", UrnMenu::new);
+
+    public static final RegistryObject<MenuType<FoundryMenu>> FOUNDRY_MENU =
+            registerMenuType("foundry_menu", FoundryMenu::new);
 
     private static <T extends AbstractContainerMenu>RegistryObject<MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));

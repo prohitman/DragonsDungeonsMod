@@ -32,7 +32,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> STANDING_TORCH = createRegistry("standing_torch", () -> new StandingTorch(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties());
     public static final RegistryObject<Block> TREASURE_CHEST = createRegistry("treasure_chest", () -> new TreasureChestBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()), new Item.Properties());
     public static final RegistryObject<Block> URN = createRegistry("urn", () -> new UrnBlock(BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F).sound(SoundType.WOOD).ignitedByLava()), new Item.Properties());
-    public static final RegistryObject<Block> FOUNDRY = createRegistry("foundry", () -> new FoundBlockShaped(BlockBehaviour.Properties.copy(Blocks.ANVIL)), new Item.Properties());
+    public static final RegistryObject<Block> FOUNDRY = createRegistry("foundry", () -> new FoundryBlock(BlockBehaviour.Properties.copy(Blocks.ANVIL)), new Item.Properties());
 
     public static final RegistryObject<Block> MITHRIL_CRYSTAL = createRegistry("mithril_crystal", () -> new MithrilCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).lightLevel((blockState) -> 6).noOcclusion()), new Item.Properties());
     public static final RegistryObject<Block> RUINED_SHINGLES = createRegistryWithStairSlabWall("ruined_shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties(), false);

@@ -1,9 +1,13 @@
 package com.prohitman.dragonsdungeons.common.blocks.obj;
 
+import com.prohitman.dragonsdungeons.common.blocks.entity.FoundryBlockEntity;
+import com.prohitman.dragonsdungeons.common.blocks.entity.TreasureChestBlockEntity;
+import com.prohitman.dragonsdungeons.core.init.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -13,6 +17,7 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
@@ -30,53 +35,66 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
 
-public class FoundryBlock{ /*extends BaseEntityBlock {
+public class FoundryBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-    protected FoundryBlock(BlockBehaviour.Properties pProperties) {
+    public FoundryBlock(BlockBehaviour.Properties pProperties) {
         super(pProperties);
-        this.registerDefault/*State(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.valueOf(false)));
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.valueOf(false)));
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         if (pLevel.isClientSide) {
             return InteractionResult.SUCCESS;
         } else {
-            this.openContainer(pLevel, pPos, pPlayer);
+            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
+            if (blockentity instanceof FoundryBlockEntity) {
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (FoundryBlockEntity)blockentity, pPos);
+
+                //pPlayer.awardStat(Stats.OPEN_BARREL);
+                PiglinAi.angerNearbyPiglins(pPlayer, true);
+            }
+
             return InteractionResult.CONSUME;
         }
     }
 
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new FurnaceBlockEntity(pPos, pState);
+        return new FoundryBlockEntity(pPos, pState);
     }
 
     @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-        return createFurnaceTicker(pLevel, pBlockEntityType, BlockEntityType.FURNACE);
+        return createFoundryTicker(pLevel, pBlockEntityType, ModBlockEntities.FOUNDRY_BLOCK_ENTITY.get());
     }
 
-    *//**
+    @Nullable
+    protected static <T extends BlockEntity> BlockEntityTicker<T> createFoundryTicker(Level pLevel, BlockEntityType<T> pServerType, BlockEntityType<? extends FoundryBlockEntity> pClientType) {
+        return pLevel.isClientSide ? null : createTickerHelper(pServerType, pClientType, FoundryBlockEntity::serverTick);
+    }
+
+
+    /**
      * Called to open this furnace's container.
      *
      * @see #use
-     *//*
+     */
     protected void openContainer(Level pLevel, BlockPos pPos, Player pPlayer) {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-        if (blockentity instanceof FurnaceBlockEntity) {
+        if (blockentity instanceof FoundryBlockEntity) {
             pPlayer.openMenu((MenuProvider)blockentity);
             pPlayer.awardStat(Stats.INTERACT_WITH_FURNACE);
         }
-
     }
 
-    *//**
+    /**
      * Called periodically clientside on blocks near the player to show effects (like furnace fire particles).
-     *//*
+     */
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         if (pState.getValue(LIT)) {
             double d0 = (double)pPos.getX() + 0.5D;
@@ -101,14 +119,14 @@ public class FoundryBlock{ /*extends BaseEntityBlock {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
-    *//**
+    /**
      * Called by BlockItem after this block has been placed.
-     *//*
+     */
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         if (pStack.hasCustomHoverName()) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            if (blockentity instanceof AbstractFurnaceBlockEntity) {
-                ((AbstractFurnaceBlockEntity)blockentity).setCustomName(pStack.getHoverName());
+            if (blockentity instanceof FoundryBlockEntity) {
+                ((FoundryBlockEntity)blockentity).setCustomName(pStack.getHoverName());
             }
         }
 
@@ -117,10 +135,10 @@ public class FoundryBlock{ /*extends BaseEntityBlock {
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
         if (!pState.is(pNewState.getBlock())) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            if (blockentity instanceof AbstractFurnaceBlockEntity) {
+            if (blockentity instanceof FoundryBlockEntity) {
                 if (pLevel instanceof ServerLevel) {
-                    Containers.dropContents(pLevel, pPos, (AbstractFurnaceBlockEntity)blockentity);
-                    ((AbstractFurnaceBlockEntity)blockentity).getRecipesToAwardAndPopExperience((ServerLevel)pLevel, Vec3.atCenterOf(pPos));
+                    Containers.dropContents(pLevel, pPos, (FoundryBlockEntity)blockentity);
+                    ((FoundryBlockEntity)blockentity).getRecipesToAwardAndPopExperience((ServerLevel)pLevel, Vec3.atCenterOf(pPos));
                 }
 
                 pLevel.updateNeighbourForOutputSignal(pPos, this);
@@ -130,52 +148,52 @@ public class FoundryBlock{ /*extends BaseEntityBlock {
         }
     }
 
-    *//**
+    /**
      * @deprecated call via {@link
      * net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#hasAnalogOutputSignal} whenever possible.
      * Implementing/overriding is fine.
-     *//*
+     */
     public boolean hasAnalogOutputSignal(BlockState pState) {
         return true;
     }
 
-    *//**
+    /**
      * Returns the analog signal this block emits. This is the signal a comparator can read from it.
      *
      * @deprecated call via {@link
      * net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#getAnalogOutputSignal} whenever possible.
      * Implementing/overriding is fine.
-     *//*
+     */
     public int getAnalogOutputSignal(BlockState pBlockState, Level pLevel, BlockPos pPos) {
         return AbstractContainerMenu.getRedstoneSignalFromBlockEntity(pLevel.getBlockEntity(pPos));
     }
 
-    *//**
+    /**
      * The type of render function called. MODEL for mixed tesr and static model, MODELBLOCK_ANIMATED for TESR-only,
      * LIQUID for vanilla liquids, INVISIBLE to skip all rendering
      * @deprecated call via {@link net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#getRenderShape}
      * whenever possible. Implementing/overriding is fine.
-     *//*
+     */
     public RenderShape getRenderShape(BlockState pState) {
         return RenderShape.MODEL;
     }
 
-    *//**
+    /**
      * Returns the blockstate with the given rotation from the passed blockstate. If inapplicable, returns the passed
      * blockstate.
      * @deprecated call via {@link net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#rotate} whenever
      * possible. Implementing/overriding is fine.
-     *//*
+     */
     public BlockState rotate(BlockState pState, Rotation pRotation) {
         return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
     }
 
-    *//**
+    /**
      * Returns the blockstate with the given mirror of the passed blockstate. If inapplicable, returns the passed
      * blockstate.
      * @deprecated call via {@link net.minecraft.world.level.block.state.BlockBehaviour.BlockStateBase#mirror} whenever
      * possible. Implementing/overriding is fine.
-     *//*
+     */
     public BlockState mirror(BlockState pState, Mirror pMirror) {
         return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
     }

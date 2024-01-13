@@ -1,6 +1,7 @@
 package com.prohitman.dragonsdungeons.client.events;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
+import com.prohitman.dragonsdungeons.client.screen.FoundryScreen;
 import com.prohitman.dragonsdungeons.client.screen.ModMenuTypes;
 import com.prohitman.dragonsdungeons.client.screen.TreasureChestScreen;
 import com.prohitman.dragonsdungeons.client.screen.UrnScreen;
@@ -17,5 +18,7 @@ public class ClientModEvents {
     {
         MenuScreens.register(ModMenuTypes.TREASURE_CHEST_MENU.get(), TreasureChestScreen::new);
         MenuScreens.register(ModMenuTypes.URN_MENU.get(), UrnScreen::new);
+        MenuScreens.register(ModMenuTypes.FOUNDRY_MENU.get(), FoundryScreen::new);
+
     }
 }
