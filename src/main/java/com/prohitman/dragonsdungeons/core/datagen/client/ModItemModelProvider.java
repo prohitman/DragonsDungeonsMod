@@ -54,7 +54,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.THATCH_ROOF);
         createParent(ModBlocks.HANGING_BARROW_MOSS);
         createParent(ModBlocks.STONE_WINDOW);
-        createBlockSingle(ModBlocks.STANDING_TORCH, "item/standing_torch");
+        createBlockSingleHandheld(ModBlocks.STANDING_TORCH, "item/standing_torch");
         createParent(ModBlocks.TREASURE_CHEST);
         createParent(ModBlocks.URN);
         createParent(ModBlocks.FOUNDRY);
@@ -131,6 +131,12 @@ public class ModItemModelProvider extends ItemModelProvider {
     private void createBlockSingle(RegistryObject<Block> block, String location){
         singleTexture((block.getId().getPath()),
                 mcLoc("item/generated"),
+                "layer0", modLoc(location));
+    }
+
+    private void createBlockSingleHandheld(RegistryObject<Block> block, String location){
+        singleTexture((block.getId().getPath()),
+                mcLoc("item/handheld"),
                 "layer0", modLoc(location));
     }
 

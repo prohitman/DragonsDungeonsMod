@@ -1,7 +1,9 @@
 package com.prohitman.dragonsdungeons.core.datagen.client;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
+import com.prohitman.dragonsdungeons.common.blocks.ModBlock;
 import com.prohitman.dragonsdungeons.common.blocks.enums.ConnectedState;
+import com.prohitman.dragonsdungeons.common.blocks.obj.FoundryBlock;
 import com.prohitman.dragonsdungeons.common.blocks.obj.StoneWindow;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
@@ -40,7 +42,8 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         createBlockWithModel(ModBlocks.THATCH);
         //createBlockWithModel(ModBlocks.MITHRIL_CRYSTAL);
-        mithrilBlock((MithrilCrystal) ModBlocks.MITHRIL_CRYSTAL.get(), models().withExistingParent(name(ModBlocks.MITHRIL_CRYSTAL.get()) + "_dd", modLoc("block/" + name(ModBlocks.MITHRIL_CRYSTAL.get())))
+        mithrilBlock((MithrilCrystal) ModBlocks.MITHRIL_CRYSTAL.get(),
+                models().withExistingParent(name(ModBlocks.MITHRIL_CRYSTAL.get()) + "_dd", modLoc("block/" + name(ModBlocks.MITHRIL_CRYSTAL.get())))
                 .renderType("cutout_mipped")
                 .ao(false));
         horizontalBlock(ModBlocks.BARROW_STONES.get(),
@@ -55,8 +58,11 @@ public class ModBlockStateProvider extends BlockStateProvider {
                 models().withExistingParent(name(ModBlocks.TREASURE_CHEST.get()) + "_dd", modLoc("block/" + name(ModBlocks.TREASURE_CHEST.get())))
                         .renderType("cutout_mipped")
                         .ao(false));
-        horizontalBlock(ModBlocks.FOUNDRY.get(),
+        foundryBlock(ModBlocks.FOUNDRY.get(),
                 models().withExistingParent(name(ModBlocks.FOUNDRY.get()) + "_dd", modLoc("block/" + name(ModBlocks.FOUNDRY.get())))
+                        .renderType("cutout_mipped")
+                        .ao(false),
+                models().withExistingParent(name(ModBlocks.FOUNDRY.get()) + "_on_dd", modLoc("block/" + name(ModBlocks.FOUNDRY.get()) + "_on"))
                         .renderType("cutout_mipped")
                         .ao(false));
 
@@ -299,6 +305,24 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .rotationY(((int) state.getValue(BlockStateProperties.FACING).toYRot() + angleOffset) % 360)
                         .build()
                 );
+    }
+
+    public void foundryBlock(Block block, ModelFile modelOff, ModelFile modelOn) {
+        createFoundryBlock(block, $ -> modelOff, $ -> modelOn, 180);
+    }
+
+    public void createFoundryBlock(Block block, Function<BlockState, ModelFile> modelFunc, Function<BlockState, ModelFile> modelFuncOn, int angleOffset) {
+        getVariantBuilder(block).forAllStates(state -> {
+            ModelFile model = modelFunc.apply(state);
+            if(state.getValue(FoundryBlock.LIT)){
+                model = modelFuncOn.apply(state);
+            }
+
+            return ConfiguredModel.builder()
+                    .modelFile(model)
+                    .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + angleOffset) % 360)
+                    .build();
+        });
     }
 
     private String name(RegistryObject<Block> block) {

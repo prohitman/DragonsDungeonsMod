@@ -1,0 +1,5 @@
+{
+  "parent": "dragonsdungeons:block/foundry_on",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout_mipped"
+}

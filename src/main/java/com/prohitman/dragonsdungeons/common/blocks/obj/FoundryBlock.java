@@ -1,5 +1,6 @@
 package com.prohitman.dragonsdungeons.common.blocks.obj;
 
+import com.prohitman.dragonsdungeons.common.Utils;
 import com.prohitman.dragonsdungeons.common.blocks.entity.FoundryBlockEntity;
 import com.prohitman.dragonsdungeons.common.blocks.entity.TreasureChestBlockEntity;
 import com.prohitman.dragonsdungeons.core.init.ModBlockEntities;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -35,6 +37,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.BooleanOp;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.network.NetworkHooks;
 
 import javax.annotation.Nullable;
@@ -46,6 +52,26 @@ public class FoundryBlock extends BaseEntityBlock {
     public FoundryBlock(BlockBehaviour.Properties pProperties) {
         super(pProperties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, Boolean.valueOf(false)));
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+        Direction direction = pState.getValue(FACING);
+        return direction.getAxis() == Direction.Axis.X ? Utils.rotateXtoZ(makeShape()) : makeShape();
+    }
+
+    public VoxelShape makeShape(){
+        VoxelShape shape = Shapes.empty();
+        shape = Shapes.join(shape, Shapes.box(0, 0, 0, 1, 0.125, 1), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0.0625, 0.125, 0.0625, 0.9375, 1.25, 0.9375), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0.1875, 1.25, 0.0625, 0.8125, 1.4375, 0.9375), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0.9375, 0.8125, 0.375, 1.3125, 1.0625, 0.625), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(1.0625, 1.0625, 0.375, 1.3125, 1.375, 0.625), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(0.0625, 0.125, 0.15625, 0.9375, 1.25, 0.15625), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(-0.3125, 1.0625, 0.375, -0.0625, 1.375, 0.625), BooleanOp.OR);
+        shape = Shapes.join(shape, Shapes.box(-0.3125, 0.8125, 0.375, 0.0625, 1.0625, 0.625), BooleanOp.OR);
+
+        return shape;
     }
 
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
@@ -113,6 +139,13 @@ public class FoundryBlock extends BaseEntityBlock {
             double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
             pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
             pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+
+            pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6 + 8, d2 + d7, 0.0D, 0.0D, 0.0D);
+            pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6 + 8, d2 + d7, 0.0D, 0.0D, 0.0D);
+
+            pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + d5, d1 + 1.2 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+            //pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+
         }
     }
     public BlockState getStateForPlacement(BlockPlaceContext pContext) {

@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,lit=false": {
       "model": "dragonsdungeons:block/foundry_dd",
       "y": 90
     },
-    "facing=north": {
+    "facing=east,lit=true": {
+      "model": "dragonsdungeons:block/foundry_on_dd",
+      "y": 90
+    },
+    "facing=north,lit=false": {
       "model": "dragonsdungeons:block/foundry_dd"
     },
-    "facing=south": {
+    "facing=north,lit=true": {
+      "model": "dragonsdungeons:block/foundry_on_dd"
+    },
+    "facing=south,lit=false": {
       "model": "dragonsdungeons:block/foundry_dd",
       "y": 180
     },
-    "facing=west": {
+    "facing=south,lit=true": {
+      "model": "dragonsdungeons:block/foundry_on_dd",
+      "y": 180
+    },
+    "facing=west,lit=false": {
       "model": "dragonsdungeons:block/foundry_dd",
+      "y": 270
+    },
+    "facing=west,lit=true": {
+      "model": "dragonsdungeons:block/foundry_on_dd",
       "y": 270
     }
   }
