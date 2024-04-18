@@ -2,8 +2,10 @@ package com.prohitman.dragonsdungeons.core.datagen.client;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.core.init.ModBlocks;
+import com.prohitman.dragonsdungeons.core.init.ModEntities;
 import com.prohitman.dragonsdungeons.core.init.ModItems;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SlabBlock;
@@ -13,6 +15,7 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 import org.codehaus.plexus.util.StringUtils;
 
+import javax.swing.text.html.parser.Entity;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -28,6 +31,9 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.RAW_ADAMANTITE);
 
         addItem(ModItems.WARG_SPAWN_EGG);
+        add( "entity.dragonsdungeons.warg", "Warg");
+
+        add( "effect.dragonsdungeons.intoxicated", "Intoxicated");
 
         addItem(ModItems.ELVEN_BRASS_INGOT);
         addItem(ModItems.DWARVEN_STEEL_INGOT);

@@ -151,6 +151,8 @@
   "block.dragonsdungeons.thatch_roof": "Thatch Roof",
   "block.dragonsdungeons.treasure_chest": "Treasure Chest",
   "block.dragonsdungeons.urn": "Urn",
+  "effect.dragonsdungeons.intoxicated": "Intoxicated",
+  "entity.dragonsdungeons.warg": "Warg",
   "item.dragonsdungeons.blank_obelisk": "Blank Obelisk",
   "item.dragonsdungeons.dragon_bone": "Dragon Bone",
   "item.dragonsdungeons.dragon_bone_axe": "Dragon Bone Axe",
