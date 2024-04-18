@@ -43,6 +43,27 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.BLANK_OBELISK);
         addItem(ModItems.WYVERN_STINGER);
 
+        addItem(ModItems.STEEL_HELMET);
+        addItem(ModItems.STEEL_CHESTPLATE);
+        addItem(ModItems.STEEL_LEGGINGS);
+        addItem(ModItems.STEEL_BOOTS);
+
+        addItem(ModItems.ELVEN_BRASS_HELMET);
+        addItem(ModItems.ELVEN_BRASS_CHESTPLATE);
+        addItem(ModItems.ELVEN_BRASS_LEGGINGS);
+        addItem(ModItems.ELVEN_BRASS_BOOTS);
+
+        addItem(ModItems.MITHRIL_HELMET);
+        addItem(ModItems.MITHRIL_CHESTPLATE);
+        addItem(ModItems.MITHRIL_LEGGINGS);
+        addItem(ModItems.MITHRIL_BOOTS);
+
+        addItem(ModItems.DRAGONBONE_HELMET);
+        addItem(ModItems.DRAGONBONE_CHESTPLATE);
+        addItem(ModItems.DRAGONBONE_LEGGINGS);
+        addItem(ModItems.DRAGONBONE_BOOTS);
+
+
         addAllTools();
         addAllSlabsStairsWalls();
 

@@ -2,6 +2,7 @@ package com.prohitman.dragonsdungeons.core.init;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.common.items.ModItemTiers;
+import com.prohitman.dragonsdungeons.common.items.armor.*;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -32,6 +33,39 @@ public class ModItems {
     public static final RegistryObject<Item> WYVERN_STINGER = ITEMS.register("wyvern_stinger", () -> new Item(new Item.Properties()));
 
     public static final RegistryObject<Item> WARG_SPAWN_EGG = ITEMS.register("warg_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.WARG, 0x9F9A96, 0xB0AAA7, new Item.Properties()));
+
+    public static final RegistryObject<Item> STEEL_HELMET = ITEMS.register("steel_helmet", () -> new
+            SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_CHESTPLATE = ITEMS.register("steel_chestplate", () -> new
+            SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_LEGGINGS = ITEMS.register("steel_leggings", () -> new
+            SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> STEEL_BOOTS = ITEMS.register("steel_boots", () -> new
+            SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<Item> ELVEN_BRASS_HELMET = ITEMS.register("elven_brass_helmet", () -> new
+            ElvenArmorItem(ModArmorMaterials.ELVEN_BRASS, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> ELVEN_BRASS_CHESTPLATE = ITEMS.register("elven_brass_chestplate", () -> new
+            ElvenArmorItem(ModArmorMaterials.ELVEN_BRASS, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> ELVEN_BRASS_LEGGINGS = ITEMS.register("elven_brass_leggings", () -> new
+            ElvenArmorItem(ModArmorMaterials.ELVEN_BRASS, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> ELVEN_BRASS_BOOTS = ITEMS.register("elven_brass_boots", () -> new
+            ElvenArmorItem(ModArmorMaterials.ELVEN_BRASS, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<Item> MITHRIL_HELMET = ITEMS.register("mithril_helmet", () -> new
+            MithrilArmorItem(ModArmorMaterials.MITHRIL, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> MITHRIL_CHESTPLATE = ITEMS.register("mithril_chestplate", () -> new
+            MithrilArmorItem(ModArmorMaterials.MITHRIL, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> MITHRIL_LEGGINGS = ITEMS.register("mithril_leggings", () -> new
+            MithrilArmorItem(ModArmorMaterials.MITHRIL, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> MITHRIL_BOOTS = ITEMS.register("mithril_boots", () -> new
+            MithrilArmorItem(ModArmorMaterials.MITHRIL, ArmorItem.Type.BOOTS, new Item.Properties()));
+    public static final RegistryObject<Item> DRAGONBONE_HELMET = ITEMS.register("dragonbone_helmet", () -> new
+            DragonPlateArmorItem(ModArmorMaterials.DRAGONBONE, ArmorItem.Type.HELMET, new Item.Properties()));
+    public static final RegistryObject<Item> DRAGONBONE_CHESTPLATE = ITEMS.register("dragonbone_chestplate", () -> new
+            DragonPlateArmorItem(ModArmorMaterials.DRAGONBONE, ArmorItem.Type.CHESTPLATE, new Item.Properties()));
+    public static final RegistryObject<Item> DRAGONBONE_LEGGINGS = ITEMS.register("dragonbone_leggings", () -> new
+            DragonPlateArmorItem(ModArmorMaterials.DRAGONBONE, ArmorItem.Type.LEGGINGS, new Item.Properties()));
+    public static final RegistryObject<Item> DRAGONBONE_BOOTS = ITEMS.register("dragonbone_boots", () -> new
+            DragonPlateArmorItem(ModArmorMaterials.DRAGONBONE, ArmorItem.Type.BOOTS, new Item.Properties()));
 
     public static <T extends Item> RegistryObject<Item> createRegistryWithToolSet(String name, Supplier<T> item, Tier tier) {
         RegistryObject<Item> object = ITEMS.register(name, item);

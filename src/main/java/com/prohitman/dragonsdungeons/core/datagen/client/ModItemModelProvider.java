@@ -35,6 +35,27 @@ public class ModItemModelProvider extends ItemModelProvider {
         createSingleWithToolset(ModItems.ELVEN_BRASS_INGOT);
         createSingle(ModItems.OLDFORGED_INGOT);
 
+        //Armors
+        createSingle(ModItems.STEEL_HELMET);
+        createSingle(ModItems.STEEL_CHESTPLATE);
+        createSingle(ModItems.STEEL_LEGGINGS);
+        createSingle(ModItems.STEEL_BOOTS);
+
+        createSingle(ModItems.ELVEN_BRASS_HELMET);
+        createSingle(ModItems.ELVEN_BRASS_CHESTPLATE);
+        createSingle(ModItems.ELVEN_BRASS_LEGGINGS);
+        createSingle(ModItems.ELVEN_BRASS_BOOTS);
+
+        createSingle(ModItems.MITHRIL_HELMET);
+        createSingle(ModItems.MITHRIL_CHESTPLATE);
+        createSingle(ModItems.MITHRIL_LEGGINGS);
+        createSingle(ModItems.MITHRIL_BOOTS);
+
+        createSingle(ModItems.DRAGONBONE_HELMET);
+        createSingle(ModItems.DRAGONBONE_CHESTPLATE);
+        createSingle(ModItems.DRAGONBONE_LEGGINGS);
+        createSingle(ModItems.DRAGONBONE_BOOTS);
+
         createSingle(ModItems.GOLD_COINS);
         createSingle(ModItems.RAW_ADAMANTITE);
         createSingle(ModItems.BLANK_OBELISK);
