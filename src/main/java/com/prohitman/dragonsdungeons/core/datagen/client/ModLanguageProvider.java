@@ -27,6 +27,8 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.GOLD_COINS);
         addItem(ModItems.RAW_ADAMANTITE);
 
+        addItem(ModItems.WARG_SPAWN_EGG);
+
         addItem(ModItems.ELVEN_BRASS_INGOT);
         addItem(ModItems.DWARVEN_STEEL_INGOT);
         addItem(ModItems.STEEL_INGOT);

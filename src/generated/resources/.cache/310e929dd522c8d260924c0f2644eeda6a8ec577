@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-13T04:16:21.1734742	Item Models: dragonsdungeons
+// 1.20.1	2024-04-18T21:46:55.1220868	Item Models: dragonsdungeons
 7eb1579ce426cbb65c592b03938f8bf1bb003faf assets/dragonsdungeons/models/item/adamantite_ore.json
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
@@ -185,4 +185,5 @@ ad2dfcf20e154c0a83966898250539cc64c4d0e4 assets/dragonsdungeons/models/item/ston
 12cb7f1cd98f9aab2d2d5d19f0d8f123afede8b2 assets/dragonsdungeons/models/item/thatch_roof.json
 3b1afac6199b1463a1abd5fc51028066496fbe68 assets/dragonsdungeons/models/item/treasure_chest.json
 e4b57c8b1def2c0f14d1219cd6a5f78893723c22 assets/dragonsdungeons/models/item/urn.json
+63ec6c618a3a23eab4cab9c52d7d3250de9b516e assets/dragonsdungeons/models/item/warg_spawn_egg.json
 b02c88a9c4efcefbd17d799392f9655bbb7890ba assets/dragonsdungeons/models/item/wyvern_stinger.json

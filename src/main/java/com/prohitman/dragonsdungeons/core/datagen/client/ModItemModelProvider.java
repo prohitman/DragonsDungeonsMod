@@ -40,6 +40,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         createSingle(ModItems.BLANK_OBELISK);
         createSingle(ModItems.WYVERN_STINGER);
 
+        withExistingParent(ModItems.WARG_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+
         //Other Blocks
         createParent(ModBlocks.SHINGLES);
         createParent(ModBlocks.RUINED_SHINGLES);

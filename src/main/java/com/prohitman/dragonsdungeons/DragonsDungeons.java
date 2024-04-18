@@ -50,6 +50,7 @@ public class DragonsDungeons
         ModBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModMenuTypes.MENUS.register(modEventBus);
         ModParticleTypes.PARTICLES.register(modEventBus);
+        ModEntities.ENTITY_TYPES.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
