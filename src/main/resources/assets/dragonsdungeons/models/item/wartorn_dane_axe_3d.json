@@ -1,0 +1,133 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "dragonsdungeons:item/wartorn_dane_axe_3d",
+		"particle": "dragonsdungeons:item/wartorn_dane_axe_3d"
+	},
+	"elements": [
+		{
+			"from": [7, -6, 7],
+			"to": [9, 20, 9],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 7.25, 8]},
+			"faces": {
+				"north": {"uv": [1, 3, 0, 16], "texture": "#0"},
+				"east": {"uv": [0, 3, 1, 16], "texture": "#0"},
+				"south": {"uv": [1, 3, 0, 16], "texture": "#0"},
+				"west": {"uv": [0, 3, 1, 16], "texture": "#0"},
+				"up": {"uv": [0, 2, 1, 3], "texture": "#0"},
+				"down": {"uv": [0, 2, 1, 3], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 16, 5],
+			"to": [8.5, 20, 7],
+			"faces": {
+				"north": {"uv": [1.5, 3.5, 2, 5.5], "texture": "#0"},
+				"east": {"uv": [1, 3.5, 2, 5.5], "texture": "#0"},
+				"south": {"uv": [1, 3.5, 1.5, 5.5], "texture": "#0"},
+				"west": {"uv": [2, 3.5, 1, 5.5], "texture": "#0"},
+				"up": {"uv": [1, 11, 1.5, 12], "texture": "#0"},
+				"down": {"uv": [1, 12, 1.5, 13], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 12, 2],
+			"to": [8.5, 21, 5],
+			"faces": {
+				"north": {"uv": [3, 3, 3.5, 7.5], "texture": "#0"},
+				"east": {"uv": [2, 3, 3.5, 7.5], "texture": "#0"},
+				"south": {"uv": [2, 3, 2.5, 7.5], "texture": "#0"},
+				"west": {"uv": [3.5, 3, 2, 7.5], "texture": "#0"},
+				"up": {"uv": [1, 2, 1.5, 3.5], "texture": "#0"},
+				"down": {"uv": [1.5, 2, 2, 3.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 10, 3],
+			"to": [8.5, 12, 5],
+			"faces": {
+				"north": {"uv": [2.5, 7.5, 3, 8.5], "texture": "#0"},
+				"east": {"uv": [2, 7.5, 3, 8.5], "texture": "#0"},
+				"south": {"uv": [2, 7.5, 2.5, 8.5], "texture": "#0"},
+				"west": {"uv": [3, 7.5, 2, 8.5], "texture": "#0"},
+				"up": {"uv": [0, 0, 0.5, 1], "texture": "#0"},
+				"down": {"uv": [0, 1, 0.5, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6.5, 17.75, 6.5],
+			"to": [9.5, 19.75, 9.5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 7.25, 8]},
+			"faces": {
+				"north": {"uv": [2.5, 15, 1, 16], "texture": "#0"},
+				"east": {"uv": [1, 15, 2.5, 16], "texture": "#0"},
+				"south": {"uv": [2.5, 15, 1, 16], "texture": "#0"},
+				"west": {"uv": [1, 15, 2.5, 16], "texture": "#0"},
+				"up": {"uv": [7.5, 1.5, 9, 3], "texture": "#0"},
+				"down": {"uv": [10, 0, 11.5, 1.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6.5, 13.75, 6.5],
+			"to": [9.5, 15.75, 9.5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 7.25, 8]},
+			"faces": {
+				"north": {"uv": [2.5, 15, 1, 16], "texture": "#0"},
+				"east": {"uv": [1, 15, 2.5, 16], "texture": "#0"},
+				"south": {"uv": [2.5, 15, 1, 16], "texture": "#0"},
+				"west": {"uv": [1, 15, 2.5, 16], "texture": "#0"},
+				"up": {"uv": [7.5, 1.5, 9, 3], "texture": "#0"},
+				"down": {"uv": [10, 0, 11.5, 1.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [6.5, -5.25, 6.5],
+			"to": [9.5, -3.25, 9.5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8, 7.25, 8]},
+			"faces": {
+				"north": {"uv": [2.5, 15, 1, 16], "texture": "#0"},
+				"east": {"uv": [1, 15, 2.5, 16], "texture": "#0"},
+				"south": {"uv": [2.5, 15, 1, 16], "texture": "#0"},
+				"west": {"uv": [1, 15, 2.5, 16], "texture": "#0"},
+				"up": {"uv": [7.5, 1.5, 9, 3], "texture": "#0"},
+				"down": {"uv": [10, 0, 11.5, 1.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7.5, 17.25, 8.5],
+			"to": [8.5, 20.25, 11.5],
+			"rotation": {"angle": 45, "axis": "x", "origin": [8, 18.25, 9.5]},
+			"faces": {
+				"north": {"uv": [1.5, 1.5, 2, 3], "texture": "#0"},
+				"east": {"uv": [3.5, 1.5, 5, 3], "texture": "#0"},
+				"south": {"uv": [2, 0, 2.5, 1.5], "texture": "#0"},
+				"west": {"uv": [3.5, 3, 5, 4.5], "texture": "#0"},
+				"up": {"uv": [2, 1.5, 2.5, 3], "texture": "#0"},
+				"down": {"uv": [1.5, 0, 2, 1.5], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 3.5, 0.5]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 3.5, 0.5]
+		},
+		"firstperson_righthand": {
+			"translation": [2.5, 0, 0]
+		},
+		"firstperson_lefthand": {
+			"translation": [2.5, 0, 0]
+		}
+	},
+	"groups": [
+		{
+			"name": "group",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7]
+		}
+	]
+}

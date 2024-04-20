@@ -1,0 +1,327 @@
+{
+	"credit": "Made with Blockbench",
+	"textures": {
+		"0": "dragonsdungeons:item/draugr_axe_3d",
+		"particle": "dragonsdungeons:item/draugr_axe_3d"
+	},
+	"elements": [
+		{
+			"name": "draugr_axe_0",
+			"from": [7.55, -3.7, 11.6],
+			"to": [8.45, 2.6, 13.4],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [4, 6, 4.5, 9.5], "texture": "#0"},
+				"east": {"uv": [5, 6, 4, 9.5], "texture": "#0"},
+				"south": {"uv": [4.5, 6, 5, 9.5], "texture": "#0"},
+				"west": {"uv": [4, 6, 5, 9.5], "texture": "#0"},
+				"up": {"uv": [4, 6, 5, 6.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [4, 9, 5, 9.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_1",
+			"from": [7.55, -6.4, 10.7],
+			"to": [8.45, 1.7, 11.6],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [3.5, 6.5, 4, 11], "texture": "#0"},
+				"east": {"uv": [4, 6.5, 3.5, 11], "texture": "#0"},
+				"south": {"uv": [3.5, 6.5, 4, 11], "texture": "#0"},
+				"west": {"uv": [3.5, 6.5, 4, 11], "texture": "#0"},
+				"up": {"uv": [3.5, 6.5, 4, 7], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [3.5, 10.5, 4, 11], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_2",
+			"from": [7.55, -3.7, 13.4],
+			"to": [8.45, 1.7, 14.3],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [5, 6.5, 5.5, 9.5], "texture": "#0"},
+				"east": {"uv": [5.5, 6.5, 5, 9.5], "texture": "#0"},
+				"south": {"uv": [5, 6.5, 5.5, 9.5], "texture": "#0"},
+				"west": {"uv": [5, 6.5, 5.5, 9.5], "texture": "#0"},
+				"up": {"uv": [5, 6.5, 5.5, 7], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [5, 9, 5.5, 9.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_3",
+			"from": [7.55, -6.4, 9.8],
+			"to": [8.45, 0.8, 10.7],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [3, 7, 3.5, 11], "texture": "#0"},
+				"east": {"uv": [3.5, 7, 3, 11], "texture": "#0"},
+				"south": {"uv": [3, 7, 3.5, 11], "texture": "#0"},
+				"west": {"uv": [3, 7, 3.5, 11], "texture": "#0"},
+				"up": {"uv": [3, 7, 3.5, 7.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [3, 10.5, 3.5, 11], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_4",
+			"from": [7.55, -6.4, 14.3],
+			"to": [8.45, 0.8, 15.2],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [5.5, 7, 6, 11], "texture": "#0"},
+				"east": {"uv": [6, 7, 5.5, 11], "texture": "#0"},
+				"south": {"uv": [5.5, 7, 6, 11], "texture": "#0"},
+				"west": {"uv": [5.5, 7, 6, 11], "texture": "#0"},
+				"up": {"uv": [5.5, 7, 6, 7.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [5.5, 10.5, 6, 11], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_5",
+			"from": [7.55, -5.5, 8.9],
+			"to": [8.45, -0.1, 9.8],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [2.5, 7.5, 3, 10.5], "texture": "#0"},
+				"east": {"uv": [3, 7.5, 2.5, 10.5], "texture": "#0"},
+				"south": {"uv": [2.5, 7.5, 3, 10.5], "texture": "#0"},
+				"west": {"uv": [2.5, 7.5, 3, 10.5], "texture": "#0"},
+				"up": {"uv": [2.5, 7.5, 3, 8], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [2.5, 10, 3, 10.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_6",
+			"from": [7.55, -5.5, 15.2],
+			"to": [8.45, -0.1, 16.1],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [6, 7.5, 6.5, 10.5], "texture": "#0"},
+				"east": {"uv": [6.5, 7.5, 6, 10.5], "texture": "#0"},
+				"south": {"uv": [6, 7.5, 6.5, 10.5], "texture": "#0"},
+				"west": {"uv": [6, 7.5, 6.5, 10.5], "texture": "#0"},
+				"up": {"uv": [6, 7.5, 6.5, 8], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [6, 10, 6.5, 10.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_7",
+			"from": [7.55, -4.6, 16.1],
+			"to": [8.45, -1, 18.8],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [6.5, 8, 7, 10], "texture": "#0"},
+				"east": {"uv": [8, 8, 6.5, 10], "texture": "#0"},
+				"south": {"uv": [7.5, 8, 8, 10], "texture": "#0"},
+				"west": {"uv": [6.5, 8, 8, 10], "texture": "#0"},
+				"up": {"uv": [6.5, 8, 8, 8.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [6.5, 9.5, 8, 10], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_8",
+			"from": [7.55, -4.6, 11.6],
+			"to": [8.45, -3.7, 12.5],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [4, 9.5, 4.5, 10], "texture": "#0"},
+				"east": {"uv": [4.5, 9.5, 4, 10], "texture": "#0"},
+				"south": {"uv": [4, 9.5, 4.5, 10], "texture": "#0"},
+				"west": {"uv": [4, 9.5, 4.5, 10], "texture": "#0"},
+				"up": {"uv": [4, 9.5, 4.5, 10], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [4, 9.5, 4.5, 10], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_9",
+			"from": [7.55, -7.3, 13.4],
+			"to": [8.45, -4.6, 14.3],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [5, 10, 5.5, 11.5], "texture": "#0"},
+				"east": {"uv": [5.5, 10, 5, 11.5], "texture": "#0"},
+				"south": {"uv": [5, 10, 5.5, 11.5], "texture": "#0"},
+				"west": {"uv": [5, 10, 5.5, 11.5], "texture": "#0"},
+				"up": {"uv": [5, 10, 5.5, 10.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [5, 11, 5.5, 11.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_10",
+			"from": [7.55, -5.5, 16.1],
+			"to": [8.45, -4.6, 17.9],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [6.5, 10, 7, 10.5], "texture": "#0"},
+				"east": {"uv": [7.5, 10, 6.5, 10.5], "texture": "#0"},
+				"south": {"uv": [7, 10, 7.5, 10.5], "texture": "#0"},
+				"west": {"uv": [6.5, 10, 7.5, 10.5], "texture": "#0"},
+				"up": {"uv": [6.5, 10, 7.5, 10.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [6.5, 10, 7.5, 10.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_11",
+			"from": [7.55, -8.2, 12.5],
+			"to": [8.45, -5.5, 13.4],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [4.5, 10.5, 5, 12], "texture": "#0"},
+				"east": {"uv": [5, 10.5, 4.5, 12], "texture": "#0"},
+				"south": {"uv": [4.5, 10.5, 5, 12], "texture": "#0"},
+				"west": {"uv": [4.5, 10.5, 5, 12], "texture": "#0"},
+				"up": {"uv": [4.5, 10.5, 5, 11], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [4.5, 11.5, 5, 12], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_12",
+			"from": [7.55, -9.1, 11.6],
+			"to": [8.45, -6.4, 12.5],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [4, 11, 4.5, 12.5], "texture": "#0"},
+				"east": {"uv": [4.5, 11, 4, 12.5], "texture": "#0"},
+				"south": {"uv": [4, 11, 4.5, 12.5], "texture": "#0"},
+				"west": {"uv": [4, 11, 4.5, 12.5], "texture": "#0"},
+				"up": {"uv": [4, 11, 4.5, 11.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [4, 12, 4.5, 12.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_13",
+			"from": [7.55, -10, 10.7],
+			"to": [8.45, -7.3, 11.6],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [3.5, 11.5, 4, 13], "texture": "#0"},
+				"east": {"uv": [4, 11.5, 3.5, 13], "texture": "#0"},
+				"south": {"uv": [3.5, 11.5, 4, 13], "texture": "#0"},
+				"west": {"uv": [3.5, 11.5, 4, 13], "texture": "#0"},
+				"up": {"uv": [3.5, 11.5, 4, 12], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [3.5, 12.5, 4, 13], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_14",
+			"from": [7.55, -10.9, 9.8],
+			"to": [8.45, -8.2, 10.7],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [3, 12, 3.5, 13.5], "texture": "#0"},
+				"east": {"uv": [3.5, 12, 3, 13.5], "texture": "#0"},
+				"south": {"uv": [3, 12, 3.5, 13.5], "texture": "#0"},
+				"west": {"uv": [3, 12, 3.5, 13.5], "texture": "#0"},
+				"up": {"uv": [3, 12, 3.5, 12.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [3, 13, 3.5, 13.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_15",
+			"from": [7.55, -11.8, 8.9],
+			"to": [8.45, -9.1, 9.8],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [2.5, 12.5, 3, 14], "texture": "#0"},
+				"east": {"uv": [3, 12.5, 2.5, 14], "texture": "#0"},
+				"south": {"uv": [2.5, 12.5, 3, 14], "texture": "#0"},
+				"west": {"uv": [2.5, 12.5, 3, 14], "texture": "#0"},
+				"up": {"uv": [2.5, 12.5, 3, 13], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [2.5, 13.5, 3, 14], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_16",
+			"from": [7.55, -12.7, 8],
+			"to": [8.45, -10, 8.9],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [2, 13, 2.5, 14.5], "texture": "#0"},
+				"east": {"uv": [2.5, 13, 2, 14.5], "texture": "#0"},
+				"south": {"uv": [2, 13, 2.5, 14.5], "texture": "#0"},
+				"west": {"uv": [2, 13, 2.5, 14.5], "texture": "#0"},
+				"up": {"uv": [2, 13, 2.5, 13.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [2, 14, 2.5, 14.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_17",
+			"from": [7.55, -13.6, 7.1],
+			"to": [8.45, -10.9, 8],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [1.5, 13.5, 2, 15], "texture": "#0"},
+				"east": {"uv": [2, 13.5, 1.5, 15], "texture": "#0"},
+				"south": {"uv": [1.5, 13.5, 2, 15], "texture": "#0"},
+				"west": {"uv": [1.5, 13.5, 2, 15], "texture": "#0"},
+				"up": {"uv": [1.5, 13.5, 2, 14], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [1.5, 14.5, 2, 15], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_18",
+			"from": [7.55, -14.5, 6.2],
+			"to": [8.45, -11.8, 7.1],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [1, 14, 1.5, 15.5], "texture": "#0"},
+				"east": {"uv": [1.5, 14, 1, 15.5], "texture": "#0"},
+				"south": {"uv": [1, 14, 1.5, 15.5], "texture": "#0"},
+				"west": {"uv": [1, 14, 1.5, 15.5], "texture": "#0"},
+				"up": {"uv": [1, 14, 1.5, 14.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [1, 15, 1.5, 15.5], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_19",
+			"from": [7.55, -15.4, 5.3],
+			"to": [8.45, -12.7, 6.2],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [0.5, 14.5, 1, 16], "texture": "#0"},
+				"east": {"uv": [1, 14.5, 0.5, 16], "texture": "#0"},
+				"south": {"uv": [0.5, 14.5, 1, 16], "texture": "#0"},
+				"west": {"uv": [0.5, 14.5, 1, 16], "texture": "#0"},
+				"up": {"uv": [0.5, 14.5, 1, 15], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0.5, 15.5, 1, 16], "rotation": 270, "texture": "#0"}
+			}
+		},
+		{
+			"name": "draugr_axe_20",
+			"from": [7.55, -15.4, 4.4],
+			"to": [8.45, -13.6, 5.3],
+			"rotation": {"angle": -45, "axis": "x", "origin": [-6.4, -6.4, -6.4]},
+			"faces": {
+				"north": {"uv": [0, 15, 0.5, 16], "texture": "#0"},
+				"east": {"uv": [0.5, 15, 0, 16], "texture": "#0"},
+				"south": {"uv": [0, 15, 0.5, 16], "texture": "#0"},
+				"west": {"uv": [0, 15, 0.5, 16], "texture": "#0"},
+				"up": {"uv": [0, 15, 0.5, 15.5], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [0, 15.5, 0.5, 16], "rotation": 270, "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"translation": [0, 5.25, 1]
+		},
+		"thirdperson_lefthand": {
+			"translation": [0, 5.25, 1]
+		},
+		"firstperson_righthand": {
+			"rotation": [-8, 0, 0],
+			"translation": [2.5, 4.25, 1]
+		},
+		"firstperson_lefthand": {
+			"rotation": [-8, 0, 0],
+			"translation": [2.5, 4.25, 1]
+		}
+	},
+	"groups": [
+		{
+			"name": "draugr_axe",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+		}
+	]
+}

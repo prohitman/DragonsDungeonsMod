@@ -29,6 +29,8 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.DRAGON_BONE);
         addItem(ModItems.GOLD_COINS);
         addItem(ModItems.RAW_ADAMANTITE);
+        addItem(ModItems.MAGE_LOOT);
+        addItem(ModItems.LOOT_BAG);
 
         addItem(ModItems.WARG_SPAWN_EGG);
         add( "entity.dragonsdungeons.warg", "Warg");
@@ -63,6 +65,12 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.DRAGONBONE_LEGGINGS);
         addItem(ModItems.DRAGONBONE_BOOTS);
 
+        /*addItem(ModItems.DRAUGR_AXE);
+        addItem(ModItems.WARTORN_DANE_AXE);
+        addItem(ModItems.LANCE);
+        addItem(ModItems.CRYSTAL_CLEAVER);
+        addItem(ModItems.DANE_AXE);*/
+        addItem(ModItems.KITE_SHIELD);
 
         addAllTools();
         addAllSlabsStairsWalls();
