@@ -36,6 +36,10 @@ public class ModItemModelProvider extends ItemModelProvider {
         createSingle(ModItems.OLDFORGED_INGOT);
         createSingle(ModItems.MAGE_LOOT);
         createSingle(ModItems.LOOT_BAG);
+        createSingle(ModItems.BEARDED_AXE);
+        createSingle(ModItems.FLASK_OF_FIRE);
+        createSingle(ModItems.FLASK_OF_ACID);
+
 
         //Armors
         createSingle(ModItems.STEEL_HELMET);

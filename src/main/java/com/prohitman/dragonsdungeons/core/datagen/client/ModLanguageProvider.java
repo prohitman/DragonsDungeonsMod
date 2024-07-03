@@ -31,6 +31,8 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.RAW_ADAMANTITE);
         addItem(ModItems.MAGE_LOOT);
         addItem(ModItems.LOOT_BAG);
+        addItem(ModItems.FLASK_OF_FIRE);
+        addItem(ModItems.FLASK_OF_ACID);
 
         addItem(ModItems.WARG_SPAWN_EGG);
         add( "entity.dragonsdungeons.warg", "Warg");

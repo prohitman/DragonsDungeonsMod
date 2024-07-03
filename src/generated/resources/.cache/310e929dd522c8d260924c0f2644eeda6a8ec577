@@ -1,4 +1,4 @@
-// 1.20.1	2024-04-20T18:38:12.3860987	Item Models: dragonsdungeons
+// 1.20.1	2024-07-03T23:10:29.9907221	Item Models: dragonsdungeons
 7eb1579ce426cbb65c592b03938f8bf1bb003faf assets/dragonsdungeons/models/item/adamantite_ore.json
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
@@ -10,6 +10,7 @@ d3b944a49b6cb844f0f4918415c3ef117349f138 assets/dragonsdungeons/models/item/agin
 21f8d57700008baf640dbb302063652c9364231e assets/dragonsdungeons/models/item/algal_greenschist_bricks_stairs.json
 4bd3106f910e66504b4c627c35fcbff04197a480 assets/dragonsdungeons/models/item/algal_greenschist_bricks_wall.json
 b0085b82fad1b6f86dde7c087374fc1d529d85ab assets/dragonsdungeons/models/item/barrow_stones.json
+690712ab90782955323c72feb5839fdb94a936b9 assets/dragonsdungeons/models/item/bearded_axe.json
 b4ef9f81986db6e3a483e06c60eeb516183d2535 assets/dragonsdungeons/models/item/blank_obelisk.json
 862e787420d0c57756871df3dbb992edaa4e7eb7 assets/dragonsdungeons/models/item/charred_lavarock_bricks.json
 1305849ca8ea497793561a78f13a54b6c0cd0c68 assets/dragonsdungeons/models/item/charred_lavarock_bricks_slab.json
@@ -70,6 +71,8 @@ cf138945459c0c0a01f0ed05985735c771acc25f assets/dragonsdungeons/models/item/elve
 533e0ca81d491595edad9b7e340bce29a4b7607a assets/dragonsdungeons/models/item/elven_brass_pickaxe.json
 859070c196741cd4ae0336361e2c1f682b346e2d assets/dragonsdungeons/models/item/elven_brass_shovel.json
 63281ad93bf5ed80bf3f220f3742c61ce5ebdd82 assets/dragonsdungeons/models/item/elven_brass_sword.json
+3b17742db07c3e700aafb812af01dbffb3a4c9ca assets/dragonsdungeons/models/item/flask_of_acid.json
+8066438aa6ddc9a84cee074ebe57c7cb8d3dfe10 assets/dragonsdungeons/models/item/flask_of_fire.json
 c5c1e93794dcd316a855703b2c363418a3dab03c assets/dragonsdungeons/models/item/forged_bricks.json
 9847d58d9a50742e5d1137fd0298ab627899476c assets/dragonsdungeons/models/item/forged_bricks_slab.json
 2359481f39ffda8f4eed4042440785fc255db87f assets/dragonsdungeons/models/item/forged_bricks_stairs.json

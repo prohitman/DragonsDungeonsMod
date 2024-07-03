@@ -3,6 +3,10 @@ package com.prohitman.dragonsdungeons.core.init;
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.common.items.ModItemTiers;
 import com.prohitman.dragonsdungeons.common.items.armor.*;
+import com.prohitman.dragonsdungeons.common.items.misc.FlaskOfAcid;
+import com.prohitman.dragonsdungeons.common.items.misc.FlaskOfFire;
+import com.prohitman.dragonsdungeons.common.items.misc.LootBag;
+import com.prohitman.dragonsdungeons.common.items.weapons.BeardedAxe;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -31,14 +35,17 @@ public class ModItems {
     public static final RegistryObject<Item> GOLD_COINS = ITEMS.register("gold_coins", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BLANK_OBELISK = ITEMS.register("blank_obelisk", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WYVERN_STINGER = ITEMS.register("wyvern_stinger", () -> new Item(new Item.Properties()));
-    public static final RegistryObject<Item> LOOT_BAG = ITEMS.register("loot_bag", () -> new Item(new Item.Properties().stacksTo(16)));
-    public static final RegistryObject<Item> MAGE_LOOT = ITEMS.register("mage_loot", () -> new Item(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> LOOT_BAG = ITEMS.register("loot_bag", () -> new LootBag(new Item.Properties().stacksTo(16), false));
+    public static final RegistryObject<Item> MAGE_LOOT = ITEMS.register("mage_loot", () -> new LootBag(new Item.Properties().stacksTo(16), true));
+    public static final RegistryObject<Item> FLASK_OF_FIRE = ITEMS.register("flask_of_fire", () -> new FlaskOfFire(new Item.Properties().stacksTo(8)));
+    public static final RegistryObject<Item> FLASK_OF_ACID = ITEMS.register("flask_of_acid", () -> new FlaskOfAcid(new Item.Properties().stacksTo(8)));
 
     public static final RegistryObject<Item> LANCE = ITEMS.register("lance", () -> new SwordItem(Tiers.IRON, 6, -2.4f, new Item.Properties()));
     public static final RegistryObject<Item> CRYSTAL_CLEAVER = ITEMS.register("crystal_cleaver", () -> new SwordItem(Tiers.IRON, 6, -2.2f, new Item.Properties()));
     public static final RegistryObject<Item> DRAUGR_AXE = ITEMS.register("draugr_axe", () -> new AxeItem(ModItemTiers.STEEL, 7, -3.1f, new Item.Properties()));
     public static final RegistryObject<Item> DANE_AXE = ITEMS.register("dane_axe", () -> new AxeItem(ModItemTiers.STEEL, 6, -3.2f, new Item.Properties()));
     public static final RegistryObject<Item> WARTORN_DANE_AXE = ITEMS.register("wartorn_dane_axe", () -> new AxeItem(ModItemTiers.STEEL, 7, -3.4f, new Item.Properties()));
+    public static final RegistryObject<Item> BEARDED_AXE = ITEMS.register("bearded_axe", () -> new BeardedAxe(ModItemTiers.STEEL, 6, -3.1F, new Item.Properties()));
 
     public static final RegistryObject<Item> KITE_SHIELD = ITEMS.register("kite_shield", () -> new ShieldItem(new Item.Properties().durability(500)));
 
