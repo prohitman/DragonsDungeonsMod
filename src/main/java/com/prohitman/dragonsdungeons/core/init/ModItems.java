@@ -7,6 +7,7 @@ import com.prohitman.dragonsdungeons.common.items.misc.FlaskOfAcid;
 import com.prohitman.dragonsdungeons.common.items.misc.FlaskOfFire;
 import com.prohitman.dragonsdungeons.common.items.misc.LootBag;
 import com.prohitman.dragonsdungeons.common.items.weapons.BeardedAxe;
+import com.prohitman.dragonsdungeons.common.items.weapons.ReachSword;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -40,7 +41,7 @@ public class ModItems {
     public static final RegistryObject<Item> FLASK_OF_FIRE = ITEMS.register("flask_of_fire", () -> new FlaskOfFire(new Item.Properties().stacksTo(8)));
     public static final RegistryObject<Item> FLASK_OF_ACID = ITEMS.register("flask_of_acid", () -> new FlaskOfAcid(new Item.Properties().stacksTo(8)));
 
-    public static final RegistryObject<Item> LANCE = ITEMS.register("lance", () -> new SwordItem(Tiers.IRON, 6, -2.4f, new Item.Properties()));
+    public static final RegistryObject<Item> LANCE = ITEMS.register("lance", () -> new ReachSword(Tiers.IRON, 6, -2.4f, 10, new Item.Properties()));
     public static final RegistryObject<Item> CRYSTAL_CLEAVER = ITEMS.register("crystal_cleaver", () -> new SwordItem(Tiers.IRON, 6, -2.2f, new Item.Properties()));
     public static final RegistryObject<Item> DRAUGR_AXE = ITEMS.register("draugr_axe", () -> new AxeItem(ModItemTiers.STEEL, 7, -3.1f, new Item.Properties()));
     public static final RegistryObject<Item> DANE_AXE = ITEMS.register("dane_axe", () -> new AxeItem(ModItemTiers.STEEL, 6, -3.2f, new Item.Properties()));
