@@ -1,6 +1,8 @@
 package com.prohitman.dragonsdungeons.common.entities;
 
+import com.prohitman.dragonsdungeons.common.entities.goals.EmblemscuteFollowMonsterGoal;
 import com.prohitman.dragonsdungeons.common.entities.goals.EmblemscuteHidingGoal;
+import net.minecraft.client.renderer.entity.EndermanRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -17,10 +19,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FollowMobGoal;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.animal.PolarBear;
+import net.minecraft.world.entity.animal.camel.Camel;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
+import net.minecraft.world.phys.AABB;
+import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -74,6 +82,7 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
 
     public EmblemscuteEntity(EntityType<? extends PathfinderMob> mob, Level level) {
         super(mob, level);
+        this.setMaxUpStep(1);
         this.goalSelector.addGoal(8, this.look_player_goal);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
     }
@@ -81,16 +90,16 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
     @Override
     protected void registerGoals() {
         super.registerGoals();
-        this.goalSelector.addGoal(0, new EmblemscuteWanderGoal(this, 1.0D, 5));
+        this.goalSelector.addGoal(0, new EmblemscuteWanderGoal(this, 0.5D, 5));
         //this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
         //this.goalSelector.addGoal(8, this.look_player_goal);
-        this.goalSelector.addGoal(8, new FollowMobGoal(this, 1.5, 10, 15));
+        this.goalSelector.addGoal(3, new EmblemscuteFollowMonsterGoal(this, 1.5, 5, 15));
         this.goalSelector.addGoal(8, new EmblemscuteHidingGoal(this));
     }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 40.0D)
+                .add(Attributes.MAX_HEALTH, 45.0D)
                 .add(Attributes.FOLLOW_RANGE, 40)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.KNOCKBACK_RESISTANCE, 10)
@@ -150,6 +159,7 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
             //this.setDeltaMovement(Vec3.ZERO);
             this.setAnimation(ANIMATION_HIDE);
             this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 1, 2));
+            //this.setBoundingBox(this.getBoundingBox().);
         }else{
             if (hidinganimationTimer > 0) {
                 hidinganimationTimer--;
@@ -237,8 +247,6 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
 
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
-        //controllers.add(new AnimationController<>(this, "Walk/Run/Idle", 3, this::walkAnimController));
-        //controllers.add(new AnimationController<>(this, "Shoot", 1, this::shootAnimController));
         controllers.add(new AnimationController(this, "controller", 10, this::walkAnimController));
 
     }

@@ -23,7 +23,7 @@ public class ModEntities {
 
     public static final RegistryObject<EntityType<EmblemscuteEntity>> EMBLEMSCUTE = ENTITY_TYPES.register(
             "emblemscute",
-            () -> EntityType.Builder.<EmblemscuteEntity>of(EmblemscuteEntity::new, MobCategory.AMBIENT)
+            () -> EntityType.Builder.of(EmblemscuteEntity::new, MobCategory.AMBIENT)
                     .sized(1.25F, 1.25F)
                     .clientTrackingRange(8)
                     .setShouldReceiveVelocityUpdates(false)

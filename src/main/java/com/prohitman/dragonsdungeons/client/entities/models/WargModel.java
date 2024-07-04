@@ -34,8 +34,15 @@ public class WargModel extends GeoModel<WargEntity> {
         if (head != null) {
             EntityModelData entityData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
-            head.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
-            head.setRotY(entityData.netHeadYaw() * Mth.DEG_TO_RAD);
+            if(animatable.isInSittingPose()){
+                head.setRotX((entityData.headPitch() - 45) * Mth.DEG_TO_RAD);
+                head.setRotY((entityData.netHeadYaw()) * Mth.DEG_TO_RAD);
+            } else{
+                head.setRotX(entityData.headPitch() * Mth.DEG_TO_RAD);
+                head.setRotY(entityData.netHeadYaw() * Mth.DEG_TO_RAD);
+            }
+
         }
     }
 }
+

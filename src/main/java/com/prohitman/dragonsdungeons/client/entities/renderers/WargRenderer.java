@@ -4,6 +4,8 @@ import com.google.common.collect.Maps;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.client.entities.models.WargModel;
+import com.prohitman.dragonsdungeons.client.entities.renderers.layers.GlowingLayer;
+import com.prohitman.dragonsdungeons.client.entities.renderers.layers.WargGlowLayer;
 import com.prohitman.dragonsdungeons.common.entities.WargEntity;
 import com.prohitman.dragonsdungeons.common.entities.variant.WargVariant;
 import net.minecraft.Util;
@@ -12,6 +14,9 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 public class WargRenderer extends GeoEntityRenderer<WargEntity> {
@@ -42,6 +47,9 @@ public class WargRenderer extends GeoEntityRenderer<WargEntity> {
 
     public WargRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new WargModel());
+
+        this.shadowRadius = 0.8F;
+        this.addRenderLayer(new WargGlowLayer(this));
     }
 
     @Override
