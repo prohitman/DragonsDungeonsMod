@@ -1,5 +1,6 @@
 package com.prohitman.dragonsdungeons.common.entities;
 
+import com.prohitman.dragonsdungeons.common.entities.goals.AnimatedMeleeAttackGoal;
 import com.prohitman.dragonsdungeons.common.entities.variant.WargVariant;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
 import net.minecraft.Util;
@@ -48,13 +49,14 @@ import software.bernie.geckolib.core.object.PlayState;
 
 import java.util.function.Predicate;
 
-public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideable {
+public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideable, IAttacking {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     protected static final RawAnimation WALK_ANIM = RawAnimation.begin().thenLoop("animation.warg.walk");
     protected static final RawAnimation RUN_ANIM = RawAnimation.begin().thenLoop("animation.warg.run");
     protected static final RawAnimation SIT_ANIM = RawAnimation.begin().thenLoop("animation.warg.sit");
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("animation.warg.idle");
+    protected static final RawAnimation ATTACK_ANIM = RawAnimation.begin().thenLoop("animation.warg.attack");
 
     private static final EntityDataAccessor<Integer> DATA_ID_TYPE_VARIANT =
             SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.INT);
@@ -65,6 +67,10 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         EntityType<?> entitytype = p_289448_.getType();
         return entitytype != ModEntities.WARG.get();
     };
+
+    public int attackAnimationTimeout = 0;
+    public boolean shouldStartAnim = false;
+
     public WargEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setMaxUpStep(1f);
@@ -79,6 +85,12 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public void setAttacking(boolean attacking) {
         this.entityData.set(IS_ATTACKING, attacking);
     }
+
+    @Override
+    public void setAttackAnimationTimeOut(int attackAnimTimeOut) {
+        this.attackAnimationTimeout = attackAnimTimeOut;
+    }
+
     public boolean isAttacking() {
         return this.entityData.get(IS_ATTACKING);
     }
@@ -89,7 +101,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.FOLLOW_RANGE, 24D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.1f)
-                .add(Attributes.ATTACK_DAMAGE, 4f)
+                .add(Attributes.ATTACK_DAMAGE, 5f)
                 .add(Attributes.ATTACK_KNOCKBACK, 0.5f);
     }
     public void setTame(boolean pTamed) {
@@ -101,13 +113,13 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
             this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(35.0);
         }
 
-        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(5.0);
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(7.0);
     }
 
     @Override
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new MeleeAttackGoal(this, 2, false));
+        this.goalSelector.addGoal(1, new AnimatedMeleeAttackGoal<>(this, 2.4D, true, 5, 10, 0.25));
 
         this.goalSelector.addGoal(0, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1.0, 22, 11f, false));
@@ -121,9 +133,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 4f));
 
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, Player.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolem.class, true));
+        this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, Player.class, true, null));
+        this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, AbstractVillager.class, true, null));
+        this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, IronGolem.class, true, null));
 
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
@@ -143,36 +155,34 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
 
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 4, this::predicate));
-        controllers.add(new AnimationController<>(this, "attackcontroller", 0, this::attackPredicate));
+        controllers.add(new AnimationController<>(this, "controller", 3, this::predicate));
+        //controllers.add(new AnimationController<>(this, "attackcontroller", 2, this::attackPredicate));
     }
 
     private PlayState attackPredicate(AnimationState state) {
-        if(this.swinging && state.getController().getAnimationState().equals(AnimationController.State.STOPPED)) {
-            state.getController().forceAnimationReset();
-            state.getController().setAnimation(RawAnimation.begin().then("animation.warg.attack", Animation.LoopType.PLAY_ONCE));
-            this.swinging = false;
+        if(shouldStartAnim) {
+            //state.getController().forceAnimationReset();
+            state.getController().setAnimation(ATTACK_ANIM);
         }
 
-        return PlayState.CONTINUE;
+        return PlayState.STOP;
     }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        if(this.isInSittingPose()){
-            state.getController().setAnimation(SIT_ANIM);
-            return PlayState.CONTINUE;
+        if(shouldStartAnim){
+            return state.setAndContinue(ATTACK_ANIM);
+        }
+        else if(this.isInSittingPose()){
+            return state.setAndContinue(SIT_ANIM);
         }
         else if(this.isRunning() && state.isMoving()){
-            state.getController().setAnimation(RUN_ANIM);
-            return PlayState.CONTINUE;
+            return state.setAndContinue(RUN_ANIM);
         }
         else if (state.isMoving()) {
-            state.getController().setAnimation(WALK_ANIM);
-            return PlayState.CONTINUE;
+            return state.setAndContinue(WALK_ANIM);
         }
 
-        state.getController().setAnimation(IDLE_ANIM);
-        return PlayState.CONTINUE;
+        return state.setAndContinue(IDLE_ANIM);
     }
 
     @Override
@@ -188,13 +198,29 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.entityData.define(IS_ATTACKING, false);
     }
 
+    /* Attacking */
+
     @Override
     public void tick() {
         super.tick();
 
         if(!this.level().isClientSide){
             this.setIsRunning(this.moveControl.getSpeedModifier() > 1);
-            System.out.println(this.getSpeed() + "IS Running:" + this.isRunning());
+        } else {
+            this.setupAttackAnimation();
+        }
+    }
+
+    private void setupAttackAnimation() {
+        if(this.isAttacking() && attackAnimationTimeout <= 0) {
+            attackAnimationTimeout = 10; // Duration of the attack animation in Ticks.
+            shouldStartAnim = true;
+        } else {
+            --this.attackAnimationTimeout;
+        }
+
+        if(!this.isAttacking()) {
+            shouldStartAnim = false;
         }
     }
 
