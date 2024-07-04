@@ -1,6 +1,7 @@
 package com.prohitman.dragonsdungeons.client.events;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
+import com.prohitman.dragonsdungeons.client.entities.renderers.EmblemscuteRenderer;
 import com.prohitman.dragonsdungeons.client.entities.renderers.WargRenderer;
 import com.prohitman.dragonsdungeons.client.screen.FoundryScreen;
 import com.prohitman.dragonsdungeons.client.screen.ModMenuTypes;
@@ -22,6 +23,8 @@ public class ClientModEvents {
     {
         event.enqueueWork(() -> {
             EntityRenderers.register(ModEntities.WARG.get(), WargRenderer::new);
+            EntityRenderers.register(ModEntities.EMBLEMSCUTE.get(), EmblemscuteRenderer::new);
+
             EntityRenderers.register(ModEntities.FLASK_OF_FIRE_PROJECTILE.get(), ThrownItemRenderer::new);
             EntityRenderers.register(ModEntities.FLASK_OF_ACID_PROJECTILE.get(), ThrownItemRenderer::new);
 
