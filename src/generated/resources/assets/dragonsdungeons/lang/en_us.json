@@ -154,6 +154,7 @@
   "effect.dragonsdungeons.intoxicated": "Intoxicated",
   "entity.dragonsdungeons.emblemscute": "Emblemscute",
   "entity.dragonsdungeons.warg": "Warg",
+  "entity.dragonsdungeons.zarg": "Zarg",
   "item.dragonsdungeons.bearded_axe": "Bearded Axe",
   "item.dragonsdungeons.blank_obelisk": "Blank Obelisk",
   "item.dragonsdungeons.crystal_cleaver": "Crystal Cleaver",
@@ -218,5 +219,6 @@
   "item.dragonsdungeons.warg_spawn_egg": "Warg Spawn Egg",
   "item.dragonsdungeons.wartorn_dane_axe": "Wartorn Dane Axe",
   "item.dragonsdungeons.wyvern_stinger": "Wyvern Stinger",
+  "item.dragonsdungeons.zarg_spawn_egg": "Zarg Spawn Egg",
   "itemGroup.dragonsdungeons": "Dragons & Dungeons Mod"
 }

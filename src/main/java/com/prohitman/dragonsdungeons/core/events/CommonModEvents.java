@@ -3,6 +3,7 @@ package com.prohitman.dragonsdungeons.core.events;
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.common.entities.EmblemscuteEntity;
 import com.prohitman.dragonsdungeons.common.entities.WargEntity;
+import com.prohitman.dragonsdungeons.common.entities.ZargEntity;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -14,6 +15,7 @@ public class CommonModEvents {
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(ModEntities.WARG.get(), WargEntity.createAttributes().build());
+        event.put(ModEntities.ZARG.get(), ZargEntity.createAttributes().build());
         event.put(ModEntities.EMBLEMSCUTE.get(), EmblemscuteEntity.createAttributes().build());
     }
 }

@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-05T15:17:04.2665891	Tags for minecraft:worldgen/biome mod id dragonsdungeons
+// 1.20.1	2024-07-05T16:14:12.0002282	Tags for minecraft:worldgen/biome mod id dragonsdungeons
 ba88e23e2234b0ec008692a68db03a13bb92b548 data/dragonsdungeons/tags/worldgen/biome/ashen_warg_spawns.json
 34221cf2084477b59843b281cf1b1519bbf50e89 data/dragonsdungeons/tags/worldgen/biome/black_warg_spawns.json
 6058b6dfa7b36e34bf6b02b94306bbdf8b334214 data/dragonsdungeons/tags/worldgen/biome/chestnut_warg_spawns.json
@@ -7,4 +7,5 @@ eac36e45c24e9f2ff3c1f50ad2ea4fc921892916 data/dragonsdungeons/tags/worldgen/biom
 dba74becb77ca28a612e57b564076517380f9820 data/dragonsdungeons/tags/worldgen/biome/snowy_warg_spawns.json
 123a8c4cf362352d397dc85738c4e8bb2ef2dc40 data/dragonsdungeons/tags/worldgen/biome/spotted_warg_spawns.json
 31057a3667315c474cf326986dca1c87e71d2365 data/dragonsdungeons/tags/worldgen/biome/striped_warg_spawns.json
+f9a43bdb89e5ae845792a5a20fbce5dcd3b2c9fe data/dragonsdungeons/tags/worldgen/biome/warg_spawns.json
 3a8d281584c0df02db2de45b5148feea3cc913a8 data/dragonsdungeons/tags/worldgen/biome/wood_warg_spawns.json

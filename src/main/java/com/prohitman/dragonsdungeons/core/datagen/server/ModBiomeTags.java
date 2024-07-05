@@ -25,6 +25,7 @@ public class ModBiomeTags extends BiomeTagsProvider {
     public static final TagKey<Biome> ASHEN_WARG_SPAWNS = createTag("ashen_warg_spawns");
     public static final TagKey<Biome> RUSTY_WARG_SPAWNS = createTag("rusty_warg_spawns");
     public static final TagKey<Biome> WOOD_WARG_SPAWNS = createTag("wood_warg_spawns");
+    public static final TagKey<Biome> WARG_SPAWNS = createTag("warg_spawns");
 
 
     public ModBiomeTags(PackOutput pOutput, CompletableFuture<HolderLookup.Provider> pProvider, @Nullable ExistingFileHelper existingFileHelper) {
@@ -42,6 +43,16 @@ public class ModBiomeTags extends BiomeTagsProvider {
         tag(ASHEN_WARG_SPAWNS).add(Biomes.SNOWY_TAIGA);
         tag(RUSTY_WARG_SPAWNS).add(Biomes.SPARSE_JUNGLE);
         tag(WOOD_WARG_SPAWNS).add(Biomes.FOREST);
+
+        tag(WARG_SPAWNS).addTags(SPOTTED_WARG_SPAWNS)
+                        .addTags(PALE_WARG_SPAWNS)
+                        .addTags(SNOWY_WARG_SPAWNS)
+                        .addTags(BLACK_WARG_SPAWNS)
+                        .addTags(CHESTNUT_WARG_SPAWNS)
+                        .addTags(STRIPED_WARG_SPAWNS)
+                        .addTags(ASHEN_WARG_SPAWNS)
+                        .addTags(WOOD_WARG_SPAWNS)
+                        .addTags(RUSTY_WARG_SPAWNS);
     }
 
     private static TagKey<Biome> createTag(String name)

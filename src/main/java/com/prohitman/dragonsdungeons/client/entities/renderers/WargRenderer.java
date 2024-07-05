@@ -40,15 +40,13 @@ public class WargRenderer extends GeoEntityRenderer<WargEntity> {
                         new ResourceLocation(DragonsDungeons.MODID, "textures/entity/wood_warg.png"));
                 map.put(WargVariant.SPOTTED,
                         new ResourceLocation(DragonsDungeons.MODID, "textures/entity/spotted_warg.png"));
-                map.put(WargVariant.ZARG,
-                        new ResourceLocation(DragonsDungeons.MODID, "textures/entity/zarg_warg.png"));
             });
 
 
     public WargRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager, new WargModel());
 
-        this.shadowRadius = 0.8F;
+        this.shadowRadius = 1F;
         this.addRenderLayer(new WargGlowLayer(this));
     }
 

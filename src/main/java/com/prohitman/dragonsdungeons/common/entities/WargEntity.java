@@ -249,6 +249,10 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public void tick() {
         super.tick();
 
+        if(this.getVariant() == WargVariant.ZARG){
+            this.setVariant(WargVariant.ASHEN);
+        }
+
         if(!this.level().isClientSide){
             this.setIsRunning(this.moveControl.getSpeedModifier() >= 2);
         } else {

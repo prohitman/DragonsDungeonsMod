@@ -1,13 +1,12 @@
 package com.prohitman.dragonsdungeons.core.events;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
-import com.prohitman.dragonsdungeons.common.IExtendedReach;
+import com.prohitman.dragonsdungeons.common.items.IExtendedReach;
 import com.prohitman.dragonsdungeons.core.network.DDPacketHandler;
 import com.prohitman.dragonsdungeons.core.network.MessageExtendedReachAttack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.Options;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;

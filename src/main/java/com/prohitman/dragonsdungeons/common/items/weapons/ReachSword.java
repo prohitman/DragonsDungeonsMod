@@ -1,6 +1,6 @@
 package com.prohitman.dragonsdungeons.common.items.weapons;
 
-import com.prohitman.dragonsdungeons.common.IExtendedReach;
+import com.prohitman.dragonsdungeons.common.items.IExtendedReach;
 import net.minecraft.world.item.SwordItem;
 import net.minecraft.world.item.Tier;
 

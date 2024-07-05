@@ -1,6 +1,6 @@
 package com.prohitman.dragonsdungeons.core.network;
 
-import com.prohitman.dragonsdungeons.common.IExtendedReach;
+import com.prohitman.dragonsdungeons.common.items.IExtendedReach;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;

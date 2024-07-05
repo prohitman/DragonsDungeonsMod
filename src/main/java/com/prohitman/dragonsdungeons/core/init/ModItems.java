@@ -53,7 +53,7 @@ public class ModItems {
     //Spawn Eggs
     public static final RegistryObject<Item> WARG_SPAWN_EGG = ITEMS.register("warg_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.WARG, 0x9F9A96, 0xB0AAA7, new Item.Properties()));
     public static final RegistryObject<Item> EMBLEMSCUTE_SPAWN_EGG = ITEMS.register("emblemscute_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.EMBLEMSCUTE, 0x423D38, 0x408814, new Item.Properties()));
-
+    public static final RegistryObject<Item> ZARG_SPAWN_EGG = ITEMS.register("zarg_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.ZARG, 0x3F5828, 0x992B2B, new Item.Properties()));
     //Armor
     public static final RegistryObject<Item> STEEL_HELMET = ITEMS.register("steel_helmet", () -> new
             SteelArmorItem(ModArmorMaterials.STEEL, ArmorItem.Type.HELMET, new Item.Properties()));

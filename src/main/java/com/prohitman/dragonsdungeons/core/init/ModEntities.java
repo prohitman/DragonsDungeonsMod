@@ -3,6 +3,7 @@ package com.prohitman.dragonsdungeons.core.init;
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.common.entities.EmblemscuteEntity;
 import com.prohitman.dragonsdungeons.common.entities.WargEntity;
+import com.prohitman.dragonsdungeons.common.entities.ZargEntity;
 import com.prohitman.dragonsdungeons.common.entities.projectiles.FlaskOfAcidProjectile;
 import com.prohitman.dragonsdungeons.common.entities.projectiles.FlaskOfFireProjectile;
 import net.minecraft.world.entity.EntityType;
@@ -20,6 +21,11 @@ public class ModEntities {
             ENTITY_TYPES.register("warg",
                     () -> EntityType.Builder.of(WargEntity::new, MobCategory.CREATURE)
                             .sized(1.3f, 1.7f).build("warg"));
+
+    public static final RegistryObject<EntityType<ZargEntity>> ZARG =
+            ENTITY_TYPES.register("zarg",
+                    () -> EntityType.Builder.of(ZargEntity::new, MobCategory.MONSTER)
+                            .sized(1.3f, 1.7f).build("zarg"));
 
     public static final RegistryObject<EntityType<EmblemscuteEntity>> EMBLEMSCUTE = ENTITY_TYPES.register(
             "emblemscute",

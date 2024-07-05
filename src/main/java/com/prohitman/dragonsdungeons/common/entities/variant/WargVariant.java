@@ -14,8 +14,7 @@ public enum WargVariant {
     ASHEN(5, WargEyeColor.BLUE),
     RUSTY(6, WargEyeColor.YELLOW),
     WOOD(7, WargEyeColor.YELLOW),
-    SPOTTED(8, WargEyeColor.YELLOW),
-    ZARG(9, WargEyeColor.RED);
+    SPOTTED(8, WargEyeColor.YELLOW);
 
     private static final WargVariant[] BY_ID = Arrays.stream(values()).sorted(Comparator.
             comparingInt(WargVariant::getId)).toArray(WargVariant[]::new);
