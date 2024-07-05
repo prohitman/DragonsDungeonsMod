@@ -18,6 +18,8 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -31,8 +33,11 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.camel.Camel;
+import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.Creeper;
+import net.minecraft.world.entity.monster.Ghast;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
@@ -42,9 +47,11 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.data.ForgeBiomeTagsProvider;
@@ -151,7 +158,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.goalSelector.addGoal(1, new FollowLeaderGoal(this, 2D, 8.0F, 30f));
 
         this.goalSelector.addGoal(0, new SitWhenOrderedToGoal(this));
-        this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1.0, 22, 11f, false));
+        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.75D, 10.0F, 2.0F, false));
 
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(Items.ROTTEN_FLESH), true));
@@ -176,6 +183,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.targetSelector.addGoal(8, new LeaderFightGoal(this, WargEntity.class, true, LEADER_SELECTOR));
     }
 
+    public static boolean checkWargSpawnRules(EntityType<? extends WargEntity> pWolf, LevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return pLevel.getBlockState(pPos.below()).is(BlockTags.FOXES_SPAWNABLE_ON) && isBrightEnoughToSpawn(pLevel, pPos);
+    }
 
     @Nullable
     @Override
@@ -249,10 +259,6 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public void tick() {
         super.tick();
 
-        if(this.getVariant() == WargVariant.ZARG){
-            this.setVariant(WargVariant.ASHEN);
-        }
-
         if(!this.level().isClientSide){
             this.setIsRunning(this.moveControl.getSpeedModifier() >= 2);
         } else {
@@ -271,6 +277,30 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         if(this.isLeader()){
             this.addEffect(new MobEffectInstance(MobEffects.GLOWING, 3));
         }
+
+        //Handles Attack Targets
+        if(this.getTarget() != null){
+            LivingEntity target = this.getTarget();
+            if(target instanceof WargEntity warg){
+                if(!this.isLeader() && warg.isLeader()){
+                    this.setTarget(null);
+                    this.setAggressive(false);
+                } else if(this.isTame() && warg.isTame()){
+                    if(this.getOwnerUUID() == warg.getOwnerUUID()){
+                        this.setTarget(null);
+                        this.setAggressive(false);
+                    }
+                }
+            }
+            if(target instanceof OwnableEntity tamed && this.isTame()){
+                if(((OwnableEntity) target).getOwner() != null && this.isTame()){
+                    if(tamed.getOwnerUUID() == this.getOwnerUUID()){
+                        this.setTarget(null);
+                        this.setAggressive(false);
+                    }
+                }
+            }
+        }
     }
 
     private void setupAttackAnimation() {
@@ -286,8 +316,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         }
     }
 
-    @Override                                       // Add healing for Wargs, Add Glowing Layer for Zargs, Add Dashing function
-    public boolean canAttack(LivingEntity pTarget) {// Change the alert others goal to not include non leaders
+    //Also Handles Attack Targets
+    @Override                                       //Add Dashing function
+    public boolean canAttack(LivingEntity pTarget) {
         if(pTarget instanceof WargEntity warg){
             if(!this.isLeader() && warg.isLeader()){
                 return false;
@@ -299,7 +330,50 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
                 return super.canAttack(pTarget);
             }
         }
+        if(pTarget instanceof TamableAnimal tamed && this.isTame()){
+            if(tamed.isTame() && this.isTame()){
+                if(tamed.getOwnerUUID() == this.getOwnerUUID()){
+                    return false;
+                }
+            }
+        }
         return super.canAttack(pTarget);
+    }
+
+    public boolean canMate(Animal pOtherAnimal) {
+        if (pOtherAnimal == this) {
+            return false;
+        } else if (!this.isTame()) {
+            return false;
+        } else if (!(pOtherAnimal instanceof Wolf)) {
+            return false;
+        } else {
+            Wolf wolf = (Wolf)pOtherAnimal;
+            if (!wolf.isTame()) {
+                return false;
+            } else if (wolf.isInSittingPose()) {
+                return false;
+            } else {
+                return this.isInLove() && wolf.isInLove();
+            }
+        }
+    }
+
+    public boolean wantsToAttack(LivingEntity pTarget, LivingEntity pOwner) {
+        if (!(pTarget instanceof Creeper) && !(pTarget instanceof Ghast)) {
+            if (pTarget instanceof Wolf) {
+                Wolf wolf = (Wolf)pTarget;
+                return !wolf.isTame() || wolf.getOwner() != pOwner;
+            } else if (pTarget instanceof Player && pOwner instanceof Player && !((Player)pOwner).canHarmPlayer((Player)pTarget)) {
+                return false;
+            } else if (pTarget instanceof AbstractHorse && ((AbstractHorse)pTarget).isTamed()) {
+                return false;
+            } else {
+                return !(pTarget instanceof TamableAnimal) || !((TamableAnimal)pTarget).isTame();
+            }
+        } else {
+            return false;
+        }
     }
 
     /* VARIANT */
@@ -312,14 +386,14 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         return this.entityData.get(DATA_ID_TYPE_VARIANT);
     }
 
-    private void setVariant(WargVariant variant){
+    public void setVariant(WargVariant variant){
         this.entityData.set(DATA_ID_TYPE_VARIANT, variant.getId() & 255);
     }
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason,
                                         @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        if(pReason == MobSpawnType.NATURAL){
+        if(pReason != MobSpawnType.SPAWN_EGG){
             WargVariant variant = getVariantFromBiome(pLevel, this.blockPosition());
             this.setVariant(variant);
         } else {
@@ -349,7 +423,13 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     @Nullable
     @Override
     protected SoundEvent getAmbientSound() {
-        return SoundEvents.WOLF_AMBIENT;
+        if (this.getTarget() != null) {
+            return SoundEvents.WOLF_GROWL;
+        } else if (this.random.nextInt(3) == 0) {
+            return this.isTame() && this.getHealth() < 10.0F ? SoundEvents.WOLF_WHINE : SoundEvents.WOLF_PANT;
+        } else {
+            return SoundEvents.WOLF_AMBIENT;
+        }
     }
 
     @Nullable
@@ -394,6 +474,19 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
             }
         }
 
+        if(isTame()){
+            if (this.isFood(itemstack) && this.getHealth() < this.getMaxHealth()) {
+                this.heal((float)itemstack.getFoodProperties(this).getNutrition());
+                if (!pPlayer.getAbilities().instabuild) {
+                    itemstack.shrink(1);
+                }
+
+                this.level().broadcastEntityEvent(this, (byte)6);
+                this.gameEvent(GameEvent.EAT, this);
+                return InteractionResult.SUCCESS;
+            }
+        }
+
         if(isTame() && pHand == InteractionHand.MAIN_HAND && !isFood(itemstack)) {
             if(!pPlayer.isCrouching()) {
                 setRiding(pPlayer);
@@ -406,6 +499,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
 
         return super.mobInteract(pPlayer, pHand);
     }
+
 
     /* RIDEABLE */
 
@@ -482,9 +576,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         return super.getDismountLocationForPassenger(pLivingEntity);
     }
 
-    @Override
     public boolean isFood(ItemStack pStack) {
-        return pStack.is(Items.BONE);
+        Item item = pStack.getItem();
+        return item.isEdible() && pStack.getFoodProperties(this).isMeat();
     }
 
     public static WargVariant getVariantFromBiome(LevelReader levelIn, BlockPos pos){

@@ -11,6 +11,7 @@ import com.prohitman.dragonsdungeons.common.entities.ZargEntity;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.monster.ZombieVillager;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
 public class ZargRenderer extends GeoEntityRenderer<ZargEntity> {
@@ -29,5 +30,8 @@ public class ZargRenderer extends GeoEntityRenderer<ZargEntity> {
         }
 
         super.render(entity, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+    }
+    public boolean isShaking(ZargEntity pEntity) {
+        return super.isShaking(pEntity) || pEntity.isConverting();
     }
 }

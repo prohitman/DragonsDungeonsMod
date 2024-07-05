@@ -4,35 +4,48 @@ import com.prohitman.dragonsdungeons.common.entities.goals.AnimatedMeleeAttackGo
 import com.prohitman.dragonsdungeons.common.entities.goals.FollowLeaderGoal;
 import com.prohitman.dragonsdungeons.common.entities.goals.LeaderFightGoal;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
+import net.minecraft.advancements.CriteriaTriggers;
+import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.Difficulty;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.AgeableMob;
-import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
+import net.minecraft.world.entity.ai.village.ReputationEventType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Turtle;
-import net.minecraft.world.entity.monster.AbstractSkeleton;
-import net.minecraft.world.entity.monster.Enemy;
-import net.minecraft.world.entity.monster.Zoglin;
+import net.minecraft.world.entity.animal.camel.Camel;
+import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
+import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.item.trading.MerchantOffers;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.block.BedBlock;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.GeoAnimatable;
@@ -58,6 +71,8 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
 
     private static final EntityDataAccessor<Boolean> IS_RUNNING = SynchedEntityData.defineId(ZargEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(ZargEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> DATA_CONVERTING_ID = SynchedEntityData.defineId(ZargEntity.class, EntityDataSerializers.BOOLEAN);
+
     public static final Predicate<LivingEntity> PREY_SELECTOR = (p_289448_) -> {
         EntityType<?> entitytype = p_289448_.getType();
         return entitytype != ModEntities.ZARG.get();
@@ -65,6 +80,10 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
 
     public int attackAnimationTimeout = 0;
     public boolean shouldStartAnim = false;
+    private int villagerConversionTime;
+    @javax.annotation.Nullable
+    private UUID conversionStarter;
+
     public ZargEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setMaxUpStep(1);
@@ -122,6 +141,10 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
         //this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
     }
 
+    public static boolean checkZargSpawnRules(EntityType<? extends ZargEntity> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
+        return pLevel.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
+    }
+
     @Nullable
     @Override
     public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob otherParent) {
@@ -163,22 +186,151 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
         return cache;
     }
 
+    /* Conversion */
+
+    public InteractionResult mobInteract(Player pPlayer, InteractionHand pHand) {
+        ItemStack itemstack = pPlayer.getItemInHand(pHand);
+        if (itemstack.is(Items.GOLDEN_APPLE)) {
+            if (!pPlayer.getAbilities().instabuild) {
+                itemstack.shrink(1);
+            }
+
+            if (!this.level().isClientSide) {
+                this.startConverting(pPlayer.getUUID(), this.random.nextInt(600) + 1000);
+            }
+
+            return InteractionResult.SUCCESS;
+        } else {
+            return super.mobInteract(pPlayer, pHand);
+        }
+    }
+
+    /**
+     * Returns whether this zombie is in the process of converting to a villager
+     */
+    public boolean isConverting() {
+        return this.getEntityData().get(DATA_CONVERTING_ID);
+    }
+
+    /**
+     * Starts conversion of this zombie villager to a villager
+     */
+    private void startConverting(@javax.annotation.Nullable UUID pConversionStarter, int pVillagerConversionTime) {
+        this.conversionStarter = pConversionStarter;
+        this.villagerConversionTime = pVillagerConversionTime;
+        this.getEntityData().set(DATA_CONVERTING_ID, true);
+        //this.removeEffect(MobEffects.WEAKNESS);
+        this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, pVillagerConversionTime, Math.min(this.level().getDifficulty().getId() - 1, 0)));
+        this.level().broadcastEntityEvent(this, (byte)16);
+    }
+
+    /**
+     * Handles an entity event received from a {@link net.minecraft.network.protocol.game.ClientboundEntityEventPacket}.
+     */
+    public void handleEntityEvent(byte pId) {
+        if (pId == 16) {
+            if (!this.isSilent()) {
+                this.level().playLocalSound(this.getX(), this.getEyeY(), this.getZ(), SoundEvents.ZOMBIE_VILLAGER_CURE, this.getSoundSource(), 1.0F + this.random.nextFloat(), this.random.nextFloat() * 0.7F + 0.3F, false);
+            }
+
+        } else {
+            super.handleEntityEvent(pId);
+        }
+    }
+
+    @Nullable
+    public WargEntity convertZargToWarg(EntityType<WargEntity> pEntityType) {
+        if (this.isRemoved()) {
+            return null;
+        } else {
+            WargEntity t = pEntityType.create(this.level());
+            if (t == null) {
+                return (WargEntity)null;
+            } else {
+                t.copyPosition(this);
+                t.setBaby(this.isBaby());
+                t.setNoAi(this.isNoAi());
+                if (this.hasCustomName()) {
+                    t.setCustomName(this.getCustomName());
+                    t.setCustomNameVisible(this.isCustomNameVisible());
+                }
+
+                if (this.isPersistenceRequired()) {
+                    t.setPersistenceRequired();
+                }
+
+                t.setInvulnerable(this.isInvulnerable());
+
+                t.setTame(true);
+                t.setOwnerUUID(this.conversionStarter);
+
+                this.level().addFreshEntity(t);
+
+                this.discard();
+                return t;
+            }
+        }
+    }
+
+    private void finishConversion(ServerLevel pServerLevel) {
+        WargEntity warg = this.convertZargToWarg(ModEntities.WARG.get());
+
+        warg.finalizeSpawn(pServerLevel, pServerLevel.getCurrentDifficultyAt(warg.blockPosition()), MobSpawnType.CONVERSION, (SpawnGroupData)null, (CompoundTag)null);
+
+        if (!this.isSilent()) {
+            pServerLevel.levelEvent((Player)null, 1027, this.blockPosition(), 0);
+        }
+        net.minecraftforge.event.ForgeEventFactory.onLivingConvert(this, warg);
+    }
+
+    private int getConversionProgress() {
+        int i = 1;
+        if (this.random.nextFloat() < 0.01F) {
+            int j = 0;
+            BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+
+            for(int k = (int)this.getX() - 4; k < (int)this.getX() + 4 && j < 14; ++k) {
+                for(int l = (int)this.getY() - 4; l < (int)this.getY() + 4 && j < 14; ++l) {
+                    for(int i1 = (int)this.getZ() - 4; i1 < (int)this.getZ() + 4 && j < 14; ++i1) {
+                        BlockState blockstate = this.level().getBlockState(blockpos$mutableblockpos.set(k, l, i1));
+                        if (blockstate.is(Blocks.IRON_BARS) || blockstate.getBlock() instanceof BedBlock) {
+                            if (this.random.nextFloat() < 0.3F) {
+                                ++i;
+                            }
+
+                            ++j;
+                        }
+                    }
+                }
+            }
+        }
+
+        return i;
+    }
+
     @Override
     protected void defineSynchedData() {
         super.defineSynchedData();
         this.entityData.define(IS_RUNNING, false);
         this.entityData.define(IS_ATTACKING, false);
+        this.entityData.define(DATA_CONVERTING_ID, false);
     }
 
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
-
+        if (pCompound.contains("ConversionTime", 99) && pCompound.getInt("ConversionTime") > -1) {
+            this.startConverting(pCompound.hasUUID("ConversionPlayer") ? pCompound.getUUID("ConversionPlayer") : null, pCompound.getInt("ConversionTime"));
+        }
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
+        pCompound.putInt("ConversionTime", this.isConverting() ? this.villagerConversionTime : -1);
+        if (this.conversionStarter != null) {
+            pCompound.putUUID("ConversionPlayer", this.conversionStarter);
+        }
     }
 
     /* SOUNDS */
@@ -211,6 +363,14 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
             this.setIsRunning(this.moveControl.getSpeedModifier() >= 2);
         } else {
             this.setupAttackAnimation();
+        }
+
+        if (!this.level().isClientSide && this.isAlive() && this.isConverting()) {
+            int i = this.getConversionProgress();
+            this.villagerConversionTime -= i;
+            if (this.villagerConversionTime <= 0 && ForgeEventFactory.canLivingConvert(this, EntityType.VILLAGER, (timer) -> this.villagerConversionTime = timer)) {
+                this.finishConversion((ServerLevel)this.level());
+            }
         }
     }
 
