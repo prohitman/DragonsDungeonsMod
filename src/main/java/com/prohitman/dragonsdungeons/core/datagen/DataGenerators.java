@@ -4,6 +4,7 @@ import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.core.datagen.client.ModBlockStateProvider;
 import com.prohitman.dragonsdungeons.core.datagen.client.ModItemModelProvider;
 import com.prohitman.dragonsdungeons.core.datagen.client.ModLanguageProvider;
+import com.prohitman.dragonsdungeons.core.datagen.server.ModBiomeTags;
 import com.prohitman.dragonsdungeons.core.datagen.server.ModBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -25,7 +26,8 @@ public class DataGenerators {
     public static void gatherData(GatherDataEvent event) {
         DataGenerator dataGenerator = event.getGenerator();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ModBlockTags blockTags = new ModBlockTags(dataGenerator.getPackOutput(), lookupProvider, event.getExistingFileHelper());
+
+        /* Client */
 
         dataGenerator.addProvider(event.includeClient(), (DataProvider.Factory<ModBlockStateProvider>)
                 output -> new ModBlockStateProvider(output, event.getExistingFileHelper()));
@@ -36,10 +38,15 @@ public class DataGenerators {
         dataGenerator.addProvider(event.includeClient(), (DataProvider.Factory<ModLanguageProvider>)
                 output -> new ModLanguageProvider(dataGenerator.getPackOutput(), "en_us"));
 
+        /* Server */
 
+        ModBlockTags blockTags = new ModBlockTags(dataGenerator.getPackOutput(), lookupProvider, event.getExistingFileHelper());
+        ModBiomeTags biomeTags = new ModBiomeTags(dataGenerator.getPackOutput(), lookupProvider, event.getExistingFileHelper());
 
         dataGenerator.addProvider(event.includeServer(), (DataProvider.Factory<ModBlockTags>)
                 output -> blockTags);
+        dataGenerator.addProvider(event.includeServer(), (DataProvider.Factory<ModBiomeTags>)
+                output -> biomeTags);
 /*
         dataGenerator.addProvider(event.includeServer(), (DataProvider.Factory<ModItemTags>)
                 output -> new ModItemTags(output, lookupProvider, blockTags.contentsGetter(), event.getExistingFileHelper()));

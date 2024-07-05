@@ -1,12 +1,16 @@
 package com.prohitman.dragonsdungeons.common.entities;
 
 import com.prohitman.dragonsdungeons.common.entities.goals.AnimatedMeleeAttackGoal;
+import com.prohitman.dragonsdungeons.common.entities.goals.FollowLeaderGoal;
+import com.prohitman.dragonsdungeons.common.entities.goals.LeaderFightGoal;
 import com.prohitman.dragonsdungeons.common.entities.variant.WargVariant;
+import com.prohitman.dragonsdungeons.core.datagen.server.ModBiomeTags;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,14 +22,18 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.*;
+import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
+import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
@@ -34,9 +42,12 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.common.data.ForgeBiomeTagsProvider;
 import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -47,6 +58,8 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.animation.AnimationState;
 import software.bernie.geckolib.core.object.PlayState;
 
+import java.util.List;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideable, IAttacking {
@@ -62,11 +75,20 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
             SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> IS_RUNNING = SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.BOOLEAN);
-
+    private static final EntityDataAccessor<Boolean> IS_LEADER = SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.BOOLEAN);
     public static final Predicate<LivingEntity> PREY_SELECTOR = (p_289448_) -> {
         EntityType<?> entitytype = p_289448_.getType();
         return entitytype != ModEntities.WARG.get();
     };
+    public static final Predicate<LivingEntity> LEADER_SELECTOR = (mob) -> {
+        EntityType<?> entitytype = mob.getType();
+        if(entitytype == ModEntities.WARG.get()){
+            return ((WargEntity)mob).isLeader();
+        }
+        return false;
+    };
+    public static final Predicate<WargEntity> LEADER_WARG_PREDICATE =
+            mob -> mob != null && mob.isLeader();
 
     public int attackAnimationTimeout = 0;
     public boolean shouldStartAnim = false;
@@ -82,6 +104,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public void setIsRunning(boolean is_running) {
         this.entityData.set(IS_RUNNING, is_running);
     }
+    public boolean isAttacking() {
+        return this.entityData.get(IS_ATTACKING);
+    }
     public void setAttacking(boolean attacking) {
         this.entityData.set(IS_ATTACKING, attacking);
     }
@@ -91,8 +116,11 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.attackAnimationTimeout = attackAnimTimeOut;
     }
 
-    public boolean isAttacking() {
-        return this.entityData.get(IS_ATTACKING);
+    public boolean isLeader() {
+        return this.entityData.get(IS_LEADER);
+    }
+    public void setLeader(boolean is_leader) {
+        this.entityData.set(IS_LEADER, is_leader);
     }
 
 
@@ -120,6 +148,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new AnimatedMeleeAttackGoal<>(this, 2.4D, true, 5, 10, 0.25));
+        this.goalSelector.addGoal(1, new FollowLeaderGoal(this, 2D, 8.0F, 30f));
 
         this.goalSelector.addGoal(0, new SitWhenOrderedToGoal(this));
         this.goalSelector.addGoal(4, new FollowOwnerGoal(this, 1.0, 22, 11f, false));
@@ -139,34 +168,49 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
 
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
+        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this, WargEntity.class)).setAlertOthers());
         this.targetSelector.addGoal(5, new NonTameRandomTargetGoal<>(this, Animal.class, false, PREY_SELECTOR));
         this.targetSelector.addGoal(6, new NonTameRandomTargetGoal<>(this, Turtle.class, false, Turtle.BABY_ON_LAND_SELECTOR));
         this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
         //this.targetSelector.addGoal(8, new ResetUniversalAngerTargetGoal<>(this, true));
+        this.targetSelector.addGoal(8, new LeaderFightGoal(this, WargEntity.class, true, LEADER_SELECTOR));
     }
 
 
     @Nullable
     @Override
-    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob ageableMob) {
-        return ModEntities.WARG.get().create(pLevel);
+    public AgeableMob getBreedOffspring(ServerLevel pLevel, AgeableMob otherParent) {
+        WargEntity warg = ModEntities.WARG.get().create(pLevel);
+        if (warg != null && otherParent instanceof WargEntity otherWarg) {
+            UUID uuid = this.getOwnerUUID();
+            if (uuid != null) {
+                warg.setOwnerUUID(uuid);
+                warg.setTame(true);
+            }
+            if(pLevel.random.nextBoolean()){
+                warg.setVariant(this.getVariant());
+            } else {
+                warg.setVariant(otherWarg.getVariant());
+            }
+        }
+
+        return warg;
     }
 
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
-        controllers.add(new AnimationController<>(this, "controller", 3, this::predicate));
+        controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
         //controllers.add(new AnimationController<>(this, "attackcontroller", 2, this::attackPredicate));
     }
 
-    private PlayState attackPredicate(AnimationState state) {
+    /*private PlayState attackPredicate(AnimationState state) {
         if(shouldStartAnim) {
             //state.getController().forceAnimationReset();
             state.getController().setAnimation(ATTACK_ANIM);
         }
 
         return PlayState.STOP;
-    }
+    }*/
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
         if(shouldStartAnim){
@@ -196,6 +240,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.entityData.define(DATA_ID_TYPE_VARIANT, 0);
         this.entityData.define(IS_RUNNING, false);
         this.entityData.define(IS_ATTACKING, false);
+        this.entityData.define(IS_LEADER, false);
     }
 
     /* Attacking */
@@ -205,9 +250,22 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         super.tick();
 
         if(!this.level().isClientSide){
-            this.setIsRunning(this.moveControl.getSpeedModifier() > 1);
+            this.setIsRunning(this.moveControl.getSpeedModifier() >= 2);
         } else {
             this.setupAttackAnimation();
+        }
+
+        List<WargEntity> list = this.level().getEntitiesOfClass(WargEntity.class, this.getBoundingBox().inflate(35.0D), LEADER_WARG_PREDICATE);
+
+        if(list.isEmpty() && !this.isTame() && !this.isBaby()){
+            this.setLeader(true);
+            this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(7f);
+        }
+        if(this.isTame() && this.isLeader()){
+            this.setLeader(false);
+        }
+        if(this.isLeader()){
+            this.addEffect(new MobEffectInstance(MobEffects.GLOWING, 3));
         }
     }
 
@@ -222,6 +280,22 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         if(!this.isAttacking()) {
             shouldStartAnim = false;
         }
+    }
+
+    @Override                                       // Add healing for Wargs, Add Glowing Layer for Zargs, Add Dashing function
+    public boolean canAttack(LivingEntity pTarget) {// Change the alert others goal to not include non leaders
+        if(pTarget instanceof WargEntity warg){
+            if(!this.isLeader() && warg.isLeader()){
+                return false;
+            } else if(this.isTame() && warg.isTame()){
+                if(this.getOwnerUUID() == warg.getOwnerUUID()){
+                    return false;
+                }
+            } else {
+                return super.canAttack(pTarget);
+            }
+        }
+        return super.canAttack(pTarget);
     }
 
     /* VARIANT */
@@ -241,20 +315,29 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason,
                                         @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
-        WargVariant variant = Util.getRandom(WargVariant.values(), this.random);
-        this.setVariant(variant);
+        if(pReason == MobSpawnType.NATURAL){
+            WargVariant variant = getVariantFromBiome(pLevel, this.blockPosition());
+            this.setVariant(variant);
+        } else {
+            WargVariant variant = Util.getRandom(WargVariant.values(), this.random);
+            this.setVariant(variant);
+        }
+
         return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
     }
     @Override
     public void readAdditionalSaveData(CompoundTag pCompound) {
         super.readAdditionalSaveData(pCompound);
         this.entityData.set(DATA_ID_TYPE_VARIANT, pCompound.getInt("Variant"));
+        pCompound.putBoolean("is_leader", this.entityData.get(IS_LEADER));
+
     }
 
     @Override
     public void addAdditionalSaveData(CompoundTag pCompound) {
         super.addAdditionalSaveData(pCompound);
         pCompound.putInt("Variant", this.getTypeVariant());
+        this.entityData.set(IS_LEADER, pCompound.getBoolean("is_leader"));
     }
 
     /* SOUNDS */
@@ -398,5 +481,27 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     @Override
     public boolean isFood(ItemStack pStack) {
         return pStack.is(Items.BONE);
+    }
+
+    public static WargVariant getVariantFromBiome(LevelReader levelIn, BlockPos pos){
+        if(levelIn.getBiome(pos).is(ModBiomeTags.ASHEN_WARG_SPAWNS)){
+            return WargVariant.ASHEN;
+        } else if(levelIn.getBiome(pos).is(ModBiomeTags.BLACK_WARG_SPAWNS)){
+            return WargVariant.BLACK;
+        }else if(levelIn.getBiome(pos).is(ModBiomeTags.CHESTNUT_WARG_SPAWNS)){
+            return WargVariant.CHESTNUT;
+        }else if(levelIn.getBiome(pos).is(ModBiomeTags.RUSTY_WARG_SPAWNS)){
+            return WargVariant.RUSTY;
+        }else if(levelIn.getBiome(pos).is(ModBiomeTags.SNOWY_WARG_SPAWNS)){
+            return WargVariant.SNOWY;
+        }else if(levelIn.getBiome(pos).is(ModBiomeTags.SPOTTED_WARG_SPAWNS)){
+            return WargVariant.SPOTTED;
+        }else if(levelIn.getBiome(pos).is(ModBiomeTags.STRIPED_WARG_SPAWNS)){
+            return WargVariant.STRIPED;
+        }else if(levelIn.getBiome(pos).is(ModBiomeTags.WOOD_WARG_SPAWNS)){
+            return WargVariant.WOOD;
+        } else{
+            return WargVariant.PALE;
+        }
     }
 }
