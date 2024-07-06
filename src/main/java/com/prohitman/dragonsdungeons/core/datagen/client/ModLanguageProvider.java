@@ -37,10 +37,12 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.WARG_SPAWN_EGG);
         addItem(ModItems.EMBLEMSCUTE_SPAWN_EGG);
         addItem(ModItems.ZARG_SPAWN_EGG);
+        addItem(ModItems.AUTOMATON_SPAWN_EGG);
 
         add( "entity.dragonsdungeons.warg", "Warg");
         add( "entity.dragonsdungeons.zarg", "Zarg");
         add( "entity.dragonsdungeons.emblemscute", "Emblemscute");
+        add( "entity.dragonsdungeons.automaton", "Automaton");
 
         add( "effect.dragonsdungeons.intoxicated", "Intoxicated");
 

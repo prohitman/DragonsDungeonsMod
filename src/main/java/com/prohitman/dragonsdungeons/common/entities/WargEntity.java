@@ -36,6 +36,7 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
@@ -184,7 +185,6 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, Player.class, true, null));
         this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, AbstractVillager.class, true, null));
         this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, IronGolem.class, true, null));
-
         this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
         this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this, WargEntity.class)).setAlertOthers());

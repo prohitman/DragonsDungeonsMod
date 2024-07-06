@@ -29,7 +29,6 @@ public class AnimatedMeleeAttackGoal<T extends PathfinderMob & IAttacking> exten
     @Override
     public void start() {
         super.start();
-        //attackDelay = 14;
         ticksUntilNextAttack = attackDuration - attackDelay;
     }
 

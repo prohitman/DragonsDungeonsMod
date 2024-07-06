@@ -1,4 +1,4 @@
-package com.prohitman.dragonsdungeons.common.entities.goals;
+package com.prohitman.dragonsdungeons.common.entities.goals.emblemscute;
 
 import com.google.common.collect.Lists;
 import com.prohitman.dragonsdungeons.common.entities.EmblemscuteEntity;

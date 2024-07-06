@@ -1,8 +1,7 @@
 package com.prohitman.dragonsdungeons.common.entities;
 
-import com.prohitman.dragonsdungeons.common.entities.goals.EmblemscuteFollowMonsterGoal;
-import com.prohitman.dragonsdungeons.common.entities.goals.EmblemscuteHidingGoal;
-import net.minecraft.client.renderer.entity.EndermanRenderer;
+import com.prohitman.dragonsdungeons.common.entities.goals.emblemscute.EmblemscuteFollowMonsterGoal;
+import com.prohitman.dragonsdungeons.common.entities.goals.emblemscute.EmblemscuteHidingGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
@@ -18,21 +17,15 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.goal.FollowMobGoal;
+import net.minecraft.world.entity.ai.control.BodyRotationControl;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
-import net.minecraft.world.entity.animal.PolarBear;
-import net.minecraft.world.entity.animal.camel.Camel;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import net.minecraft.world.phys.AABB;
-import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.core.animatable.instance.SingletonAnimatableInstanceCache;
@@ -227,6 +220,26 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
 
 
     }*/
+    protected BodyRotationControl createBodyControl() {
+        return new EmblemscuteEntity.EmblemscuteBodyRotationControl(this);
+    }
+
+    class EmblemscuteBodyRotationControl extends BodyRotationControl {
+        public EmblemscuteBodyRotationControl(EmblemscuteEntity emblemscuteEntity) {
+            super(emblemscuteEntity);
+        }
+
+        /**
+         * Update the Head and Body rendering angles
+         */
+        public void clientTick() {
+            if (!EmblemscuteEntity.this.getHiding()) {
+                super.clientTick();
+            }
+
+        }
+    }
+
 
     protected class EmblemscuteWanderGoal extends WaterAvoidingRandomStrollGoal {
         private EmblemscuteEntity entity;

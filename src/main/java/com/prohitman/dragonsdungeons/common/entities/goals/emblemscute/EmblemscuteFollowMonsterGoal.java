@@ -1,4 +1,4 @@
-package com.prohitman.dragonsdungeons.common.entities.goals;
+package com.prohitman.dragonsdungeons.common.entities.goals.emblemscute;
 
 import com.prohitman.dragonsdungeons.common.entities.EmblemscuteEntity;
 import net.minecraft.world.entity.Mob;

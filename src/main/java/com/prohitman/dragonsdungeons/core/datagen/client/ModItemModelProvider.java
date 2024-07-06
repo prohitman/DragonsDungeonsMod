@@ -70,6 +70,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         withExistingParent(ModItems.WARG_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.EMBLEMSCUTE_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
         withExistingParent(ModItems.ZARG_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
+        withExistingParent(ModItems.AUTOMATON_SPAWN_EGG.getId().getPath(), mcLoc("item/template_spawn_egg"));
 
         //Other Blocks
         createParent(ModBlocks.SHINGLES);
