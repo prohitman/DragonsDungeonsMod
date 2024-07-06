@@ -10,6 +10,7 @@ import net.minecraft.world.entity.SpawnPlacements;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
@@ -31,5 +32,6 @@ public class CommonModEvents {
     public static void registerSpawns(@NotNull SpawnPlacementRegisterEvent event) {
         event.register(ModEntities.ZARG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, ZargEntity::checkZargSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
         event.register(ModEntities.WARG.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, WargEntity::checkWargSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
+        event.register(ModEntities.EMBLEMSCUTE.get(), SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES, EmblemscuteEntity::checkEmblemscuteSpawnRules, SpawnPlacementRegisterEvent.Operation.OR);
     }
 }

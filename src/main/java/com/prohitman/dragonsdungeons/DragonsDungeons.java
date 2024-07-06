@@ -52,6 +52,7 @@ public class DragonsDungeons
         ModParticleTypes.PARTICLES.register(modEventBus);
         ModEntities.ENTITY_TYPES.register(modEventBus);
         ModEffects.MOB_EFFECTS.register(modEventBus);
+        ModBiomeModifiers.BIOME_MODIFIER_SERIALIZERS.register(modEventBus);
 
         MinecraftForge.EVENT_BUS.register(this);
         //ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);

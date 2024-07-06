@@ -14,8 +14,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Difficulty;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
@@ -27,14 +29,13 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.ai.village.ReputationEventType;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.animal.IronGolem;
-import net.minecraft.world.entity.animal.Turtle;
+import net.minecraft.world.entity.animal.*;
 import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -45,6 +46,7 @@ import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -130,7 +132,7 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 4f));
 
-        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 0, false, true, (livingEntity -> {
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, Player.class, 2, false, true, (livingEntity -> {
             return !livingEntity.isSpectator() && !((Player)livingEntity).isCreative();
         })));
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, AbstractVillager.class, true, null));
@@ -142,7 +144,74 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
     }
 
     public static boolean checkZargSpawnRules(EntityType<? extends ZargEntity> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
+        return pLevel.getBlockState(pPos.below()).is(BlockTags.FOXES_SPAWNABLE_ON) && pLevel.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
+    }
+
+    @Override
+    public SpawnGroupData finalizeSpawn(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty, MobSpawnType pReason, @Nullable SpawnGroupData pSpawnData, @Nullable CompoundTag pDataTag) {
+        RandomSource randomsource = pLevel.getRandom();
+        if(randomsource.nextInt(100) == 0){
+            this.setBaby(true);
+        }
+        if (randomsource.nextInt(2) == 0 && !this.isBaby()) {
+            spawnRidingZombie(pLevel, pDifficulty);
+        }
+
+        return super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
+    }
+
+    public void spawnRidingZombie(ServerLevelAccessor pLevel, DifficultyInstance pDifficulty){
+        Zombie zombie = EntityType.ZOMBIE.create(this.level());
+        if (zombie != null) {
+            zombie.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+            boolean zombieHasSword = false;
+
+            for(EquipmentSlot equipmentslot : EquipmentSlot.values()) {
+
+                if (equipmentslot.getType() == EquipmentSlot.Type.ARMOR && pLevel.getRandom().nextBoolean()) {
+                    ItemStack itemstack = zombie.getItemBySlot(equipmentslot);
+
+                    if (itemstack.isEmpty()) {
+                        int i = pLevel.getRandom().nextInt(2) + 2;
+
+                        Item item = getEquipmentForSlot(equipmentslot, i);
+                        if (item != null) {
+                            zombie.setItemSlot(equipmentslot, new ItemStack(item));
+
+                            if(pLevel.getRandom().nextInt(3) == 0){
+                                zombie.setItemSlot(equipmentslot, EnchantmentHelper.enchantItem(pLevel.getRandom(), new ItemStack(item), (int)(5.0F + 1 * (float)pLevel.getRandom().nextInt(18)), false));
+                            }
+                        }
+                    }
+
+                } else if(equipmentslot == EquipmentSlot.MAINHAND && pLevel.getRandom().nextInt(3) == 0 && !zombieHasSword){
+                    ItemStack itemStack = zombie.getItemBySlot(equipmentslot);
+                    if(itemStack.isEmpty()){
+                        zombie.setItemSlot(equipmentslot, new ItemStack(Items.IRON_SWORD));
+                        zombieHasSword = true;
+                    }
+                }
+            }
+
+            zombie.finalizeSpawn(pLevel, pDifficulty, MobSpawnType.JOCKEY, (SpawnGroupData)null, (CompoundTag)null);
+            zombie.startRiding(this);
+        }
+    }
+
+    @Override
+    public MobType getMobType() {
+        return MobType.UNDEAD;
+    }
+
+    @Override
+    protected boolean shouldDespawnInPeaceful() {
+        return true;
+    }
+
+    @Nullable
+    @Override
+    public LivingEntity getControllingPassenger() {
+        return null;
     }
 
     @Nullable
@@ -219,7 +288,6 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
         this.conversionStarter = pConversionStarter;
         this.villagerConversionTime = pVillagerConversionTime;
         this.getEntityData().set(DATA_CONVERTING_ID, true);
-        //this.removeEffect(MobEffects.WEAKNESS);
         this.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, pVillagerConversionTime, Math.min(this.level().getDifficulty().getId() - 1, 0)));
         this.level().broadcastEntityEvent(this, (byte)16);
     }
@@ -265,6 +333,11 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
                 t.setOwnerUUID(this.conversionStarter);
 
                 this.level().addFreshEntity(t);
+                if (this.isPassenger()) {
+                    Entity entity = this.getVehicle();
+                    this.stopRiding();
+                    t.startRiding(entity, true);
+                }
 
                 this.discard();
                 return t;
