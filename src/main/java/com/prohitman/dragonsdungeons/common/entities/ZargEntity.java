@@ -153,7 +153,7 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
         if(randomsource.nextInt(100) == 0){
             this.setBaby(true);
         }
-        if (randomsource.nextInt(2) == 0 && !this.isBaby()) {
+        if (randomsource.nextInt(5) == 0 && !this.isBaby()) {
             spawnRidingZombie(pLevel, pDifficulty);
         }
 
@@ -224,23 +224,19 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        //controllers.add(new AnimationController<>(this, "attackcontroller", 2, this::attackPredicate));
+        controllers.add(new AnimationController<>(this, "attackcontroller", 2, this::attackPredicate));
     }
 
-    /*private PlayState attackPredicate(AnimationState state) {
+    private PlayState attackPredicate(AnimationState state) {
         if(shouldStartAnim) {
-            //state.getController().forceAnimationReset();
-            state.getController().setAnimation(ATTACK_ANIM);
+            return state.setAndContinue(ATTACK_ANIM);
         }
 
         return PlayState.STOP;
-    }*/
+    }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        if(shouldStartAnim){
-            return state.setAndContinue(ATTACK_ANIM);
-        }
-        else if(this.isRunning() && state.isMoving()){
+        if(this.isRunning() && state.isMoving()){
             return state.setAndContinue(RUN_ANIM);
         }
         else if (state.isMoving()) {

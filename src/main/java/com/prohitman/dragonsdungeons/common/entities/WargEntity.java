@@ -10,7 +10,6 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.data.tags.BiomeTagsProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -18,6 +17,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
@@ -32,13 +32,10 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.ai.goal.target.*;
 import net.minecraft.world.entity.animal.*;
-import net.minecraft.world.entity.animal.camel.Camel;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
-import net.minecraft.world.entity.animal.horse.Llama;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
-import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
@@ -50,11 +47,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.common.data.ForgeBiomeTagsProvider;
 import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
@@ -69,7 +65,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideable, IAttacking {
+public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideable, IAttacking, PlayerRideableJumping {
     private AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
     protected static final RawAnimation WALK_ANIM = RawAnimation.begin().thenLoop("animation.warg.walk");
@@ -83,6 +79,8 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     private static final EntityDataAccessor<Boolean> IS_RUNNING = SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_ATTACKING = SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.BOOLEAN);
     private static final EntityDataAccessor<Boolean> IS_LEADER = SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.BOOLEAN);
+    private static final EntityDataAccessor<Boolean> IS_DASHING = SynchedEntityData.defineId(WargEntity.class, EntityDataSerializers.BOOLEAN);
+
     public static final Predicate<LivingEntity> PREY_SELECTOR = (p_289448_) -> {
         EntityType<?> entitytype = p_289448_.getType();
         return entitytype != ModEntities.WARG.get();
@@ -99,6 +97,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
 
     public int attackAnimationTimeout = 0;
     public boolean shouldStartAnim = false;
+    private int dashCooldown = 0;
+    private boolean isJumping;
+    private float playerJumpPendingScale;
 
     public WargEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -108,7 +109,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public boolean isRunning() {
         return this.entityData.get(IS_RUNNING);
     }
-    public void setIsRunning(boolean is_running) {
+    public void setRunning(boolean is_running) {
         this.entityData.set(IS_RUNNING, is_running);
     }
     public boolean isAttacking() {
@@ -117,7 +118,6 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public void setAttacking(boolean attacking) {
         this.entityData.set(IS_ATTACKING, attacking);
     }
-
     @Override
     public void setAttackAnimationTimeOut(int attackAnimTimeOut) {
         this.attackAnimationTimeout = attackAnimTimeOut;
@@ -129,7 +129,18 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public void setLeader(boolean is_leader) {
         this.entityData.set(IS_LEADER, is_leader);
     }
-
+    public boolean isDashing() {
+        return this.entityData.get(IS_DASHING);
+    }
+    public void setDashing(boolean is_dashing) {
+        this.entityData.set(IS_DASHING, is_dashing);
+    }
+    public boolean isJumping() {
+        return this.isJumping;
+    }
+    public void setIsJumping(boolean pJumping) {
+        this.isJumping = pJumping;
+    }
 
     public static AttributeSupplier.Builder createAttributes() {
         return Animal.createLivingAttributes().add(Attributes.MAX_HEALTH, 35D)
@@ -137,7 +148,8 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
                 .add(Attributes.FOLLOW_RANGE, 24D)
                 .add(Attributes.ARMOR_TOUGHNESS, 0.1f)
                 .add(Attributes.ATTACK_DAMAGE, 5f)
-                .add(Attributes.ATTACK_KNOCKBACK, 0.5f);
+                .add(Attributes.ATTACK_KNOCKBACK, 0.5f)
+                .add(Attributes.JUMP_STRENGTH, 0.42F);
     }
     public void setTame(boolean pTamed) {
         super.setTame(pTamed);
@@ -210,23 +222,19 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     @Override
     public void registerControllers(final AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "controller", 5, this::predicate));
-        //controllers.add(new AnimationController<>(this, "attackcontroller", 2, this::attackPredicate));
+        controllers.add(new AnimationController<>(this, "attackcontroller", 2, this::attackPredicate));
     }
 
-    /*private PlayState attackPredicate(AnimationState state) {
+    private PlayState attackPredicate(AnimationState state) {
         if(shouldStartAnim) {
-            //state.getController().forceAnimationReset();
-            state.getController().setAnimation(ATTACK_ANIM);
+            return state.setAndContinue(ATTACK_ANIM);
         }
 
         return PlayState.STOP;
-    }*/
+    }
 
     private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> state) {
-        if(shouldStartAnim){
-            return state.setAndContinue(ATTACK_ANIM);
-        }
-        else if(this.isInSittingPose()){
+        if(this.isInSittingPose()){
             return state.setAndContinue(SIT_ANIM);
         }
         else if(this.isRunning() && state.isMoving()){
@@ -251,6 +259,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.entityData.define(IS_RUNNING, false);
         this.entityData.define(IS_ATTACKING, false);
         this.entityData.define(IS_LEADER, false);
+        this.entityData.define(IS_DASHING, false);
     }
 
     /* Attacking */
@@ -259,8 +268,19 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public void tick() {
         super.tick();
 
+        if (this.isDashing() && this.dashCooldown < 50 && (this.onGround() || this.isInWater() || this.isPassenger())) {
+            this.setDashing(false);
+        }
+
+        if (this.dashCooldown > 0) {
+            --this.dashCooldown;
+            if (this.dashCooldown == 0) {
+                this.level().playSound((Player)null, this.blockPosition(), SoundEvents.CAMEL_DASH_READY, SoundSource.NEUTRAL, 1.0F, 1.0F);
+            }
+        }
+
         if(!this.level().isClientSide){
-            this.setIsRunning(this.moveControl.getSpeedModifier() >= 2);
+            this.setRunning(this.moveControl.getSpeedModifier() >= 2);
         } else {
             this.setupAttackAnimation();
         }
@@ -317,7 +337,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     }
 
     //Also Handles Attack Targets
-    @Override                                       //Add Dashing function
+    @Override
     public boolean canAttack(LivingEntity pTarget) {
         if(pTarget instanceof WargEntity warg){
             if(!this.isLeader() && warg.isLeader()){
@@ -453,7 +473,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
 
         Item itemForTaming = Items.BONE;
 
-        if(item == itemForTaming && !isTame()) {
+        if(item == itemForTaming && !isTame() && pPlayer.getAbilities().instabuild) {
             if(this.level().isClientSide()) {
                 return InteractionResult.CONSUME;
             } else {
@@ -500,6 +520,106 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         return super.mobInteract(pPlayer, pHand);
     }
 
+    /* DASHING */
+
+    @Override
+    public boolean canCollideWith(Entity pEntity) {
+        if(!this.isPassengerOfSameVehicle(pEntity) && this.isDashing()){
+            pEntity.hurt(this.damageSources().mobAttack(this), 4);
+        }
+        return super.canCollideWith(pEntity);
+    }
+
+    protected void tickRidden(Player pPlayer, Vec3 pTravelVector) {
+        super.tickRidden(pPlayer, pTravelVector);
+        if (this.isControlledByLocalInstance()) {
+            /*if (pTravelVector.z <= 0.0D) {
+                this.gallopSoundCounter = 0;
+            }*/
+
+            if (this.onGround()) {
+                this.setIsJumping(false);
+                if (this.playerJumpPendingScale > 0.0F && !this.isJumping()) {
+                    this.executeRidersJump(this.playerJumpPendingScale, pTravelVector);
+                }
+
+                this.playerJumpPendingScale = 0.0F;
+            }
+        }
+    }
+
+    protected Vec3 getRiddenInput(Player pPlayer, Vec3 pTravelVector) {
+        if (this.onGround() && this.playerJumpPendingScale == 0.0) {
+            return Vec3.ZERO;
+        } else {
+            float f = pPlayer.xxa * 0.5F;
+            float f1 = pPlayer.zza;
+            if (f1 <= 0.0F) {
+                f1 *= 0.25F;
+            }
+
+            return new Vec3(f, 0.0D, f1);
+        }
+    }
+
+    @Override
+    public boolean canJump() {
+        return true;
+    }
+
+    public void onPlayerJump(int pJumpPower) {
+        if (this.dashCooldown <= 0 && this.onGround()) {
+            if (pJumpPower < 0) {
+                pJumpPower = 0;
+            }/* else {
+                this.allowStandSliding = true;
+                this.standIfPossible();
+            }*/
+
+            if (pJumpPower >= 90) {
+                this.playerJumpPendingScale = 1.0F;
+            } else {
+                this.playerJumpPendingScale = 0.4F + 0.4F * (float)pJumpPower / 90.0F;
+            }
+        }
+    }
+
+    public boolean canSprint() {
+        return true;
+    }
+
+    protected void executeRidersJump(float pPlayerJumpPendingScale, Vec3 pTravelVector) {
+        double d0 = this.getAttributeValue(Attributes.JUMP_STRENGTH) * (double)this.getBlockJumpFactor() + (double)this.getJumpBoostPower();
+        this.addDeltaMovement(this.getLookAngle().multiply(1.0D, 0.0D, 1.0D).normalize().scale((double)(22.2222F * pPlayerJumpPendingScale) * this.getAttributeValue(Attributes.MOVEMENT_SPEED) * (double)this.getBlockSpeedFactor()).add(0.0D, (double)(1.4285F * pPlayerJumpPendingScale) * d0, 0.0D));
+        this.dashCooldown = 55;
+        this.setDashing(true);
+        this.hasImpulse = true;
+    }
+
+    public void handleStartJump(int pJumpPower) {
+        this.playSound(SoundEvents.WOLF_GROWL, 1.0F, 1.0F);
+        this.setDashing(true);
+    }
+
+    public void handleStopJump() {
+    }
+
+    public int getJumpCooldown() {
+        return this.dashCooldown;
+    }
+
+    //protected boolean canPerformRearing() {
+    //    return false;
+    //}
+
+    public void onSyncedDataUpdated(EntityDataAccessor<?> pKey) {
+        if (!this.firstTick && IS_DASHING.equals(pKey)) {
+            this.dashCooldown = this.dashCooldown == 0 ? 55 : this.dashCooldown;
+        }
+
+        super.onSyncedDataUpdated(pKey);
+    }
+
 
     /* RIDEABLE */
 
@@ -532,12 +652,13 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
 
             // Inside this if statement, we are on the client!
             if (this.isControlledByLocalInstance()) {
-                float newSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED);
-                this.setIsRunning(false);
+                float speedBonus = this.getJumpCooldown() == 0 ? 0.1f : 0;
+                float newSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) + speedBonus;
+                this.setRunning(false);
                 // increasing speed by 100% if the spring key is held down (number for testing purposes)
                 if(Minecraft.getInstance().options.keySprint.isDown()) {
-                    newSpeed *= 1.8f;
-                    this.setIsRunning(true);
+                    newSpeed *= 1.7f;
+                    this.setRunning(true);
                 }
 
                 this.setSpeed(newSpeed);
