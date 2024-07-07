@@ -1,4 +1,4 @@
-// 1.20.1	2024-01-13T20:06:04.4401125	Block States: dragonsdungeons
+// 1.20.1	2024-07-06T23:13:31.0334356	Block States: dragonsdungeons
 41358e3c72dbd7b487c06d8f88290978aa654583 assets/dragonsdungeons/blockstates/adamantite_ore.json
 f01a670d8f2cb81d21a5004e2b4bd2aeaefa3901 assets/dragonsdungeons/blockstates/aging_adobe.json
 5986a5d3c75af8ef5583d7c03041503851e1bc5f assets/dragonsdungeons/blockstates/aging_adobe_pillar.json
@@ -458,10 +458,10 @@ bfa7ea20845e06eb138e7121d4be7ce07069bc59 assets/dragonsdungeons/models/block/shi
 3dba7079d55c20574d2706a6ac3e77f4ea243e32 assets/dragonsdungeons/models/block/shingles_stairs_inner.json
 9e497aa46937d33c4396ef1b6314217de22e75a3 assets/dragonsdungeons/models/block/shingles_stairs_outer.json
 0aa8767393c9fbaaa3913f66bd4a79459c8aa7c4 assets/dragonsdungeons/models/block/steel_block.json
-061f0e87cf1f86275b882163d770c19d00343dcb assets/dragonsdungeons/models/block/stone_window.json
-d48ad31ad5f89594262f2d4d84e45d2c694998dc assets/dragonsdungeons/models/block/stone_window_bottom.json
-8899d505c4f08e512652bd51c2ddb6e40cfc133b assets/dragonsdungeons/models/block/stone_window_middle.json
-7472741a82df2eb899987494933baa1e1e484d14 assets/dragonsdungeons/models/block/stone_window_top.json
+12e49ecab716f2885979e7c9e84306dec28c2376 assets/dragonsdungeons/models/block/stone_window.json
+fc93eb0adf49c1629271944de6d6232210016098 assets/dragonsdungeons/models/block/stone_window_bottom.json
+0ada244204b1e57c31a92be3dc4347b4e8de1bda assets/dragonsdungeons/models/block/stone_window_middle.json
+dfb9f959e5bcbe65b6fb7a3fb476a215ade131d1 assets/dragonsdungeons/models/block/stone_window_top.json
 3163eaf112e84f0c83351dce65cbeffeda5fca1d assets/dragonsdungeons/models/block/thatch_dd.json
 70df0a5decb7d8a9dd6395aca621f42dd62b83b3 assets/dragonsdungeons/models/block/thatch_roof_dd.json
 5fe8332062827eaea2c406cf0d7d2e7234b63da3 assets/dragonsdungeons/models/block/treasure_chest_dd.json

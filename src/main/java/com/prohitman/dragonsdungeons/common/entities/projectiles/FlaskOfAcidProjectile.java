@@ -3,12 +3,15 @@ package com.prohitman.dragonsdungeons.common.entities.projectiles;
 import com.google.common.collect.Lists;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
 import com.prohitman.dragonsdungeons.core.init.ModItems;
+import com.prohitman.dragonsdungeons.core.init.ModParticles;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -57,9 +60,16 @@ public class FlaskOfAcidProjectile extends ThrowableItemProjectile {
         return 0.05F;
     }
 
-    @Override
+/*    @Override
     public void onClientRemoval() {
         this.animateTick(this.level(), this.blockPosition(), this.random);
+    }*/
+
+    @Override
+    public void handleEntityEvent(byte pId) {
+        if (pId == 3) {
+            this.animateTick(this.level(), this.blockPosition(), this.random);
+        }
     }
 
     @Override
@@ -77,6 +87,8 @@ public class FlaskOfAcidProjectile extends ThrowableItemProjectile {
                     double d2 = (double) pos.getZ() + z + (rand.nextInt(9) / 5);
                     levelIn.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0D, 0.01D, 0.0D);
                     levelIn.addParticle(ParticleTypes.ASH, d0, d1, d2, 0.0D, 0.01D, 0.0D);
+                    levelIn.addParticle(ModParticles.ACID_FLASK_PARTICLE.get(), d0, d1, d2, 0.0D, 0.05D + Mth.nextDouble(this.level().random, 0, 0.1), 0.0D);
+
 
                 }
             }
@@ -99,9 +111,9 @@ public class FlaskOfAcidProjectile extends ThrowableItemProjectile {
 
             if (!list.isEmpty()) {
                 this.applySplash(list, result.getType() == HitResult.Type.ENTITY ? ((EntityHitResult)result).getEntity() : null);
-
             }
             int i = potion.hasInstantEffects() ? 2007 : 2002;
+            this.level().broadcastEntityEvent(this, (byte)3);
             this.level().levelEvent(i, this.blockPosition(), PotionUtils.getColor(potion));
             this.discard();
         }

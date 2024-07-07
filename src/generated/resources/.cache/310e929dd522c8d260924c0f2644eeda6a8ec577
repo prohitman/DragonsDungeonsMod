@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-06T16:04:27.6219352	Item Models: dragonsdungeons
+// 1.20.1	2024-07-07T05:16:16.0359714	Item Models: dragonsdungeons
 7eb1579ce426cbb65c592b03938f8bf1bb003faf assets/dragonsdungeons/models/item/adamantite_ore.json
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
@@ -122,6 +122,7 @@ bca4e01ad80f00e6a8d5cc6953d06766a9ea93fb assets/dragonsdungeons/models/item/lava
 a1391e97283f28b17544e71006cd56206724b178 assets/dragonsdungeons/models/item/lined_forged_bricks_wall.json
 c67ab125f23b5346a4df2f602d516d019bc29913 assets/dragonsdungeons/models/item/loot_bag.json
 d8670fb7a6f3582d3de36219c25f9ae645aa8531 assets/dragonsdungeons/models/item/mage_loot.json
+c3e230b6910889d2bb734aa33b8f63fc7cf4291b assets/dragonsdungeons/models/item/mechanical_part.json
 1fba627e7cbac2139bc6e82090fcda67bd8411c9 assets/dragonsdungeons/models/item/mithril_axe.json
 c1988a3fad489a482098a3d12039859b11f45f55 assets/dragonsdungeons/models/item/mithril_block.json
 5c9f790e31e90cf75981d855c6e93a7efae9f6b8 assets/dragonsdungeons/models/item/mithril_boots.json

@@ -33,6 +33,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.LOOT_BAG);
         addItem(ModItems.FLASK_OF_FIRE);
         addItem(ModItems.FLASK_OF_ACID);
+        addItem(ModItems.MECHANICAL_PART);
 
         addItem(ModItems.WARG_SPAWN_EGG);
         addItem(ModItems.EMBLEMSCUTE_SPAWN_EGG);

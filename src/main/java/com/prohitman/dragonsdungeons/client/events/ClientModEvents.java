@@ -9,11 +9,15 @@ import com.prohitman.dragonsdungeons.client.screen.FoundryScreen;
 import com.prohitman.dragonsdungeons.client.screen.ModMenuTypes;
 import com.prohitman.dragonsdungeons.client.screen.TreasureChestScreen;
 import com.prohitman.dragonsdungeons.client.screen.UrnScreen;
+import com.prohitman.dragonsdungeons.common.particles.MithrilCrystalParticle;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
+import com.prohitman.dragonsdungeons.core.init.ModParticles;
 import net.minecraft.client.gui.screens.MenuScreens;
+import net.minecraft.client.particle.SoulParticle;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -36,5 +40,12 @@ public class ClientModEvents {
             MenuScreens.register(ModMenuTypes.URN_MENU.get(), UrnScreen::new);
             MenuScreens.register(ModMenuTypes.FOUNDRY_MENU.get(), FoundryScreen::new);
         });
+    }
+
+    @SubscribeEvent
+    public static void registerParticles(RegisterParticleProvidersEvent event){
+        event.registerSpriteSet(ModParticles.ACID_FLASK_PARTICLE.get(), SoulParticle.EmissiveProvider::new);
+        event.registerSpriteSet(ModParticles.MITHRIL_CRYSTAL_PARTICLE.get(), MithrilCrystalParticle.Provider::new);
+
     }
 }

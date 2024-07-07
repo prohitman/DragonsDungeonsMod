@@ -236,10 +236,10 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
     public void createStoneWindow(RegistryObject<Block> block){
         stoneWindow(block.get(),
-                models().cubeAll(name(block), modLoc("block/" + name(block))).renderType("translucent"),
-                models().cubeAll(name(block) + "_top", modLoc("block/" + name(block) + "_top")).renderType("translucent"),
-                models().cubeAll(name(block) + "_bottom", modLoc("block/" + name(block) + "_bottom")).renderType("translucent"),
-                models().cubeAll(name(block) + "_middle", modLoc("block/" + name(block) + "_middle")).renderType("translucent"));
+                models().cubeColumn(name(block), modLoc("block/" + name(block)), modLoc("block/" + name(block) + "_flat")).renderType("translucent"),
+                models().cubeColumn(name(block) + "_top", modLoc("block/" + name(block) + "_top"), modLoc("block/" + name(block) + "_flat")).renderType("translucent"),
+                models().cubeColumn(name(block) + "_bottom", modLoc("block/" + name(block) + "_bottom"), modLoc("block/" + name(block) + "_flat")).renderType("translucent"),
+                models().cubeColumn(name(block) + "_middle", modLoc("block/" + name(block) + "_middle"), modLoc("block/" + name(block) + "_flat")).renderType("translucent"));
     }
 
     public void stoneWindow(Block window, ModelFile none, ModelFile top, ModelFile bottom, ModelFile both){

@@ -64,10 +64,11 @@ public class FlaskOfFireProjectile extends ThrowableItemProjectile {
     public Packet<ClientGamePacketListener> getAddEntityPacket() {
         return NetworkHooks.getEntitySpawningPacket(this);
     }
-
     @Override
-    public void onClientRemoval() {
-        this.animateParticles(this.level(), this.blockPosition(), this.random);
+    public void handleEntityEvent(byte pId) {
+        if (pId == 3) {
+            this.animateParticles(this.level(), this.blockPosition(), this.random);
+        }
     }
 
     public void animateParticles(Level levelIn, BlockPos pos, RandomSource rand) {
@@ -134,6 +135,7 @@ public class FlaskOfFireProjectile extends ThrowableItemProjectile {
                 level().gameEvent(this.getOwner(), GameEvent.BLOCK_PLACE, this.blockPosition());
             }
             int i = potion.hasInstantEffects() ? 2007 : 2002;
+            this.level().broadcastEntityEvent(this, (byte)3);
             this.level().levelEvent(i, this.blockPosition(), PotionUtils.getColor(potion));
             this.discard();
         }

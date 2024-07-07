@@ -104,7 +104,7 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
     }
 
     public static boolean checkEmblemscuteSpawnRules(EntityType<? extends EmblemscuteEntity> pType, ServerLevelAccessor pLevel, MobSpawnType pSpawnType, BlockPos pPos, RandomSource pRandom) {
-        return pLevel.getDifficulty() != Difficulty.PEACEFUL && Monster.isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
+        return pLevel.getDifficulty() != Difficulty.PEACEFUL && pPos.getY() < pLevel.getSeaLevel() - 5 && Monster.isDarkEnoughToSpawn(pLevel, pPos, pRandom) && checkMobSpawnRules(pType, pLevel, pSpawnType, pPos, pRandom);
     }
 
     public byte getAnimation() {
@@ -276,12 +276,7 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
         float limbSwingAmount = state.getLimbSwingAmount();
 
         boolean isMoving = !(limbSwingAmount > -0.05F && limbSwingAmount < 0.05F);
-        boolean inWater = isInWater();
         AnimationController controller = state.getController();
-/*        if (isFlapping) {
-            controller.setAnimation(FLY_ANIM);
-            return PlayState.CONTINUE;
-        }*/
 
         byte currentAnimation = this.getAnimation();
 
@@ -291,9 +286,6 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
         }
         //return PlayState.CONTINUE;
         else {//controller.markNeedsReload();
-                /*if (inWater) {
-                    controller.setAnimation(isMoving ? SWIM_ANIM : IDLE_ANIM);
-                } else {*/
             if (isMoving) {
                 controller.setAnimation(WALK_ANIM);
                 this.setAnimation(ANIMATION_WALK);

@@ -36,6 +36,8 @@ public class ModItems {
     public static final RegistryObject<Item> GOLD_COINS = ITEMS.register("gold_coins", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> BLANK_OBELISK = ITEMS.register("blank_obelisk", () -> new Item(new Item.Properties()));
     public static final RegistryObject<Item> WYVERN_STINGER = ITEMS.register("wyvern_stinger", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> MECHANICAL_PART = ITEMS.register("mechanical_part", () -> new Item(new Item.Properties()));
+
     public static final RegistryObject<Item> LOOT_BAG = ITEMS.register("loot_bag", () -> new LootBag(new Item.Properties().stacksTo(16), false));
     public static final RegistryObject<Item> MAGE_LOOT = ITEMS.register("mage_loot", () -> new LootBag(new Item.Properties().stacksTo(16), true));
     public static final RegistryObject<Item> FLASK_OF_FIRE = ITEMS.register("flask_of_fire", () -> new FlaskOfFire(new Item.Properties().stacksTo(8)));

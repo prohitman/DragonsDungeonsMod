@@ -1,11 +1,14 @@
 package com.prohitman.dragonsdungeons.common.blocks.shaped;
 
 import com.prohitman.dragonsdungeons.common.Utils;
+import com.prohitman.dragonsdungeons.core.init.ModParticles;
 import net.minecraft.Util;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -21,6 +24,7 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -44,6 +48,22 @@ public class MithrilCrystal extends FaceAttachedHorizontalDirectionalBlock imple
     public MithrilCrystal(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(FACE, AttachFace.WALL).setValue(WATERLOGGED, Boolean.valueOf(false)));
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource rand) {
+        super.animateTick(state, world, pos, rand);
+
+        // Define the AABB for your custom shapes
+        AABB shape = new AABB(pos.getX(), pos.getY() + 0.1, pos.getZ(),
+                pos.getX() + 1, pos.getY() + 1, pos.getZ() + 1);
+
+
+        double x = shape.minX + rand.nextDouble() * (shape.maxX - shape.minX);
+        double y = shape.minY + rand.nextDouble() * (shape.maxY - shape.minY);
+        double z = shape.minZ + rand.nextDouble() * (shape.maxZ - shape.minZ);
+
+        world.addParticle(ModParticles.MITHRIL_CRYSTAL_PARTICLE.get(), x, y, z, 0.0, 0.0, 0.0);
     }
 
     @Override
