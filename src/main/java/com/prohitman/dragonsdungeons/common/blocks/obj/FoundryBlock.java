@@ -1,6 +1,7 @@
 package com.prohitman.dragonsdungeons.common.blocks.obj;
 
 import com.prohitman.dragonsdungeons.common.Utils;
+import com.prohitman.dragonsdungeons.common.blocks.entity.FoundryBE;
 import com.prohitman.dragonsdungeons.common.blocks.entity.FoundryBlockEntity;
 import com.prohitman.dragonsdungeons.common.blocks.entity.TreasureChestBlockEntity;
 import com.prohitman.dragonsdungeons.core.init.ModBlockEntities;
@@ -12,6 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
@@ -26,6 +28,7 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -79,8 +82,8 @@ public class FoundryBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         } else {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            if (blockentity instanceof FoundryBlockEntity) {
-                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (FoundryBlockEntity)blockentity, pPos);
+            if (blockentity instanceof FoundryBE) {
+                NetworkHooks.openScreen(((ServerPlayer)pPlayer), (FoundryBE)blockentity, pPos);
 
                 //pPlayer.awardStat(Stats.OPEN_BARREL);
                 PiglinAi.angerNearbyPiglins(pPlayer, true);
@@ -91,32 +94,50 @@ public class FoundryBlock extends BaseEntityBlock {
     }
 
     public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new FoundryBlockEntity(pPos, pState);
+        return new FoundryBE(pPos, pState);
     }
 
     @Nullable
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
+        if(pLevel.isClientSide()) {
+            return null;
+        }
+
+        return createTickerHelper(pBlockEntityType, ModBlockEntities.FOUNDRY_BLOCK_ENTITY.get(),
+                (pLevel1, pPos, pState1, pBlockEntity) -> pBlockEntity.tick(pLevel1, pPos, pState1));
+    }
+
+    @Override
+    public boolean isCollisionShapeFullBlock(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+        return false;
+    }
+
+
+
+    /*    @Nullable
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
         return createFoundryTicker(pLevel, pBlockEntityType, ModBlockEntities.FOUNDRY_BLOCK_ENTITY.get());
     }
 
     @Nullable
-    protected static <T extends BlockEntity> BlockEntityTicker<T> createFoundryTicker(Level pLevel, BlockEntityType<T> pServerType, BlockEntityType<? extends FoundryBlockEntity> pClientType) {
-        return pLevel.isClientSide ? null : createTickerHelper(pServerType, pClientType, FoundryBlockEntity::serverTick);
+    protected static <T extends BlockEntity> BlockEntityTicker<T> createFoundryTicker(Level pLevel, BlockEntityType<T> pServerType, BlockEntityType<? extends FoundryBE> pClientType) {
+        return pLevel.isClientSide ? null : createTickerHelper(pServerType, pClientType, FoundryBE::serverTick);
     }
 
 
-    /**
+    *//**
      * Called to open this furnace's container.
      *
      * @see #use
-     */
+     *//*
     protected void openContainer(Level pLevel, BlockPos pPos, Player pPlayer) {
         BlockEntity blockentity = pLevel.getBlockEntity(pPos);
         if (blockentity instanceof FoundryBlockEntity) {
             pPlayer.openMenu((MenuProvider)blockentity);
             pPlayer.awardStat(Stats.INTERACT_WITH_FURNACE);
         }
-    }
+    }*/
 
     /**
      * Called periodically clientside on blocks near the player to show effects (like furnace fire particles).
@@ -124,7 +145,7 @@ public class FoundryBlock extends BaseEntityBlock {
     public void animateTick(BlockState pState, Level pLevel, BlockPos pPos, RandomSource pRandom) {
         if (pState.getValue(LIT)) {
             double d0 = (double)pPos.getX() + 0.5D;
-            double d1 = (double)pPos.getY();
+            double d1 = (double)pPos.getY() + 0.25D;
             double d2 = (double)pPos.getZ() + 0.5D;
             if (pRandom.nextDouble() < 0.1D) {
                 pLevel.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
@@ -135,6 +156,13 @@ public class FoundryBlock extends BaseEntityBlock {
             double d3 = 0.52D;
             double d4 = pRandom.nextDouble() * 0.6D - 0.3D;
             double d5 = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.52D : d4;
+
+            double csmokeX = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * 0.8D : d4;
+            double csmokeZ = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.8D : d4;
+
+            double csmoke2X = direction$axis == Direction.Axis.X ? (double)direction.getStepX() * -0.8D : d4;
+            double csmoke2Z = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * -0.8D : d4;
+
             double d6 = pRandom.nextDouble() * 6.0D / 16.0D;
             double d7 = direction$axis == Direction.Axis.Z ? (double)direction.getStepZ() * 0.52D : d4;
             pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
@@ -143,8 +171,8 @@ public class FoundryBlock extends BaseEntityBlock {
             pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6 + 8, d2 + d7, 0.0D, 0.0D, 0.0D);
             pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6 + 8, d2 + d7, 0.0D, 0.0D, 0.0D);
 
-            pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + d5, d1 + 1.2 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
-            //pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
+            pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + csmokeZ, d1 + d6 + 1.1, d2 + csmokeX, 0.0D, 0.02D + Mth.nextDouble(pRandom, 0, 0.05), 0.0D);
+            pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + csmoke2Z, d1 + d6 + 1.1, d2 + csmoke2X, 0.0D, 0.02D+ Mth.nextDouble(pRandom, 0, 0.05), 0.0D);
 
         }
     }
@@ -152,33 +180,29 @@ public class FoundryBlock extends BaseEntityBlock {
         return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite());
     }
 
-    /**
+/*    *//**
      * Called by BlockItem after this block has been placed.
-     */
+     *//*
     public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, LivingEntity pPlacer, ItemStack pStack) {
         if (pStack.hasCustomHoverName()) {
             BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            if (blockentity instanceof FoundryBlockEntity) {
-                ((FoundryBlockEntity)blockentity).setCustomName(pStack.getHoverName());
+            if (blockentity instanceof FoundryBE) {
+                ((FoundryBE)blockentity).setCustomName(pStack.getHoverName());
             }
         }
 
-    }
+    }*/
 
+    @Override
     public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (!pState.is(pNewState.getBlock())) {
-            BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-            if (blockentity instanceof FoundryBlockEntity) {
-                if (pLevel instanceof ServerLevel) {
-                    Containers.dropContents(pLevel, pPos, (FoundryBlockEntity)blockentity);
-                    ((FoundryBlockEntity)blockentity).getRecipesToAwardAndPopExperience((ServerLevel)pLevel, Vec3.atCenterOf(pPos));
-                }
-
-                pLevel.updateNeighbourForOutputSignal(pPos, this);
+        if (pState.getBlock() != pNewState.getBlock()) {
+            BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
+            if (blockEntity instanceof FoundryBE) {
+                ((FoundryBE) blockEntity).drops();
             }
-
-            super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
         }
+
+        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
     }
 
     /**

@@ -5,10 +5,8 @@ import com.prohitman.dragonsdungeons.client.entities.renderers.AutomatonRenderer
 import com.prohitman.dragonsdungeons.client.entities.renderers.EmblemscuteRenderer;
 import com.prohitman.dragonsdungeons.client.entities.renderers.WargRenderer;
 import com.prohitman.dragonsdungeons.client.entities.renderers.ZargRenderer;
-import com.prohitman.dragonsdungeons.client.screen.FoundryScreen;
-import com.prohitman.dragonsdungeons.client.screen.ModMenuTypes;
-import com.prohitman.dragonsdungeons.client.screen.TreasureChestScreen;
-import com.prohitman.dragonsdungeons.client.screen.UrnScreen;
+import com.prohitman.dragonsdungeons.client.screen.*;
+import com.prohitman.dragonsdungeons.client.screen.menu.FoundryBEMenu;
 import com.prohitman.dragonsdungeons.common.particles.MithrilCrystalParticle;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
 import com.prohitman.dragonsdungeons.core.init.ModParticles;
@@ -38,7 +36,10 @@ public class ClientModEvents {
 
             MenuScreens.register(ModMenuTypes.TREASURE_CHEST_MENU.get(), TreasureChestScreen::new);
             MenuScreens.register(ModMenuTypes.URN_MENU.get(), UrnScreen::new);
-            MenuScreens.register(ModMenuTypes.FOUNDRY_MENU.get(), FoundryScreen::new);
+            //MenuScreens.register(ModMenuTypes.FOUNDRY_MENU.get(), FoundryScreen::new);
+
+            MenuScreens.register(ModMenuTypes.FOUNDRY_MENU.get(), FoundryBEScreen::new);
+
         });
     }
 

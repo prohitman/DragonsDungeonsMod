@@ -1,0 +1,6 @@
+{
+  "type": "dragonsdungeons:alloying",
+  "first_ingredient": { "item": "minecraft:iron_ingot" },
+  "second_ingredient": { "item": "minecraft:coal" },
+  "result": { "item": "dragonsdungeons:steel_ingot", "count": 1 }
+}
