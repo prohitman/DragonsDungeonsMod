@@ -1,0 +1,9 @@
+// 1.20.1	2024-07-07T18:02:17.9826758	Recipes
+8325804afd6be8899b09512c8c7c4ececea0194b data/dragonsdungeons/advancements/recipes/building_blocks/steel_block.json
+1ebbeab76390e5915a0ef01105e9c9196e4d39bb data/dragonsdungeons/recipes/steel_block.json
+0c69c172faf3aec621acbbaa50182a5d35b177e3 data/minecraft/advancements/recipes/misc/dwarven_steel_ingot_alloying.json
+380a7430d3d7d31f1f9d413328b667eda7a5763a data/minecraft/advancements/recipes/misc/mithril_ingot_alloying.json
+3cbac720c8bed91307035e7d3615be0a770052d5 data/minecraft/advancements/recipes/misc/steel_ingot_alloying.json
+2f0105bd572403a79d09288589d6ca65a5fc0422 data/minecraft/recipes/dwarven_steel_ingot_alloying.json
+6e9d8b69a72ecdd28ccfcb898d9553c668fc9577 data/minecraft/recipes/mithril_ingot_alloying.json
+05c48fa8266b5eff4c6253b7b2d8370b7c4abae8 data/minecraft/recipes/steel_ingot_alloying.json

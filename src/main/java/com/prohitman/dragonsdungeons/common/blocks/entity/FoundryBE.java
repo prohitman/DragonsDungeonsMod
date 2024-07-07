@@ -44,7 +44,7 @@ public class FoundryBE extends BlockEntity implements MenuProvider {
 
     protected final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 100;
+    private int maxProgress = 200;
     private int fuelTime = 0;
     private int maxFuelTime = 0;
 

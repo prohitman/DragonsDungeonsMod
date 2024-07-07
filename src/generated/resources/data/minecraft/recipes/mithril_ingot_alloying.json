@@ -1,0 +1,12 @@
+{
+  "type": "dragonsdungeons:alloying",
+  "first_ingredient": {
+    "item": "dragonsdungeons:mithril_crystal"
+  },
+  "result": {
+    "item": "dragonsdungeons:mithril_ingot"
+  },
+  "second_ingredient": {
+    "item": "dragonsdungeons:steel_ingot"
+  }
+}

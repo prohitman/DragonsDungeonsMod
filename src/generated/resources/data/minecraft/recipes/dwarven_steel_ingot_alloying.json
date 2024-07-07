@@ -1,0 +1,12 @@
+{
+  "type": "dragonsdungeons:alloying",
+  "first_ingredient": {
+    "item": "dragonsdungeons:raw_adamantite"
+  },
+  "result": {
+    "item": "dragonsdungeons:dwarven_steel_ingot"
+  },
+  "second_ingredient": {
+    "item": "dragonsdungeons:steel_ingot"
+  }
+}

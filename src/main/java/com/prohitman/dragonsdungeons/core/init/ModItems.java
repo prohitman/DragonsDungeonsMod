@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DragonsDungeons.MODID);
 
-
+    //TODO Reverse auto tool creation, so that individual tools can be accessed
     public static final RegistryObject<Item> DWARVEN_STEEL_INGOT = createRegistryWithToolSet("dwarven_steel_ingot", () -> new Item(new Item.Properties()), ModItemTiers.DWARVEN_STEEL);
     public static final RegistryObject<Item> ELVEN_BRASS_INGOT = createRegistryWithToolSet("elven_brass_ingot", () -> new Item(new Item.Properties()), ModItemTiers.ELVEN_BRASS);
     public static final RegistryObject<Item> MITHRIL_INGOT = createRegistryWithToolSet("mithril_ingot", () -> new Item(new Item.Properties()), ModItemTiers.MITHRIL);

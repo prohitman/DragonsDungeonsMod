@@ -22,6 +22,7 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, DragonsDungeons.MODID);
 
+    //TODO Reverse auto slab/stairs/walls creation, so that individual blocks can be accessed
     public static final RegistryObject<Block> CHUNKY_RUBBLE = createRegistry("chunky_rubble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT)), new Item.Properties());
     public static final RegistryObject<Block> RUBBLE = createRegistry("rubble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT)), new Item.Properties());
     public static final RegistryObject<Block> THATCH = createRegistry("thatch", () -> new Block(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).noOcclusion()), new Item.Properties());

@@ -6,6 +6,7 @@ import com.prohitman.dragonsdungeons.core.datagen.client.ModItemModelProvider;
 import com.prohitman.dragonsdungeons.core.datagen.client.ModLanguageProvider;
 import com.prohitman.dragonsdungeons.core.datagen.server.ModBiomeTags;
 import com.prohitman.dragonsdungeons.core.datagen.server.ModBlockTags;
+import com.prohitman.dragonsdungeons.core.datagen.server.ModRecipes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
@@ -47,6 +48,8 @@ public class DataGenerators {
                 output -> blockTags);
         dataGenerator.addProvider(event.includeServer(), (DataProvider.Factory<ModBiomeTags>)
                 output -> biomeTags);
+        dataGenerator.addProvider(event.includeServer(), new ModRecipes(dataGenerator.getPackOutput()));
+
 /*
         dataGenerator.addProvider(event.includeServer(), (DataProvider.Factory<ModItemTags>)
                 output -> new ModItemTags(output, lookupProvider, blockTags.contentsGetter(), event.getExistingFileHelper()));
