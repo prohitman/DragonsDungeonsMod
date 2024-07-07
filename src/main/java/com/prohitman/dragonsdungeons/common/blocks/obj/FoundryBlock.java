@@ -138,7 +138,7 @@ public class FoundryBlock extends BaseEntityBlock {
             double d1 = (double)pPos.getY() + 0.25D;
             double d2 = (double)pPos.getZ() + 0.5D;
             if (pRandom.nextDouble() < 0.1D) {
-                pLevel.playLocalSound(d0, d1, d2, SoundEvents.FURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 1.0F, 1.0F, false);
+                pLevel.playLocalSound(d0, d1, d2, SoundEvents.FIRE_AMBIENT, SoundSource.BLOCKS, 1.0F, 1.0F, false);
             }
 
             Direction direction = pState.getValue(FACING);
