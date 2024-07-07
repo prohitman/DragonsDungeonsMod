@@ -1,24 +1,18 @@
 package com.prohitman.dragonsdungeons.client.screen.slots;
 
 import com.prohitman.dragonsdungeons.client.screen.menu.FoundryMenu;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.Container;
-import net.minecraft.world.inventory.AbstractFurnaceMenu;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.SlotItemHandler;
 
-public class FoundryFuelSlot extends Slot {
-    private final FoundryMenu menu;
-
-    public FoundryFuelSlot(FoundryMenu pFurnaceMenu, Container pFurnaceContainer, int pSlot, int pXPosition, int pYPosition) {
-        super(pFurnaceContainer, pSlot, pXPosition, pYPosition);
-        this.menu = pFurnaceMenu;
+public class FoundryFuelSlot extends SlotItemHandler {
+    private FoundryMenu menu;
+    public FoundryFuelSlot(FoundryMenu menu, IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        super(itemHandler, index, xPosition, yPosition);
+        this.menu = menu;
     }
 
-    /**
-     * Check if the stack is allowed to be placed in this slot, used for armor slots as well as furnace fuel.
-     */
     public boolean mayPlace(ItemStack pStack) {
         return this.menu.isFuel(pStack) || isBucket(pStack);
     }

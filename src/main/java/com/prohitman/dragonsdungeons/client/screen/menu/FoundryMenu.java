@@ -2,70 +2,127 @@ package com.prohitman.dragonsdungeons.client.screen.menu;
 
 import com.prohitman.dragonsdungeons.client.screen.ModMenuTypes;
 import com.prohitman.dragonsdungeons.client.screen.slots.FoundryFuelSlot;
-import com.prohitman.dragonsdungeons.client.screen.slots.FoundryResultSlot;
-import com.prohitman.dragonsdungeons.common.blocks.entity.FoundryBlockEntity;
-import com.prohitman.dragonsdungeons.common.blocks.entity.TreasureChestBlockEntity;
+import com.prohitman.dragonsdungeons.client.screen.slots.FoundryOutputSlot;
+import com.prohitman.dragonsdungeons.common.blocks.entity.FoundryBE;
+import com.prohitman.dragonsdungeons.core.init.ModBlocks;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.Container;
-import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.AbstractCookingRecipe;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.items.SlotItemHandler;
 
-public class FoundryMenu extends RecipeBookMenu<Container> {
-    public static final int INGREDIENT_SLOT = 0;
-    public static final int FUEL_SLOT = 1;
-    public static final int RESULT_SLOT = 2;
-    public static final int SLOT_COUNT = 3;
-    public static final int DATA_COUNT = 4;
-    private static final int INV_SLOT_START = 3;
-    private static final int INV_SLOT_END = 30;
-    private static final int USE_ROW_SLOT_START = 30;
-    private static final int USE_ROW_SLOT_END = 39;
-    private final Container container;
+public class FoundryMenu extends AbstractContainerMenu {
+    public final FoundryBE blockEntity;
+    private final Level level;
     private final ContainerData data;
-    protected final Level level;
-    private final RecipeType<? extends AbstractCookingRecipe> recipeType;
-    private final RecipeBookType recipeBookType;
-    public final FoundryBlockEntity blockEntity;
 
-    public FoundryMenu(int pContainerId, Inventory pPlayerInventory, FriendlyByteBuf extraData) {
-        this(pContainerId, pPlayerInventory, (Container) pPlayerInventory.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
+    public FoundryMenu(int pContainerId, Inventory inv, FriendlyByteBuf extraData) {
+        this(pContainerId, inv, inv.player.level().getBlockEntity(extraData.readBlockPos()), new SimpleContainerData(4));
     }
 
-    public FoundryMenu(int pContainerId, Inventory pPlayerInventory, Container pContainer, ContainerData pData) {
+    public FoundryMenu(int pContainerId, Inventory inv, BlockEntity entity, ContainerData data) {
         super(ModMenuTypes.FOUNDRY_MENU.get(), pContainerId);
-        this.recipeType = RecipeType.BLASTING;
-        this.recipeBookType = RecipeBookType.BLAST_FURNACE;
-        checkContainerSize(pContainer, 5);
-        checkContainerDataCount(pData, 4);
-        this.container = pContainer;
-        this.data = pData;
-        this.level = pPlayerInventory.player.level();
-        blockEntity = ((FoundryBlockEntity) pContainer);
+        checkContainerSize(inv, 4);
+        blockEntity = ((FoundryBE) entity);
+        this.level = inv.player.level();
+        this.data = data;
 
-        addPlayerInventory(pPlayerInventory);
-        addPlayerHotbar(pPlayerInventory);
+        addPlayerInventory(inv);
+        addPlayerHotbar(inv);
 
         this.blockEntity.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
-            for (int i = 0; i < 3; ++i) {
-                this.addSlot(new SlotItemHandler(iItemHandler, i, 44+i * 18, 27));
-            }
-
-            this.addSlot(new FoundryFuelSlot(this, pContainer, 4, 80, 75));
-            this.addSlot(new FoundryResultSlot(pPlayerInventory.player, pContainer, 3, 116, 27));
-
+            this.addSlot(new SlotItemHandler(iItemHandler, 0, 53, 27)); // Input slot 1
+            this.addSlot(new SlotItemHandler(iItemHandler, 1, 71, 27)); // Input slot 2
+            this.addSlot(new FoundryFuelSlot(this, iItemHandler, 2, 80, 75)); // Fuel slot
+            this.addSlot(new FoundryOutputSlot(iItemHandler, 3, 107, 27)); // Output slot
         });
 
-        this.addDataSlots(pData);
+        addDataSlots(data);
+    }
+
+    public boolean isFuel(ItemStack pStack) {
+        return ForgeHooks.getBurnTime(pStack, RecipeType.SMELTING) > 0;
+    }
+
+    public boolean isCrafting() {
+        return data.get(0) > 0;
+    }
+
+    public int getScaledProgress() {
+        int progress = this.data.get(0);
+        int maxProgress = this.data.get(1); // Max Progress
+        int progressArrowSize = 17; // This is the height in pixels of your arrow
+
+        return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
+    }
+
+    public int getFuelLeftScaled() {
+        int fuelTime = this.data.get(2);
+        int maxFuelTime = this.data.get(3);
+        int fuelBarHeight = 20; // This is the height in pixels of your fuel bar
+
+        return maxFuelTime != 0 && fuelTime != 0 ? fuelTime * fuelBarHeight / maxFuelTime : 0;
+    }
+
+    // CREDIT GOES TO: diesieben07 | https://github.com/diesieben07/SevenCommons
+    // must assign a slot number to each of the slots used by the GUI.
+    // For this container, we can see both the tile inventory's slots as well as the player inventory slots and the hotbar.
+    // Each time we add a Slot to the container, it automatically increases the slotIndex, which means
+    //  0 - 8 = hotbar slots (which will map to the InventoryPlayer slot numbers 0 - 8)
+    //  9 - 35 = player inventory slots (which map to the InventoryPlayer slot numbers 9 - 35)
+    //  36 - 44 = TileInventory slots, which map to our TileEntity slot numbers 0 - 8)
+    private static final int HOTBAR_SLOT_COUNT = 9;
+    private static final int PLAYER_INVENTORY_ROW_COUNT = 3;
+    private static final int PLAYER_INVENTORY_COLUMN_COUNT = 9;
+    private static final int PLAYER_INVENTORY_SLOT_COUNT = PLAYER_INVENTORY_COLUMN_COUNT * PLAYER_INVENTORY_ROW_COUNT;
+    private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
+    private static final int VANILLA_FIRST_SLOT_INDEX = 0;
+    private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
+
+    // THIS YOU HAVE TO DEFINE!
+    private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
+    @Override
+    public ItemStack quickMoveStack(Player playerIn, int pIndex) {
+        Slot sourceSlot = slots.get(pIndex);
+        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        ItemStack sourceStack = sourceSlot.getItem();
+        ItemStack copyOfSourceStack = sourceStack.copy();
+
+        // Check if the slot clicked is one of the vanilla container slots
+        if (pIndex < VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT) {
+            // This is a vanilla container slot so merge the stack into the tile inventory
+            if (!moveItemStackTo(sourceStack, TE_INVENTORY_FIRST_SLOT_INDEX, TE_INVENTORY_FIRST_SLOT_INDEX
+                    + TE_INVENTORY_SLOT_COUNT, false)) {
+                return ItemStack.EMPTY;  // EMPTY_ITEM
+            }
+        } else if (pIndex < TE_INVENTORY_FIRST_SLOT_INDEX + TE_INVENTORY_SLOT_COUNT) {
+            // This is a TE slot so merge the stack into the players inventory
+            if (!moveItemStackTo(sourceStack, VANILLA_FIRST_SLOT_INDEX, VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT, false)) {
+                return ItemStack.EMPTY;
+            }
+        } else {
+            System.out.println("Invalid slotIndex:" + pIndex);
+            return ItemStack.EMPTY;
+        }
+        // If stack size == 0 (the entire stack was moved) set slot contents to null
+        if (sourceStack.getCount() == 0) {
+            sourceSlot.set(ItemStack.EMPTY);
+        } else {
+            sourceSlot.setChanged();
+        }
+        sourceSlot.onTake(playerIn, sourceStack);
+        return copyOfSourceStack;
+    }
+
+    @Override
+    public boolean stillValid(Player pPlayer) {
+        return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()), pPlayer, ModBlocks.FOUNDRY.get());
     }
 
     private void addPlayerInventory(Inventory playerInventory) {
@@ -80,134 +137,5 @@ public class FoundryMenu extends RecipeBookMenu<Container> {
         for (int i = 0; i < 9; ++i) {
             this.addSlot(new Slot(playerInventory, i, 8 + i * 18, 165));
         }
-    }
-
-    public void fillCraftSlotsStackedContents(StackedContents pItemHelper) {
-        if (this.container instanceof StackedContentsCompatible) {
-            ((StackedContentsCompatible)this.container).fillStackedContents(pItemHelper);
-        }
-
-    }
-
-    public void clearCraftingContent() {
-        this.getSlot(0).set(ItemStack.EMPTY);
-        this.getSlot(1).set(ItemStack.EMPTY);
-        this.getSlot(2).set(ItemStack.EMPTY);
-
-        this.getSlot(4).set(ItemStack.EMPTY);
-    }
-
-    public boolean recipeMatches(Recipe<? super Container> pRecipe) {
-        return pRecipe.matches(this.container, this.level);
-    }
-
-    public int getResultSlotIndex() {
-        return 3;
-    }
-
-    public int getGridWidth() {
-        return 3;
-    }
-
-    public int getGridHeight() {
-        return 1;
-    }
-
-    public int getSize() {
-        return 5;
-    }
-
-    /**
-     * Determines whether supplied player can use this container
-     */
-    public boolean stillValid(Player pPlayer) {
-        return this.container.stillValid(pPlayer);
-    }
-
-    /**
-     * Handle when the stack in slot {@code index} is shift-clicked. Normally this moves the stack between the player
-     * inventory and the other inventory(s).
-     */
-    public ItemStack quickMoveStack(Player pPlayer, int pIndex) {
-        ItemStack itemstack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(pIndex);
-        if (slot != null && slot.hasItem()) {
-            ItemStack itemstack1 = slot.getItem();
-            itemstack = itemstack1.copy();
-            if (pIndex == 3) {
-                if (!this.moveItemStackTo(itemstack1, 3, 39, true)) {
-                    return ItemStack.EMPTY;
-                }
-
-                slot.onQuickCraft(itemstack1, itemstack);
-            } else if (pIndex != 1 && pIndex != 0) {
-                if (this.canSmelt(itemstack1)) {
-                    if (!this.moveItemStackTo(itemstack1, 0, 1, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (this.isFuel(itemstack1)) {
-                    if (!this.moveItemStackTo(itemstack1, 1, 2, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (pIndex >= 3 && pIndex < 30) {
-                    if (!this.moveItemStackTo(itemstack1, 30, 39, false)) {
-                        return ItemStack.EMPTY;
-                    }
-                } else if (pIndex >= 30 && pIndex < 39 && !this.moveItemStackTo(itemstack1, 3, 30, false)) {
-                    return ItemStack.EMPTY;
-                }
-            } else if (!this.moveItemStackTo(itemstack1, 3, 39, false)) {
-                return ItemStack.EMPTY;
-            }
-
-            if (itemstack1.isEmpty()) {
-                slot.setByPlayer(ItemStack.EMPTY);
-            } else {
-                slot.setChanged();
-            }
-
-            if (itemstack1.getCount() == itemstack.getCount()) {
-                return ItemStack.EMPTY;
-            }
-
-            slot.onTake(pPlayer, itemstack1);
-        }
-
-        return itemstack;
-    }
-
-    protected boolean canSmelt(ItemStack pStack) {
-        return this.level.getRecipeManager().getRecipeFor((RecipeType<AbstractCookingRecipe>)this.recipeType, new SimpleContainer(pStack), this.level).isPresent();
-    }
-
-    public boolean isFuel(ItemStack pStack) {
-        return net.minecraftforge.common.ForgeHooks.getBurnTime(pStack, this.recipeType) > 0;
-    }
-
-    public int getBurnProgress() {
-        int i = this.data.get(2);
-        int j = this.data.get(3);
-        return j != 0 && i != 0 ? i * 24 / j : 0;
-    }
-
-    public int getLitProgress() {
-        int i = this.data.get(1);
-        if (i == 0) {
-            i = 200;
-        }
-
-        return this.data.get(0) * 21 / i;
-    }
-
-    public boolean isLit() {
-        return this.data.get(0) > 0;
-    }
-
-    public RecipeBookType getRecipeBookType() {
-        return this.recipeBookType;
-    }
-
-    public boolean shouldMoveToInventory(int pSlotIndex) {
-        return pSlotIndex != 4;
     }
 }

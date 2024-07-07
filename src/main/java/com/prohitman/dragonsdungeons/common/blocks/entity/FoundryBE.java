@@ -1,6 +1,5 @@
 package com.prohitman.dragonsdungeons.common.blocks.entity;
 
-import com.prohitman.dragonsdungeons.client.screen.menu.FoundryBEMenu;
 import com.prohitman.dragonsdungeons.client.screen.menu.FoundryMenu;
 import com.prohitman.dragonsdungeons.common.blocks.obj.FoundryBlock;
 import com.prohitman.dragonsdungeons.common.recipes.AlloyingRecipe;
@@ -117,7 +116,7 @@ public class FoundryBE extends BlockEntity implements MenuProvider {
     @Nullable
     @Override
     public AbstractContainerMenu createMenu(int pContainerId, Inventory pPlayerInventory, Player pPlayer) {
-        return new FoundryBEMenu(pContainerId, pPlayerInventory, this, this.data);
+        return new FoundryMenu(pContainerId, pPlayerInventory, this, this.data);
     }
 
     @Override
