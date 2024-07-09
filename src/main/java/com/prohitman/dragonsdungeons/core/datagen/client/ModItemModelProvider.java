@@ -40,6 +40,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         createSingle(ModItems.FLASK_OF_FIRE);
         createSingle(ModItems.FLASK_OF_ACID);
         createSingle(ModItems.MECHANICAL_PART);
+        createSingle(ModItems.FOSSIL_BONE);
 
 
         //Armors

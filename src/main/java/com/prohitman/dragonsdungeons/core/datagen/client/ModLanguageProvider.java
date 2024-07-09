@@ -34,6 +34,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addItem(ModItems.FLASK_OF_FIRE);
         addItem(ModItems.FLASK_OF_ACID);
         addItem(ModItems.MECHANICAL_PART);
+        addItem(ModItems.FOSSIL_BONE);
 
         addItem(ModItems.WARG_SPAWN_EGG);
         addItem(ModItems.EMBLEMSCUTE_SPAWN_EGG);

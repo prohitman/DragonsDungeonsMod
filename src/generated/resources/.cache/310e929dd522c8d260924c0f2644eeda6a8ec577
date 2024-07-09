@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-07T05:16:16.0359714	Item Models: dragonsdungeons
+// 1.20.1	2024-07-09T21:17:55.1647579	Item Models: dragonsdungeons
 7eb1579ce426cbb65c592b03938f8bf1bb003faf assets/dragonsdungeons/models/item/adamantite_ore.json
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
@@ -85,6 +85,7 @@ b77f28092559b80f58066195ad8ea2bdca8040f0 assets/dragonsdungeons/models/item/forg
 8cfd8332a3dc6b01e84852aca31f00c8d47d7731 assets/dragonsdungeons/models/item/forged_tiles_slab.json
 3d1fef26a97bc1e67ee4242dea83707c6250803e assets/dragonsdungeons/models/item/forged_tiles_stairs.json
 754b139ff5603b988e4aee961a793dcb4274d74a assets/dragonsdungeons/models/item/forged_tiles_wall.json
+332aed543fa5c9ae1eccf5178abdbd589ad7e24b assets/dragonsdungeons/models/item/fossil_bone.json
 494dc43ce31c9a86e150ae252f714c32f08df464 assets/dragonsdungeons/models/item/foundry.json
 a5fdc0a7f2dbf968da3e67bdc2541887836a220e assets/dragonsdungeons/models/item/gold_coins.json
 c460bc37ff250b1dcf05160de10d90240ca2bb3c assets/dragonsdungeons/models/item/greenschist.json
