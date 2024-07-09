@@ -153,7 +153,7 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
         if(randomsource.nextInt(100) == 0){
             this.setBaby(true);
         }
-        if (randomsource.nextInt(5) == 0 && !this.isBaby()) {
+        if (randomsource.nextFloat() < 0.4 && !this.isBaby()) {
             spawnRidingZombie(pLevel, pDifficulty);
         }
 
