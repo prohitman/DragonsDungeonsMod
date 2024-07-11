@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_mithril_crystal": {
+    "has_item.dragonsdungeons.mithril_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "dragonsdungeons:mithril_crystal"
+              "dragonsdungeons:mithril_ingot"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:mithril_ingot_alloying"
+        "recipe": "dragonsdungeons:mithril_block"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_mithril_crystal",
+      "has_item.dragonsdungeons.mithril_ingot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:mithril_ingot_alloying"
+      "dragonsdungeons:mithril_block"
     ]
   },
   "sends_telemetry_event": false

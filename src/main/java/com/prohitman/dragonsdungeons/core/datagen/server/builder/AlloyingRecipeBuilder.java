@@ -1,6 +1,7 @@
 package com.prohitman.dragonsdungeons.core.datagen.server.builder;
 
 import com.google.gson.JsonObject;
+import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.core.init.ModRecipeSerializers;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -46,7 +47,7 @@ public class AlloyingRecipeBuilder {
     }
 
     public void save(Consumer<FinishedRecipe> pRecipeConsumer, String pLocation) {
-        this.save(pRecipeConsumer, new ResourceLocation(pLocation));
+        this.save(pRecipeConsumer, new ResourceLocation(DragonsDungeons.MODID, pLocation));
     }
 
     public void save(Consumer<FinishedRecipe> pRecipeConsumer, ResourceLocation pLocation) {

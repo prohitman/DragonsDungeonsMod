@@ -1,12 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_iron_ingot": {
+    "has_item.dragonsdungeons.dwarven_steel_ingot": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:iron_ingot"
+              "dragonsdungeons:dwarven_steel_ingot"
             ]
           }
         ]
@@ -15,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:steel_ingot_alloying"
+        "recipe": "dragonsdungeons:dwarven_steel_axe"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_iron_ingot",
+      "has_item.dragonsdungeons.dwarven_steel_ingot",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "minecraft:steel_ingot_alloying"
+      "dragonsdungeons:dwarven_steel_axe"
     ]
   },
   "sends_telemetry_event": false

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "m": {
+      "item": "dragonsdungeons:mithril_ingot"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "m",
+    "m",
+    "s"
+  ],
+  "result": {
+    "item": "dragonsdungeons:mithril_sword"
+  },
+  "show_notification": true
+}

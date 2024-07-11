@@ -280,7 +280,14 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         }
 
         if(!this.level().isClientSide){
-            this.setRunning(this.moveControl.getSpeedModifier() >= 2);
+            if(!this.isVehicle()){
+                this.setRunning(this.moveControl.getSpeedModifier() >= 2);
+            }
+            if(this.isRunning()){
+                System.out.println("I am running!");
+            } else {
+                System.out.println("I am not");
+            }
         } else {
             this.setupAttackAnimation();
         }
@@ -658,6 +665,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
                 // increasing speed by 100% if the spring key is held down (number for testing purposes)
                 if(Minecraft.getInstance().options.keySprint.isDown()) {
                     newSpeed *= 1.7f;
+                }
+
+                if(newSpeed > (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) + speedBonus && !this.level().isClientSide){
                     this.setRunning(true);
                 }
 

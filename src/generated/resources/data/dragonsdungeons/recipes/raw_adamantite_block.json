@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "m": {
+      "item": "dragonsdungeons:raw_adamantite"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "mmm",
+    "mmm"
+  ],
+  "result": {
+    "item": "dragonsdungeons:raw_adamantite_block"
+  },
+  "show_notification": true
+}

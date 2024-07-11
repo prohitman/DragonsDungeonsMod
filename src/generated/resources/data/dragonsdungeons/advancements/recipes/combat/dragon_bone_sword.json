@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.dragonsdungeons.dragon_bone": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragonsdungeons:dragon_bone"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dragonsdungeons:dragon_bone_sword"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.dragonsdungeons.dragon_bone",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dragonsdungeons:dragon_bone_sword"
+    ]
+  },
+  "sends_telemetry_event": false
+}

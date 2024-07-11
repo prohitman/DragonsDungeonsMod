@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.dragonsdungeons.elven_brass_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragonsdungeons:elven_brass_ingot"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dragonsdungeons:elven_brass_axe"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.dragonsdungeons.elven_brass_ingot",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dragonsdungeons:elven_brass_axe"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -12,6 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class AlloyingRecipe implements Recipe<Container> {
     private final ItemStack result;
     private final NonNullList<Ingredient> ingredients;
 
-    public AlloyingRecipe(ResourceLocation id, ItemStack result, NonNullList<Ingredient> ingredients) {
+    public AlloyingRecipe(NonNullList<Ingredient> ingredients, ItemStack result, ResourceLocation id) {
         this.id = id;
         this.result = result;
         this.ingredients = ingredients;
@@ -28,6 +29,9 @@ public class AlloyingRecipe implements Recipe<Container> {
 
     @Override
     public boolean matches(Container inv, Level level) {
+        if(level.isClientSide){
+            return false;
+        }
         List<ItemStack> inputs = new ArrayList<>();
         for (int i = 0; i < 2; i++) {
             inputs.add(inv.getItem(i));
@@ -46,6 +50,11 @@ public class AlloyingRecipe implements Recipe<Container> {
             }
         }
         return inputs.isEmpty();
+    }
+
+    @Override
+    public NonNullList<Ingredient> getIngredients() {
+        return ingredients;
     }
 
     @Override
@@ -89,29 +98,32 @@ public class AlloyingRecipe implements Recipe<Container> {
 
         @Override
         public AlloyingRecipe fromJson(ResourceLocation recipeId, JsonObject json) {
-            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
             NonNullList<Ingredient> ingredients = NonNullList.withSize(2, Ingredient.EMPTY);
             ingredients.set(0, Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "first_ingredient")));
             ingredients.set(1, Ingredient.fromJson(GsonHelper.getAsJsonObject(json, "second_ingredient")));
-            return new AlloyingRecipe(recipeId, result, ingredients);
+
+            ItemStack result = ShapedRecipe.itemStackFromJson(GsonHelper.getAsJsonObject(json, "result"));
+
+            return new AlloyingRecipe(ingredients, result, recipeId);
         }
 
         @Override
-        public AlloyingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
-            ItemStack result = buffer.readItem();
+        public @Nullable AlloyingRecipe fromNetwork(ResourceLocation recipeId, FriendlyByteBuf buffer) {
             NonNullList<Ingredient> ingredients = NonNullList.withSize(2, Ingredient.EMPTY);
-            for (int i = 0; i < ingredients.size(); i++) {
-                ingredients.set(i, Ingredient.fromNetwork(buffer));
-            }
-            return new AlloyingRecipe(recipeId, result, ingredients);
+
+            ingredients.set(0, Ingredient.fromNetwork(buffer));
+            ingredients.set(1, Ingredient.fromNetwork(buffer));
+
+            ItemStack result = buffer.readItem();
+            return new AlloyingRecipe(ingredients, result, recipeId);
         }
 
         @Override
         public void toNetwork(FriendlyByteBuf buffer, AlloyingRecipe recipe) {
-            buffer.writeItemStack(recipe.getResultItem(null), false);
             for (Ingredient ingredient : recipe.getIngredients()) {
                 ingredient.toNetwork(buffer);
             }
+            buffer.writeItemStack(recipe.getResultItem(null), false);
         }
     }
 

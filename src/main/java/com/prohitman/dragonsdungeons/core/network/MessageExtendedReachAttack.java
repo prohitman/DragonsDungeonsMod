@@ -43,7 +43,7 @@ public class MessageExtendedReachAttack implements IMessage<MessageExtendedReach
 
             Entity theEntity = thePlayer.level().getEntity(message.entityId);
             // DEBUG
-            System.out.println("Entity = " + theEntity);
+            //System.out.println("Entity = " + theEntity);
 
             // Need to ensure that hackers can't cause trick kills,
             // so double check weapon type and reach

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "m": {
+      "item": "dragonsdungeons:dragon_bone"
+    },
+    "s": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "mm",
+    "sm",
+    "s "
+  ],
+  "result": {
+    "item": "dragonsdungeons:dragon_bone_axe"
+  },
+  "show_notification": true
+}

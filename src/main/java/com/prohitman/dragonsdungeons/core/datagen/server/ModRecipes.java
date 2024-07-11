@@ -29,6 +29,26 @@ public class ModRecipes extends RecipeProvider {
         this.alloying(Items.IRON_INGOT, Items.COAL, ModItems.STEEL_INGOT.get(), RecipeCategory.MISC, consumer);
 
         createFullBlock(ModItems.STEEL_INGOT.get(), ModBlocks.STEEL_BLOCK.get(), consumer);
+        createFullBlock(ModItems.DWARVEN_STEEL_INGOT.get(), ModBlocks.DWARVEN_STEEL_BLOCK.get(), consumer);
+        createFullBlock(ModItems.MITHRIL_INGOT.get(), ModBlocks.MITHRIL_BLOCK.get(), consumer);
+        createFullBlock(ModItems.ELVEN_BRASS_INGOT.get(), ModBlocks.ELVEN_BRASS_BLOCK.get(), consumer);
+        createFullBlock(ModItems.RAW_ADAMANTITE.get(), ModBlocks.RAW_ADAMANTITE_BLOCK.get(), consumer);
+
+        createBlockRecipes(ModBlocks.LAVAROCK.get(), true, consumer);
+
+        createToolSet(ModItems.STEEL_INGOT.get(), consumer);
+        createToolSet(ModItems.DWARVEN_STEEL_INGOT.get(), consumer);
+        createToolSet(ModItems.MITHRIL_INGOT.get(), consumer);
+        createToolSet(ModItems.ELVEN_BRASS_INGOT.get(), consumer);
+        createToolSet(ModItems.DRAGON_BONE.get(), consumer);
+    }
+
+    public void createBlockRecipes(Block block, boolean withWalls, Consumer<FinishedRecipe> consumer){
+        stairBuilder(ModBlocks.getStairFromBlock(block).asItem(), Ingredient.of(block)).save(consumer);
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getSlabFromBlock(block).asItem(), Ingredient.of(block)).save(consumer);
+        if(withWalls){
+            wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getWallFromBlock(block).asItem(), Ingredient.of(block)).save(consumer);
+        }
     }
 
     public void alloying(Item first_ingredient, Item second_ingredient, Item result, RecipeCategory category, Consumer<FinishedRecipe> consumer){
@@ -51,6 +71,15 @@ public class ModRecipes extends RecipeProvider {
 
     public void createArmorSet(){
 
+    }
+
+    public void createToolSet(Item material, Consumer<FinishedRecipe> consumer){
+        createToolSet(material,
+                ModItems.getSwordFromMaterial(material),
+                ModItems.getShovelFromMaterial(material),
+                ModItems.getAxeFromMaterial(material),
+                ModItems.getHoeFromMaterial(material),
+                consumer);
     }
 
     public void createToolSet(Item material, Item sword, Item shovel, Item axe, Item hoe, Consumer<FinishedRecipe> consumer){

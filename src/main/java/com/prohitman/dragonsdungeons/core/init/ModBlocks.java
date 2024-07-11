@@ -8,6 +8,7 @@ import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.ThatchRoof;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -122,5 +123,26 @@ public class ModBlocks {
 
     public static <T extends Block> RegistryObject<Block> createRegistryWithoutBlockItem(String name, Supplier<T> block) {
         return BLOCKS.register(name, block);
+    }
+
+    public static StairBlock getStairFromBlock(Block block){
+        return (StairBlock) BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter((blockIn -> blockIn.getDescriptionId()
+                        .equals(block.getDescriptionId().concat("_stairs"))))
+                .findFirst().get();
+    }
+
+    public static SlabBlock getSlabFromBlock(Block block){
+        return (SlabBlock) BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter((blockIn -> blockIn.getDescriptionId()
+                        .equals(block.getDescriptionId().concat("_slab"))))
+                .findFirst().get();
+    }
+
+    public static WallBlock getWallFromBlock(Block block){
+        return (WallBlock) BLOCKS.getEntries().stream().map(RegistryObject::get)
+                .filter((blockIn -> blockIn.getDescriptionId()
+                        .equals(block.getDescriptionId().concat("_wall"))))
+                .findFirst().get();
     }
 }

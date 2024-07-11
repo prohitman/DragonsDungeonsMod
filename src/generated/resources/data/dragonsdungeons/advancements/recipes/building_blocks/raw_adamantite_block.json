@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_item.dragonsdungeons.raw_adamantite": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "dragonsdungeons:raw_adamantite"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "dragonsdungeons:raw_adamantite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_item.dragonsdungeons.raw_adamantite",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "dragonsdungeons:raw_adamantite_block"
+    ]
+  },
+  "sends_telemetry_event": false
+}

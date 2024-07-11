@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "m": {
+      "item": "dragonsdungeons:elven_brass_ingot"
+    }
+  },
+  "pattern": [
+    "mmm",
+    "mmm",
+    "mmm"
+  ],
+  "result": {
+    "item": "dragonsdungeons:elven_brass_block"
+  },
+  "show_notification": true
+}

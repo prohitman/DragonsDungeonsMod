@@ -21,6 +21,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
+import java.util.logging.Logger;
 
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, DragonsDungeons.MODID);
@@ -105,6 +106,35 @@ public class ModItems {
         RegistryObject<Item> object_hoe = ITEMS.register(material+"_hoe", () -> new HoeItem(tier, -2, -1, new Item.Properties()));
 
         return object;
+    }
+
+    //TODO: Add Exception Handling
+    public static SwordItem getSwordFromMaterial(Item material){
+        return (SwordItem) ITEMS.getEntries().stream().map(RegistryObject::get)
+                .filter((item -> item.getDescriptionId()
+                        .equals(material.getDescriptionId().replace("_ingot", "").concat("_sword"))))
+                .findFirst().get();
+    }
+
+    public static ShovelItem getShovelFromMaterial(Item material){
+        return (ShovelItem) ITEMS.getEntries().stream().map(RegistryObject::get)
+                .filter((item -> item.getDescriptionId()
+                        .equals(material.getDescriptionId().replace("_ingot", "").concat("_shovel"))))
+                .findFirst().get();
+    }
+
+    public static AxeItem getAxeFromMaterial(Item material){
+        return (AxeItem) ITEMS.getEntries().stream().map(RegistryObject::get)
+                .filter((item -> item.getDescriptionId()
+                        .equals(material.getDescriptionId().replace("_ingot", "").concat("_axe"))))
+                .findFirst().get();
+    }
+
+    public static HoeItem getHoeFromMaterial(Item material){
+        return (HoeItem) ITEMS.getEntries().stream().map(RegistryObject::get)
+                .filter((item -> item.getDescriptionId()
+                        .equals(material.getDescriptionId().replace("_ingot", "").concat("_hoe"))))
+                .findFirst().get();
     }
 
     /*public static float getAttackDamageModifiers(int index){
