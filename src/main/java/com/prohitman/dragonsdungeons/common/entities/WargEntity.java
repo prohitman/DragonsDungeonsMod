@@ -36,7 +36,6 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.AbstractSkeleton;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Ghast;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.npc.AbstractVillager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.vehicle.DismountHelper;
@@ -49,8 +48,8 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.Vec2;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
@@ -105,6 +104,8 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     public WargEntity(EntityType<? extends TamableAnimal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setMaxUpStep(1f);
+        this.setPathfindingMalus(BlockPathTypes.POWDER_SNOW, -1.0F);
+        this.setPathfindingMalus(BlockPathTypes.DANGER_POWDER_SNOW, -1.0F);
     }
 
     public boolean isRunning() {
@@ -168,10 +169,10 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new AnimatedMeleeAttackGoal<>(this, 2.4D, true, 5, 10, 0.25));
-        this.goalSelector.addGoal(1, new FollowLeaderGoal(this, 2D, 8.0F, 30f));
+        this.goalSelector.addGoal(1, new FollowLeaderGoal(this, 1.25f, 8.0F, 30f));
 
         this.goalSelector.addGoal(0, new SitWhenOrderedToGoal(this));
-        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 1.75D, 10.0F, 2.0F, false));
+        this.goalSelector.addGoal(6, new FollowOwnerGoal(this, 2D, 5.0F, 2.0F, false));
 
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.0D, Ingredient.of(Items.ROTTEN_FLESH), true));
@@ -185,9 +186,9 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, Player.class, true, null));
         this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, AbstractVillager.class, true, null));
         this.targetSelector.addGoal(3, new NonTameRandomTargetGoal<>(this, IronGolem.class, true, null));
-        this.targetSelector.addGoal(1, new OwnerHurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new OwnerHurtTargetGoal(this));
-        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this, WargEntity.class)).setAlertOthers());
+        this.targetSelector.addGoal(3, new OwnerHurtByTargetGoal(this));
+        this.targetSelector.addGoal(3, new OwnerHurtTargetGoal(this));
+        this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setAlertOthers());
         this.targetSelector.addGoal(5, new NonTameRandomTargetGoal<>(this, Animal.class, false, PREY_SELECTOR));
         this.targetSelector.addGoal(6, new NonTameRandomTargetGoal<>(this, Turtle.class, false, Turtle.BABY_ON_LAND_SELECTOR));
         this.targetSelector.addGoal(7, new NearestAttackableTargetGoal<>(this, AbstractSkeleton.class, false));
@@ -280,14 +281,22 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         }
 
         if(!this.level().isClientSide){
-            if(!this.isVehicle()){
+
+            if(this.isVehicle() && this.getControllingPassenger() instanceof Player player){
+                //float runningSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) * 1.7f;
+                //float playerSpeed = 0.13f;
+
+                this.setRunning(player.isSprinting());
+            }
+            else {
                 this.setRunning(this.moveControl.getSpeedModifier() >= 2);
             }
-            if(this.isRunning()){
-                System.out.println("I am running!");
+
+            /*if(this.isRunning()){
+                System.out.println("I am running!" + this.getSpeed() + this.isVehicle() + this.moveControl.getSpeedModifier());
             } else {
-                System.out.println("I am not");
-            }
+                System.out.println("I am not" + this.getSpeed() + this.isVehicle() + this.moveControl.getSpeedModifier());
+            }*/
         } else {
             this.setupAttackAnimation();
         }
@@ -306,7 +315,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
         }
 
         //Handles Attack Targets
-        if(this.getTarget() != null){
+        /*if(this.getTarget() != null){
             LivingEntity target = this.getTarget();
             if(target instanceof WargEntity warg){
                 if(!this.isLeader() && warg.isLeader()){
@@ -327,7 +336,7 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
                     }
                 }
             }
-        }
+        }*/
     }
 
     private void setupAttackAnimation() {
@@ -346,24 +355,16 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
     //Also Handles Attack Targets
     @Override
     public boolean canAttack(LivingEntity pTarget) {
-        if(pTarget instanceof WargEntity warg){
-            if(!this.isLeader() && warg.isLeader()){
-                return false;
-            } else if(this.isTame() && warg.isTame()){
-                if(this.getOwnerUUID() == warg.getOwnerUUID()){
+        if(!this.isTame()){
+            if(pTarget instanceof WargEntity warg){
+                if(!this.isLeader() && warg.isLeader()){
                     return false;
-                }
-            } else {
-                return super.canAttack(pTarget);
-            }
-        }
-        if(pTarget instanceof TamableAnimal tamed && this.isTame()){
-            if(tamed.isTame() && this.isTame()){
-                if(tamed.getOwnerUUID() == this.getOwnerUUID()){
-                    return false;
+                } else {
+                    return super.canAttack(pTarget);
                 }
             }
         }
+
         return super.canAttack(pTarget);
     }
 
@@ -388,15 +389,19 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
 
     public boolean wantsToAttack(LivingEntity pTarget, LivingEntity pOwner) {
         if (!(pTarget instanceof Creeper) && !(pTarget instanceof Ghast)) {
-            if (pTarget instanceof Wolf) {
-                Wolf wolf = (Wolf)pTarget;
+            if (pTarget instanceof WargEntity) {
+                WargEntity wolf = (WargEntity)pTarget;
                 return !wolf.isTame() || wolf.getOwner() != pOwner;
             } else if (pTarget instanceof Player && pOwner instanceof Player && !((Player)pOwner).canHarmPlayer((Player)pTarget)) {
                 return false;
-            } else if (pTarget instanceof AbstractHorse && ((AbstractHorse)pTarget).isTamed()) {
-                return false;
+            } else if (pTarget instanceof AbstractHorse abstractHorse) {
+                return !abstractHorse.isTamed();
             } else {
-                return !(pTarget instanceof TamableAnimal) || !((TamableAnimal)pTarget).isTame();
+                if(pTarget instanceof TamableAnimal animal){
+                    return !animal.isTame();
+                }
+
+                return true;
             }
         } else {
             return false;
@@ -660,15 +665,11 @@ public class WargEntity extends TamableAnimal implements GeoEntity, PlayerRideab
             // Inside this if statement, we are on the client!
             if (this.isControlledByLocalInstance()) {
                 float speedBonus = this.getJumpCooldown() == 0 ? 0.1f : 0;
-                float newSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) + speedBonus;
-                this.setRunning(false);
+                float newSpeed = (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED)*0.9f + speedBonus;
+
                 // increasing speed by 100% if the spring key is held down (number for testing purposes)
                 if(Minecraft.getInstance().options.keySprint.isDown()) {
-                    newSpeed *= 1.7f;
-                }
-
-                if(newSpeed > (float) this.getAttributeValue(Attributes.MOVEMENT_SPEED) + speedBonus && !this.level().isClientSide){
-                    this.setRunning(true);
+                    newSpeed *= 1.5f;
                 }
 
                 this.setSpeed(newSpeed);

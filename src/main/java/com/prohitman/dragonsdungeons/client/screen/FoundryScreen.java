@@ -45,7 +45,7 @@ public class FoundryScreen extends AbstractContainerScreen<FoundryMenu> {
 
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if (menu.isCrafting()) {
-            guiGraphics.blit(TEXTURE, x + 88, y + 26, 238, 46, menu.getScaledProgress(), 17);
+            guiGraphics.blit(TEXTURE, x + 88, y + 26, 239, 46, menu.getScaledProgress(), 17);
         }
     }
 

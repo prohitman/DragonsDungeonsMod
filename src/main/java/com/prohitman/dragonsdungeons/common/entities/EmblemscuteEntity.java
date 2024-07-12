@@ -82,6 +82,7 @@ public class EmblemscuteEntity extends PathfinderMob implements GeoEntity {
         this.setMaxUpStep(1);
         this.goalSelector.addGoal(8, this.look_player_goal);
         this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.xpReward = 5;
     }
 
     @Override

@@ -71,6 +71,8 @@ public class AutomatonEntity extends PathfinderMob implements GeoEntity, IAttack
         //this.goalSelector.addGoal(5, new AutomatonRangedMeleeAttack<>(this, 1.0D, 20, 20.0F));
         //this.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(this, Player.class, false));
         //this.setPathfindingMalus(BlockPathTypes.WATER, 0.0F);
+        this.xpReward = 3;
+
     }
 
     protected void registerGoals() {

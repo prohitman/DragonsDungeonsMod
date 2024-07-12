@@ -159,7 +159,7 @@ public class FoundryBlock extends BaseEntityBlock {
             pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6, d2 + d7, 0.0D, 0.0D, 0.0D);
 
             //pLevel.addParticle(ParticleTypes.SMOKE, d0 + d5, d1 + d6 + 8, d2 + d7, 0.0D, 0.0D, 0.0D);
-            //pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6 + 8, d2 + d7, 0.0D, 0.0D, 0.0D);
+            //  pLevel.addParticle(ParticleTypes.FLAME, d0 + d5, d1 + d6 + 8, d2 + d7, 0.0D, 0.0D, 0.0D);
 
             pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + csmokeZ, d1 + d6 + 1.1, d2 + csmokeX, 0.0D, 0.02D + Mth.nextDouble(pRandom, 0, 0.05), 0.0D);
             pLevel.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d0 + csmoke2Z, d1 + d6 + 1.1, d2 + csmoke2X, 0.0D, 0.02D+ Mth.nextDouble(pRandom, 0, 0.05), 0.0D);

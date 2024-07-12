@@ -44,10 +44,16 @@ public class ModRecipes extends RecipeProvider {
     }
 
     public void createBlockRecipes(Block block, boolean withWalls, Consumer<FinishedRecipe> consumer){
-        stairBuilder(ModBlocks.getStairFromBlock(block).asItem(), Ingredient.of(block)).save(consumer);
-        slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getSlabFromBlock(block).asItem(), Ingredient.of(block)).save(consumer);
+        stairBuilder(ModBlocks.getStairFromBlock(block).asItem(), Ingredient.of(block))
+                .unlockedBy(getHasName(block), has(block))
+                .save(consumer);
+        slabBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getSlabFromBlock(block).asItem(), Ingredient.of(block))
+                .unlockedBy(getHasName(block), has(block))
+                .save(consumer);
         if(withWalls){
-            wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getWallFromBlock(block).asItem(), Ingredient.of(block)).save(consumer);
+            wallBuilder(RecipeCategory.BUILDING_BLOCKS, ModBlocks.getWallFromBlock(block).asItem(), Ingredient.of(block))
+                    .unlockedBy(getHasName(block), has(block))
+                    .save(consumer);
         }
     }
 

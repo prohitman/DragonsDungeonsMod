@@ -154,7 +154,7 @@ public class FoundryBE extends BlockEntity implements MenuProvider {
             }
         }
 
-        if(hasFuelInFuelSlot() && !isBurning()){
+        if(hasFuelInFuelSlot() && hasRecipe() && !isBurning()){
             startBurning();
         }
 

@@ -57,7 +57,7 @@ public class FoundryMenu extends AbstractContainerMenu {
     public int getScaledProgress() {
         int progress = this.data.get(0);
         int maxProgress = this.data.get(1); // Max Progress
-        int progressArrowSize = 17; // This is the height in pixels of your arrow
+        int progressArrowSize = 18; // This is the height in pixels of your arrow
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
@@ -65,7 +65,7 @@ public class FoundryMenu extends AbstractContainerMenu {
     public int getFuelLeftScaled() {
         int fuelTime = this.data.get(2);
         int maxFuelTime = this.data.get(3);
-        int fuelBarHeight = 20; // This is the height in pixels of your fuel bar
+        int fuelBarHeight = 19; // This is the height in pixels of your fuel bar
 
         return maxFuelTime != 0 && fuelTime != 0 ? fuelTime * fuelBarHeight / maxFuelTime : 0;
     }

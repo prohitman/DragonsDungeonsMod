@@ -3,6 +3,7 @@ package com.prohitman.dragonsdungeons.common.entities;
 import com.prohitman.dragonsdungeons.common.entities.goals.AnimatedMeleeAttackGoal;
 import com.prohitman.dragonsdungeons.common.entities.goals.FollowLeaderGoal;
 import com.prohitman.dragonsdungeons.common.entities.goals.LeaderFightGoal;
+import com.prohitman.dragonsdungeons.common.entities.goals.ZargStrollGoal;
 import com.prohitman.dragonsdungeons.core.init.ModEntities;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -89,6 +90,7 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
     public ZargEntity(EntityType<? extends Animal> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         this.setMaxUpStep(1);
+        this.xpReward = 2;
     }
 
     public boolean isRunning() {
@@ -128,7 +130,7 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
 
 
         this.goalSelector.addGoal(1, new FollowParentGoal(this, 1.0d));
-        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0D));
+        this.goalSelector.addGoal(2, new ZargStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
         this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 4f));
 
@@ -439,6 +441,14 @@ public class ZargEntity extends Animal implements GeoEntity, IAttacking, Enemy {
             this.villagerConversionTime -= i;
             if (this.villagerConversionTime <= 0 && ForgeEventFactory.canLivingConvert(this, EntityType.VILLAGER, (timer) -> this.villagerConversionTime = timer)) {
                 this.finishConversion((ServerLevel)this.level());
+            }
+        }
+
+        if(this.isVehicle() && this.getFirstPassenger() instanceof Zombie zombie){
+            if(zombie.getTarget() != null && this.getTarget() == null){
+                this.setTarget(zombie.getTarget());
+            } else if(zombie.getTarget() == null && this.getTarget() != null){
+                zombie.setTarget(this.getTarget());
             }
         }
     }
