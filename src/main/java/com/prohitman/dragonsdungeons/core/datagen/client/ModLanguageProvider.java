@@ -105,6 +105,7 @@ public class ModLanguageProvider extends LanguageProvider {
         addBlock(ModBlocks.STEEL_BLOCK);
         addBlock(ModBlocks.MITHRIL_BLOCK);
         addBlock(ModBlocks.FORGED_DOOR);
+        addBlock(ModBlocks.PALISADE);
 
         addBlock(ModBlocks.GREENSCHIST);
         addBlock(ModBlocks.GREENSCHIST_BRICKS);

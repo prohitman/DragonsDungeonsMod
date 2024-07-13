@@ -2,6 +2,7 @@ package com.prohitman.dragonsdungeons.core.datagen.client;
 
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.common.blocks.ModBlock;
+import com.prohitman.dragonsdungeons.common.blocks.ModBlockStateProperties;
 import com.prohitman.dragonsdungeons.common.blocks.enums.ConnectedState;
 import com.prohitman.dragonsdungeons.common.blocks.obj.FoundryBlock;
 import com.prohitman.dragonsdungeons.common.blocks.obj.StoneWindow;
@@ -63,6 +64,14 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .renderType("cutout_mipped")
                         .ao(false),
                 models().withExistingParent(name(ModBlocks.FOUNDRY.get()) + "_on_dd", modLoc("block/" + name(ModBlocks.FOUNDRY.get()) + "_on"))
+                        .renderType("cutout_mipped")
+                        .ao(false));
+
+        palisade(ModBlocks.PALISADE,
+                models().withExistingParent(name(ModBlocks.PALISADE.get()) + "_top_dd", modLoc("block/" + name(ModBlocks.PALISADE.get()) + "_top"))
+                        .renderType("cutout_mipped")
+                        .ao(false),
+                models().withExistingParent(name(ModBlocks.PALISADE.get()) + "_middle_dd", modLoc("block/" + name(ModBlocks.PALISADE.get()) + "_middle"))
                         .renderType("cutout_mipped")
                         .ao(false));
 
@@ -187,6 +196,25 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
         createStairSlabWall(ModBlocks.CHARRED_LAVAROCK_BRICKS, true);
+    }
+
+    public void palisade(RegistryObject<Block> block, ModelFile modelTop, ModelFile modelMiddle) {
+        createPalisade(block, $ -> modelTop, $ -> modelMiddle, 180);
+    }
+
+    public void createPalisade(RegistryObject<Block> block, Function<BlockState, ModelFile> top_palisade, Function<BlockState, ModelFile> middle_palisade, int angleOffset){
+        getVariantBuilder(block.get())
+                .forAllStates(state -> {
+                    ModelFile model = top_palisade.apply(state);
+                    if(!state.getValue(ModBlockStateProperties.IS_TOP)){
+                        model = middle_palisade.apply(state);
+                    }
+
+                    return ConfiguredModel.builder()
+                            .modelFile(model)
+                            .rotationY(((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + angleOffset) % 360)
+                            .build();
+                });
     }
 
     public void createStairSlabWall(RegistryObject<Block> block, boolean withWalls){

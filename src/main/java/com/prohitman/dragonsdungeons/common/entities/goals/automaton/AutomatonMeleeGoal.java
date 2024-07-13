@@ -12,20 +12,25 @@ public class AutomatonMeleeGoal extends AnimatedMeleeAttackGoal<AutomatonEntity>
 
     @Override
     public boolean canUse() {
-        LivingEntity livingEntity = this.mob.getTarget();
-        return super.canUse() && this.mob.distanceToSqr(livingEntity) < 7;
+        if(this.mob.getTarget() != null){
+            LivingEntity livingEntity = this.mob.getTarget();
+
+            if(this.mob.distanceToSqr(livingEntity) >= 8){
+                return false;
+            }
+        }
+        return super.canUse();
     }
 
     @Override
     public boolean canContinueToUse() {
-        LivingEntity livingEntity = this.mob.getTarget();
-        return super.canContinueToUse() && this.mob.distanceToSqr(livingEntity) < 7;
-    }
+        if(this.mob.getTarget() != null){
+            LivingEntity livingEntity = this.mob.getTarget();
 
-
-    @Override
-    public void stop() {
-        super.stop();
-        this.mob.setAggressive(true);
+            if(this.mob.distanceToSqr(livingEntity) >= 8){
+                return false;
+            }
+        }
+        return super.canContinueToUse();
     }
 }

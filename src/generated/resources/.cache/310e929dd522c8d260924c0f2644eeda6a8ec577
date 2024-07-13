@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-09T21:17:55.1647579	Item Models: dragonsdungeons
+// 1.20.1	2024-07-13T17:01:29.3075415	Item Models: dragonsdungeons
 7eb1579ce426cbb65c592b03938f8bf1bb003faf assets/dragonsdungeons/models/item/adamantite_ore.json
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
@@ -150,6 +150,7 @@ e656d3f4bf90c6c86df950ab67efd2d5cbd141e9 assets/dragonsdungeons/models/item/moss
 a1016fd8d89c6fbf145ec0d95fc3e34fbf7bed96 assets/dragonsdungeons/models/item/mossy_shale_bricks_wall.json
 6ac39dc23d8636e2f3d4fb717a9c9e01fe8f3eb6 assets/dragonsdungeons/models/item/oldforged_ingot.json
 064400b720f927a1a1f7de59c4bcf9c5f6dc1f65 assets/dragonsdungeons/models/item/painted_aging_adobe.json
+bdeef6844da30d38d549fdaa07e10e5bd5213485 assets/dragonsdungeons/models/item/palisade.json
 d65d4bc4404615f4d80ba98433c783245b216832 assets/dragonsdungeons/models/item/polished_greenschist.json
 46c1aeca45c5e9068974827a5382847ab03c7275 assets/dragonsdungeons/models/item/polished_greenschist_slab.json
 a7c72d8180a76cb49d9d35061495a35640bf21ec assets/dragonsdungeons/models/item/polished_greenschist_stairs.json

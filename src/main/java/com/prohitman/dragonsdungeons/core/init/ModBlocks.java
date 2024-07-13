@@ -3,12 +3,10 @@ package com.prohitman.dragonsdungeons.core.init;
 import com.prohitman.dragonsdungeons.DragonsDungeons;
 import com.prohitman.dragonsdungeons.common.blocks.obj.*;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.BarrowStones;
-import com.prohitman.dragonsdungeons.common.blocks.shaped.FoundBlockShaped;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.MithrilCrystal;
 import com.prohitman.dragonsdungeons.common.blocks.shaped.ThatchRoof;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ShovelItem;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -23,7 +21,6 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, DragonsDungeons.MODID);
 
-    //TODO Reverse auto slab/stairs/walls creation, so that individual blocks can be accessed
     public static final RegistryObject<Block> CHUNKY_RUBBLE = createRegistry("chunky_rubble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT)), new Item.Properties());
     public static final RegistryObject<Block> RUBBLE = createRegistry("rubble", () -> new Block(BlockBehaviour.Properties.copy(Blocks.ROOTED_DIRT)), new Item.Properties());
     public static final RegistryObject<Block> THATCH = createRegistry("thatch", () -> new Block(BlockBehaviour.Properties.copy(Blocks.HAY_BLOCK).noOcclusion()), new Item.Properties());
@@ -39,6 +36,7 @@ public class ModBlocks {
     public static final RegistryObject<Block> MITHRIL_CRYSTAL = createRegistry("mithril_crystal", () -> new MithrilCrystal(BlockBehaviour.Properties.copy(Blocks.AMETHYST_BLOCK).lightLevel((blockState) -> 6).noOcclusion()), new Item.Properties());
     public static final RegistryObject<Block> RUINED_SHINGLES = createRegistryWithStairSlabWall("ruined_shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties(), false);
     public static final RegistryObject<Block> SHINGLES = createRegistryWithStairSlabWall("shingles", () -> new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)), new Item.Properties(), false);
+    public static final RegistryObject<Block> PALISADE = createRegistry("palisade", () -> new PalisadeBlock(BlockBehaviour.Properties.copy(Blocks.OAK_WOOD)), new Item.Properties());
 
     public static final RegistryObject<Block> ADAMANTITE_ORE = createRegistry("adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.COPPER_ORE).mapColor(MapColor.COLOR_CYAN)), new Item.Properties());
     public static final RegistryObject<Block> DEEPSLATE_ADAMANTITE_ORE = createRegistry("deepslate_adamantite_ore", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DEEPSLATE_COPPER_ORE).mapColor(MapColor.COLOR_CYAN)), new Item.Properties());

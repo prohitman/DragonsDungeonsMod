@@ -54,7 +54,7 @@ public class AnimatedMeleeAttackGoal<T extends PathfinderMob & IAttacking> exten
     }
 
     private boolean isEnemyWithinAttackDistance(LivingEntity pEnemy, double pDistToEnemySqr) {
-        return pDistToEnemySqr <= this.getAttackReachSqr(pEnemy);
+        return pDistToEnemySqr <= (this.getAttackReachSqr(pEnemy) + attackReach);
     }
 
     protected void resetAttackCooldown() {
@@ -94,8 +94,8 @@ public class AnimatedMeleeAttackGoal<T extends PathfinderMob & IAttacking> exten
         super.stop();
     }
 
-    @Override
+/*    @Override
     protected double getAttackReachSqr(LivingEntity pAttackTarget) {
         return super.getAttackReachSqr(pAttackTarget) + attackReach;
-    }
+    }*/
 }

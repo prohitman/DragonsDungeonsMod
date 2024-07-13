@@ -1,5 +1,8 @@
 package com.prohitman.dragonsdungeons.common.entities;
 
+import com.prohitman.dragonsdungeons.common.entities.goals.AnimatedMeleeAttackGoal;
+import com.prohitman.dragonsdungeons.common.entities.goals.AnimatedRangedAttackGoal;
+import com.prohitman.dragonsdungeons.common.entities.goals.RangedAttackGoal;
 import com.prohitman.dragonsdungeons.common.entities.goals.automaton.AutomatonMeleeGoal;
 import com.prohitman.dragonsdungeons.common.entities.goals.automaton.AutomatonRangedGoal;
 import net.minecraft.core.BlockPos;
@@ -13,6 +16,7 @@ import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.target.HurtByTargetGoal;
@@ -76,18 +80,18 @@ public class AutomatonEntity extends PathfinderMob implements GeoEntity, IAttack
     }
 
     protected void registerGoals() {
-        super.registerGoals();
-
-        this.goalSelector.addGoal(0, new WaterAvoidingRandomStrollGoal(this, 0.8D));
-        this.goalSelector.addGoal(1, new AutomatonMeleeGoal(this, 1.25D, true, 10, 22, 2));
-        this.goalSelector.addGoal(1, new AutomatonRangedGoal(this, 1.15D, 0, 15F, 12, 35));
-
-        this.goalSelector.addGoal(5, new RandomLookAroundGoal(this));
-        this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 0.8D));
+        this.goalSelector.addGoal(3, new RandomLookAroundGoal(this));
+        this.goalSelector.addGoal(4, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        //this.goalSelector.addGoal(2, new AnimatedMeleeAttackGoal<>(this, 1.25D, true, 10, 22, 1f)); DONE
+        //this.goalSelector.addGoal(2, new AnimatedRangedAttackGoal<>(this, 1.25f,0, 15, 12, 35)); DONE
+        this.goalSelector.addGoal(2, new AutomatonMeleeGoal(this, 1.25D, true, 10, 22, 1.25f));
+        this.goalSelector.addGoal(2, new AutomatonRangedGoal(this, 1.25D, 0, 25f, 12, 35));
+        //this.goalSelector.addGoal(2, new MeleeAttackGoal(this, 1.25d, false));
 
         this.targetSelector.addGoal(8, (new HurtByTargetGoal(this, this.getClass())).setAlertOthers());
         this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Player.class,  false, true));
-        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Camel.class, 0, false, false, null));
+        this.targetSelector.addGoal(8, new NearestAttackableTargetGoal<>(this, Camel.class, false, false));
     }
 
     public static AttributeSupplier.Builder createAttributes() {

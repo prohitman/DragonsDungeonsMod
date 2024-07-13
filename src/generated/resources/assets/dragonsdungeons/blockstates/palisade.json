@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "facing=east,is_top=false,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_middle_dd",
+      "y": 90
+    },
+    "facing=east,is_top=false,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_middle_dd",
+      "y": 90
+    },
+    "facing=east,is_top=true,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_top_dd",
+      "y": 90
+    },
+    "facing=east,is_top=true,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_top_dd",
+      "y": 90
+    },
+    "facing=north,is_top=false,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_middle_dd"
+    },
+    "facing=north,is_top=false,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_middle_dd"
+    },
+    "facing=north,is_top=true,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_top_dd"
+    },
+    "facing=north,is_top=true,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_top_dd"
+    },
+    "facing=south,is_top=false,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_middle_dd",
+      "y": 180
+    },
+    "facing=south,is_top=false,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_middle_dd",
+      "y": 180
+    },
+    "facing=south,is_top=true,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_top_dd",
+      "y": 180
+    },
+    "facing=south,is_top=true,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_top_dd",
+      "y": 180
+    },
+    "facing=west,is_top=false,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_middle_dd",
+      "y": 270
+    },
+    "facing=west,is_top=false,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_middle_dd",
+      "y": 270
+    },
+    "facing=west,is_top=true,waterlogged=false": {
+      "model": "dragonsdungeons:block/palisade_top_dd",
+      "y": 270
+    },
+    "facing=west,is_top=true,waterlogged=true": {
+      "model": "dragonsdungeons:block/palisade_top_dd",
+      "y": 270
+    }
+  }
+}

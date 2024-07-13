@@ -1,0 +1,5 @@
+{
+  "parent": "dragonsdungeons:block/palisade_middle",
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout_mipped"
+}

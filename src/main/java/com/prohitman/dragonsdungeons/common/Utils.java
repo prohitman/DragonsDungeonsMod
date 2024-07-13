@@ -70,6 +70,40 @@ public class Utils {
         return rotatedShape;
     }
 
+    public static VoxelShape rotateXtoZ(VoxelShape shape, int times){
+        VoxelShape rotatedShape;
+        rotatedShape = shape;
+        for(int i=0; i < times; i++){
+            rotatedShape = rotateXtoZ(rotatedShape);
+        }
+
+        return rotatedShape;
+    }
+
+    public static VoxelShape rotateXtoZFlippedY(VoxelShape shape){
+        List<AABB> soureBoxes = shape.toAabbs();
+        VoxelShape rotatedShape = Shapes.empty();
+        for(AABB box : soureBoxes){
+            box = new AABB(1 - box.maxZ, box.maxY, box.minX, 1 - box.minZ, box.minY, box.maxX);
+
+            rotatedShape = orUnoptimized(rotatedShape, Shapes.create(box));
+        }
+
+        return rotatedShape;
+    }
+
+    public static VoxelShape flipY(VoxelShape shape){
+        List<AABB> soureBoxes = shape.toAabbs();
+        VoxelShape rotatedShape = Shapes.empty();
+        for(AABB box : soureBoxes){
+            box = new AABB(box.minX, box.maxY, box.minZ, box.maxX, box.minY, box.maxZ);
+
+            rotatedShape = orUnoptimized(rotatedShape, Shapes.create(box));
+        }
+
+        return rotatedShape;
+    }
+
     public static VoxelShape floorToCeiling(VoxelShape shape){
         List<AABB> soureBoxes = shape.toAabbs();
         VoxelShape rotatedShape = Shapes.empty();

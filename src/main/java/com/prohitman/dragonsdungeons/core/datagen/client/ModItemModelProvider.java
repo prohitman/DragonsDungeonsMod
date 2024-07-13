@@ -98,6 +98,7 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.DWARVEN_STEEL_BLOCK);
         createParent(ModBlocks.STEEL_BLOCK);
         createBlockSingle(ModBlocks.FORGED_DOOR, "item/forged_door");
+        createPalisadeParent(ModBlocks.PALISADE);
 
         createStairWallSlabParents();
 
@@ -176,6 +177,10 @@ public class ModItemModelProvider extends ItemModelProvider {
 
     private void createParent(RegistryObject<Block> handler) {
         withExistingParent(handler.getId().getPath(), modLoc( "block/" + handler.getId().getPath()));
+    }
+
+    private void createPalisadeParent(RegistryObject<Block> handler) {
+        withExistingParent(handler.getId().getPath(), modLoc( "block/" + handler.getId().getPath() + "_top"));
     }
 
     private void createParentBlock(RegistryObject<Block> handler) {

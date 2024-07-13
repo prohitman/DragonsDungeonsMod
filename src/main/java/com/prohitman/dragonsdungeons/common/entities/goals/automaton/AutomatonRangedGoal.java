@@ -15,14 +15,26 @@ public class AutomatonRangedGoal extends AnimatedRangedAttackGoal<AutomatonEntit
 
     @Override
     public boolean canContinueToUse() {
-        LivingEntity livingEntity = this.entity.getTarget();
-        return super.canContinueToUse() && this.entity.distanceToSqr(livingEntity) >= 7;
+        if(this.entity.getTarget() != null){
+            LivingEntity livingEntity = this.entity.getTarget();
+
+            if(this.entity.distanceToSqr(livingEntity) < 8){
+                return false;
+            }
+        }
+        return super.canContinueToUse();
     }
 
     @Override
     public boolean canUse() {
-        LivingEntity livingEntity = this.entity.getTarget();
-        return super.canUse() && this.entity.distanceToSqr(livingEntity) >= 7;
+        if(this.entity.getTarget() != null){
+            LivingEntity livingEntity = this.entity.getTarget();
+
+            if(this.entity.distanceToSqr(livingEntity) < 8){
+                return false;
+            }
+        }
+        return super.canUse();
     }
 
     @Override
