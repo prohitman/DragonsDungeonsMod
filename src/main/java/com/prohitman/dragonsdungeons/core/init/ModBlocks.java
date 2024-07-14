@@ -9,7 +9,9 @@ import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
@@ -17,6 +19,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 import java.util.function.Supplier;
+import java.util.function.ToIntFunction;
 
 public class ModBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, DragonsDungeons.MODID);
@@ -46,6 +49,8 @@ public class ModBlocks {
     public static final RegistryObject<Block> MITHRIL_BLOCK = createRegistry("mithril_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.DIAMOND)), new Item.Properties());
     public static final RegistryObject<Block> STEEL_BLOCK = createRegistry("steel_block", () -> new Block(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK)), new Item.Properties());
     public static final RegistryObject<Block> FORGED_DOOR = createRegistry("forged_door", () -> new DoorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_DOOR).mapColor(MapColor.COLOR_BLACK), BlockSetType.IRON), new Item.Properties());
+    public static final RegistryObject<Block> BRAZIER = createRegistry("brazier", () -> new BrazierBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.CHAIN).noOcclusion().lightLevel(litBlockEmission(15)), false), new Item.Properties());
+    public static final RegistryObject<Block> SOUL_BRAZIER = createRegistry("soul_brazier", () -> new BrazierBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(5.0F, 6.0F).sound(SoundType.CHAIN).noOcclusion().lightLevel(litBlockEmission(10)), true), new Item.Properties());
 
     public static final RegistryObject<Block> AGING_ADOBE = createRegistryWithStairSlabWall("aging_adobe", () -> new Block(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties(), true);
     public static final RegistryObject<Block> AGING_ADOBE_PILLAR = createRegistry("aging_adobe_pillar", () -> new RotatedPillarBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SAND)), new Item.Properties());
@@ -142,5 +147,9 @@ public class ModBlocks {
                 .filter((blockIn -> blockIn.getDescriptionId()
                         .equals(block.getDescriptionId().concat("_wall"))))
                 .findFirst().get();
+    }
+
+    private static ToIntFunction<BlockState> litBlockEmission(int pLightValue) {
+        return (state) -> state.getValue(BlockStateProperties.LIT) ? pLightValue : 0;
     }
 }

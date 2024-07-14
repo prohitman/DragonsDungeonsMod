@@ -1,0 +1,6 @@
+// 1.20.1	2024-07-14T01:39:15.7152105	Tags for minecraft:item mod id dragonsdungeons
+a38ba4411f7f6798e07e58a8fafee6651c1d93ac data/dragonsdungeons/tags/items/lightables.json
+5c8e69416eca54771f1609a20518c46ba1ed584e data/minecraft/tags/items/axes.json
+4029117a1c8ee1313e73769e02b3836a24918b6b data/minecraft/tags/items/hoes.json
+eb0818bcb609c289e9e0608558e7a493587c537a data/minecraft/tags/items/shovels.json
+4ca1fbb45859dd041375ad57af8e52a438c09f3f data/minecraft/tags/items/swords.json

@@ -75,6 +75,22 @@ public class ModBlockStateProvider extends BlockStateProvider {
                         .renderType("cutout_mipped")
                         .ao(false));
 
+        createBrazier(ModBlocks.BRAZIER,
+                models().withExistingParent(name(ModBlocks.BRAZIER.get()) + "_dd", modLoc("block/" + name(ModBlocks.BRAZIER.get())))
+                        .renderType("cutout_mipped")
+                        .ao(false),
+                models().withExistingParent(name(ModBlocks.BRAZIER.get()) + "_unlit_dd", modLoc("block/" + name(ModBlocks.BRAZIER.get()) + "_unlit"))
+                        .renderType("cutout_mipped")
+                        .ao(false));
+
+        createBrazier(ModBlocks.SOUL_BRAZIER,
+                models().withExistingParent(name(ModBlocks.SOUL_BRAZIER.get()) + "_dd", modLoc("block/" + name(ModBlocks.SOUL_BRAZIER.get())))
+                        .renderType("cutout_mipped")
+                        .ao(false),
+                models().withExistingParent(name(ModBlocks.SOUL_BRAZIER.get()) + "_unlit_dd", modLoc("block/" + name(ModBlocks.SOUL_BRAZIER.get()) + "_unlit"))
+                        .renderType("cutout_mipped")
+                        .ao(false));
+
         //createBlockWithModel(ModBlocks.TREASURE_CHEST);
         createBlockWithModel(ModBlocks.HANGING_BARROW_MOSS);
         createStoneWindow(ModBlocks.STONE_WINDOW);
@@ -196,6 +212,20 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
         simpleBlock(ModBlocks.CHARRED_LAVAROCK_BRICKS.get());
         createStairSlabWall(ModBlocks.CHARRED_LAVAROCK_BRICKS, true);
+    }
+
+    public void createBrazier(RegistryObject<Block> block, ModelFile litBrazier, ModelFile unlitBrazier){
+        getVariantBuilder(block.get())
+                .forAllStates(state -> {
+                    ModelFile model = unlitBrazier;
+                    if(state.getValue(BlockStateProperties.LIT)){
+                        model = litBrazier;
+                    }
+
+                    return ConfiguredModel.builder()
+                            .modelFile(model)
+                            .build();
+                });
     }
 
     public void palisade(RegistryObject<Block> block, ModelFile modelTop, ModelFile modelMiddle) {

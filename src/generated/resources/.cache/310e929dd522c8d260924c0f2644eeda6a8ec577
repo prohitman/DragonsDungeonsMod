@@ -1,4 +1,4 @@
-// 1.20.1	2024-07-13T17:01:29.3075415	Item Models: dragonsdungeons
+// 1.20.1	2024-07-14T02:06:15.9819731	Item Models: dragonsdungeons
 7eb1579ce426cbb65c592b03938f8bf1bb003faf assets/dragonsdungeons/models/item/adamantite_ore.json
 f5b0a43815903ce51eea208bcb3bf691e8e4e5d5 assets/dragonsdungeons/models/item/aging_adobe.json
 5b25a045f64a9672368a377f296d127ed53e95e8 assets/dragonsdungeons/models/item/aging_adobe_pillar.json
@@ -13,6 +13,7 @@ d3b944a49b6cb844f0f4918415c3ef117349f138 assets/dragonsdungeons/models/item/agin
 b0085b82fad1b6f86dde7c087374fc1d529d85ab assets/dragonsdungeons/models/item/barrow_stones.json
 690712ab90782955323c72feb5839fdb94a936b9 assets/dragonsdungeons/models/item/bearded_axe.json
 b4ef9f81986db6e3a483e06c60eeb516183d2535 assets/dragonsdungeons/models/item/blank_obelisk.json
+5b37cb9110a64401264066dbcf8a3516c779abaf assets/dragonsdungeons/models/item/brazier.json
 862e787420d0c57756871df3dbb992edaa4e7eb7 assets/dragonsdungeons/models/item/charred_lavarock_bricks.json
 1305849ca8ea497793561a78f13a54b6c0cd0c68 assets/dragonsdungeons/models/item/charred_lavarock_bricks_slab.json
 660917ca2cd0b53178b04800c3a9250f8c12f852 assets/dragonsdungeons/models/item/charred_lavarock_bricks_stairs.json
@@ -194,6 +195,7 @@ dc258c9a4b3f7498cfef51ee6e7fed5d41b59ef8 assets/dragonsdungeons/models/item/shal
 39166c3596e02ff668a42f47d383a07d2afe4187 assets/dragonsdungeons/models/item/shingles.json
 59d86275bf8f23398e84a73cadf4ed495e8fb08f assets/dragonsdungeons/models/item/shingles_slab.json
 5f69f475308fc6395ad9d394c345a5774da4e84e assets/dragonsdungeons/models/item/shingles_stairs.json
+5b37cb9110a64401264066dbcf8a3516c779abaf assets/dragonsdungeons/models/item/soul_brazier.json
 6eb3c4b6c04712f14a9eb366ddd296a09253c7b5 assets/dragonsdungeons/models/item/standing_torch.json
 bab70de564442efc7e0d8d87f61bf0300b4a9ae1 assets/dragonsdungeons/models/item/steel_axe.json
 755911a806992606407622d5407a3920cb8dacd8 assets/dragonsdungeons/models/item/steel_block.json

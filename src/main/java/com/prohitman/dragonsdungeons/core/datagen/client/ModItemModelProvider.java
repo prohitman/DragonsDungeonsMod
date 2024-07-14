@@ -99,6 +99,8 @@ public class ModItemModelProvider extends ItemModelProvider {
         createParent(ModBlocks.STEEL_BLOCK);
         createBlockSingle(ModBlocks.FORGED_DOOR, "item/forged_door");
         createPalisadeParent(ModBlocks.PALISADE);
+        createBlockSingle(ModBlocks.BRAZIER, "item/brazier_item");
+        createBlockSingle(ModBlocks.SOUL_BRAZIER, "item/brazier_item");
 
         createStairWallSlabParents();
 
